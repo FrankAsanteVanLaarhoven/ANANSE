@@ -1,0 +1,28 @@
+.local/
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+*.sqlite3*
+*.db
+*.p12
+*.mobileprovision
+*.keystore
+*.jks
+.env
+.env.*
+!.env.example
+Builds/
+Unreal/Binaries/
+Unreal/Intermediate/
+Unreal/Saved/
+Unreal/DerivedDataCache/
+Unreal/.vs/
+Unreal/*.sln
+Unreal/*.suo
+Unreal/*.code-workspace
+Unreal/Content/Data/catalogue.json
+# Evidence can contain local paths: inspect and redact before committing.
+
+# Preserve verification artifacts locally; source control contains authored project files only.
+evidence/

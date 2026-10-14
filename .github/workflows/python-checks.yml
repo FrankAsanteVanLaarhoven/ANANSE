@@ -1,0 +1,29 @@
+name: Local-studio-contracts
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      # Before production: replace action tags with reviewed immutable commit SHAs.
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python -m pip install -r requirements.lock
+      - run: python -m pytest -q --junitxml=.local/verification/ci/pytest.xml
+      - run: python scripts/http_smoke.py --out .local/verification/ci/http
+      - run: node --check studio/static/app.js
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: studio-test-evidence
+          path: |
+            .local/verification/ci/pytest.xml
+            .local/verification/ci/http/http-smoke.json
+          include-hidden-files: true
+          if-no-files-found: error

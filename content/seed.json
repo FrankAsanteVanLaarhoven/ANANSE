@@ -1,0 +1,562 @@
+{
+  "factions": [
+    {
+      "id": "story-road",
+      "data": {
+        "name": "The Story Road",
+        "public_goal": "Preserve plural memory without granting storytellers unlimited authority."
+      }
+    },
+    {
+      "id": "seven-markets",
+      "data": {
+        "name": "The Seven Markets",
+        "public_goal": "Keep trade moving and protect named witnesses."
+      }
+    },
+    {
+      "id": "golden-guard",
+      "data": {
+        "name": "The Golden Guard",
+        "public_goal": "Enforce court orders while questioning their provenance."
+      }
+    },
+    {
+      "id": "silence-court",
+      "data": {
+        "name": "The Silence Court",
+        "public_goal": "Make one official history the basis of political order."
+      }
+    },
+    {
+      "id": "root-archive",
+      "data": {
+        "name": "The Root Archive",
+        "public_goal": "Keep old knowledge without surrendering its custodians."
+      }
+    },
+    {
+      "id": "forest-compact",
+      "data": {
+        "name": "The Forest Compact",
+        "public_goal": "Demand reciprocity for using hidden paths."
+      }
+    },
+    {
+      "id": "hive",
+      "data": {
+        "name": "The Hive of Mmoboro",
+        "public_goal": "Respond collectively when the community bears the cost of deceit."
+      }
+    }
+  ],
+  "assets": [
+    {
+      "id": "kwaku-body",
+      "data": {
+        "name": "Kwaku production mesh — not supplied",
+        "category": "skeletal-mesh",
+        "status": "planned"
+      }
+    },
+    {
+      "id": "kwaku-movement",
+      "data": {
+        "name": "Kwaku locomotion set — not supplied",
+        "category": "animation",
+        "status": "planned"
+      }
+    },
+    {
+      "id": "market-kit",
+      "data": {
+        "name": "Modular market kit — not supplied",
+        "category": "static-mesh",
+        "status": "planned"
+      }
+    },
+    {
+      "id": "drum-court-score",
+      "data": {
+        "name": "Commissioned score — not supplied",
+        "category": "audio",
+        "status": "planned"
+      }
+    }
+  ],
+  "characters": [
+    {
+      "id": "kwaku",
+      "data": {
+        "name": "Kwaku, the Story-Binder",
+        "role": "Playable courier and apprentice",
+        "description": "Playable courier and apprentice. Character identity and all visuals remain subject to narrative and cultural review.",
+        "archetype": "Ananse-inspired original protagonist",
+        "representation": "human",
+        "silhouette": "courier",
+        "faction_ids": [
+          "story-road"
+        ],
+        "powers": [
+          "web-step",
+          "borrowed-voice",
+          "trick-mirror"
+        ],
+        "variants": [
+          {
+            "id": "base",
+            "label": "Base concept",
+            "cloth_colour": "#AD6E36",
+            "accent_colour": "#D6B675"
+          },
+          {
+            "id": "festival",
+            "label": "Festival concept",
+            "cloth_colour": "#305D63",
+            "accent_colour": "#D6B675"
+          }
+        ],
+        "source_note": "Supplied ANANSE character brief; a design proposal, not verified cultural canon or exclusive ownership of folklore.",
+        "culture_review_required": true,
+        "in_vertical_slice": true,
+        "stage": "concept"
+      }
+    },
+    {
+      "id": "ananse",
+      "data": {
+        "name": "Kwaku Ananse",
+        "role": "Mythic trickster presence; separate from the playable courier",
+        "description": "Mythic trickster presence; separate from the playable courier. Character identity and all visuals remain subject to narrative and cultural review.",
+        "archetype": "Ananse tradition",
+        "representation": "mythic",
+        "silhouette": "spirit",
+        "faction_ids": [
+          "story-road"
+        ],
+        "powers": [],
+        "variants": [
+          {
+            "id": "base",
+            "label": "Base concept",
+            "cloth_colour": "#AD6E36",
+            "accent_colour": "#D6B675"
+          }
+        ],
+        "source_note": "Supplied ANANSE character brief; a design proposal, not verified cultural canon or exclusive ownership of folklore.",
+        "culture_review_required": true,
+        "in_vertical_slice": false,
+        "stage": "concept"
+      }
+    },
+    {
+      "id": "nyame",
+      "data": {
+        "name": "Nyame",
+        "role": "Authority and judgement; not a loot boss",
+        "description": "Authority and judgement; not a loot boss. Character identity and all visuals remain subject to narrative and cultural review.",
+        "archetype": "Sky-deity archetype in the supplied brief",
+        "representation": "mythic",
+        "silhouette": "spirit",
+        "faction_ids": [
+          "story-road"
+        ],
+        "powers": [],
+        "variants": [
+          {
+            "id": "base",
+            "label": "Base concept",
+            "cloth_colour": "#AD6E36",
+            "accent_colour": "#D6B675"
+          }
+        ],
+        "source_note": "Supplied ANANSE character brief; a design proposal, not verified cultural canon or exclusive ownership of folklore.",
+        "culture_review_required": true,
+        "in_vertical_slice": false,
+        "stage": "concept"
+      }
+    },
+    {
+      "id": "aso-yaa",
+      "data": {
+        "name": "Aso Yaa, the Ledger-Keeper",
+        "role": "Strategist with independent political goals",
+        "description": "Strategist with independent political goals. Character identity and all visuals remain subject to narrative and cultural review.",
+        "archetype": "Aso archetype in the supplied brief",
+        "representation": "human",
+        "silhouette": "scholar",
+        "faction_ids": [
+          "seven-markets"
+        ],
+        "powers": [],
+        "variants": [
+          {
+            "id": "base",
+            "label": "Base concept",
+            "cloth_colour": "#AD6E36",
+            "accent_colour": "#D6B675"
+          }
+        ],
+        "source_note": "Supplied ANANSE character brief; a design proposal, not verified cultural canon or exclusive ownership of folklore.",
+        "culture_review_required": true,
+        "in_vertical_slice": true,
+        "stage": "concept"
+      }
+    },
+    {
+      "id": "kojo",
+      "data": {
+        "name": "Kojo of the Slow Road",
+        "role": "Investigator who follows contradictions",
+        "description": "Investigator who follows contradictions. Character identity and all visuals remain subject to narrative and cultural review.",
+        "archetype": "Turtle-inspired original adaptation",
+        "representation": "human",
+        "silhouette": "scholar",
+        "faction_ids": [
+          "story-road"
+        ],
+        "powers": [],
+        "variants": [
+          {
+            "id": "base",
+            "label": "Base concept",
+            "cloth_colour": "#AD6E36",
+            "accent_colour": "#D6B675"
+          }
+        ],
+        "source_note": "Supplied ANANSE character brief; a design proposal, not verified cultural canon or exclusive ownership of folklore.",
+        "culture_review_required": true,
+        "in_vertical_slice": true,
+        "stage": "concept"
+      }
+    },
+    {
+      "id": "esi",
+      "data": {
+        "name": "Esi of the Drum Court",
+        "role": "Performer and public storyteller",
+        "description": "Performer and public storyteller. Character identity and all visuals remain subject to narrative and cultural review.",
+        "archetype": "Original character; oral-performance inspiration",
+        "representation": "human",
+        "silhouette": "court",
+        "faction_ids": [
+          "story-road"
+        ],
+        "powers": [],
+        "variants": [
+          {
+            "id": "base",
+            "label": "Base concept",
+            "cloth_colour": "#AD6E36",
+            "accent_colour": "#D6B675"
+          }
+        ],
+        "source_note": "Supplied ANANSE character brief; a design proposal, not verified cultural canon or exclusive ownership of folklore.",
+        "culture_review_required": true,
+        "in_vertical_slice": true,
+        "stage": "concept"
+      }
+    },
+    {
+      "id": "mmoatia-twins",
+      "data": {
+        "name": "The Mmoatia Twins",
+        "role": "Ambiguous guides who require reciprocal bargains",
+        "description": "Ambiguous guides who require reciprocal bargains. Character identity and all visuals remain subject to narrative and cultural review.",
+        "archetype": "Forest-spirit archetype in the supplied brief",
+        "representation": "spirit",
+        "silhouette": "spirit",
+        "faction_ids": [
+          "forest-compact"
+        ],
+        "powers": [],
+        "variants": [
+          {
+            "id": "base",
+            "label": "Base concept",
+            "cloth_colour": "#AD6E36",
+            "accent_colour": "#D6B675"
+          }
+        ],
+        "source_note": "Supplied ANANSE character brief; a design proposal, not verified cultural canon or exclusive ownership of folklore.",
+        "culture_review_required": true,
+        "in_vertical_slice": false,
+        "stage": "concept"
+      }
+    },
+    {
+      "id": "kofi",
+      "data": {
+        "name": "Old Boatman Kofi",
+        "role": "Boat guide, route broker and comic mentor",
+        "description": "Boat guide, route broker and comic mentor. Character identity and all visuals remain subject to narrative and cultural review.",
+        "archetype": "Original river-guide archetype",
+        "representation": "human",
+        "silhouette": "courier",
+        "faction_ids": [
+          "seven-markets"
+        ],
+        "powers": [],
+        "variants": [
+          {
+            "id": "base",
+            "label": "Base concept",
+            "cloth_colour": "#AD6E36",
+            "accent_colour": "#D6B675"
+          }
+        ],
+        "source_note": "Supplied ANANSE character brief; a design proposal, not verified cultural canon or exclusive ownership of folklore.",
+        "culture_review_required": true,
+        "in_vertical_slice": false,
+        "stage": "concept"
+      }
+    },
+    {
+      "id": "weaver",
+      "data": {
+        "name": "The Weaver of Silence",
+        "role": "Antagonist who offers stability through controlled memory",
+        "description": "Antagonist who offers stability through controlled memory. Character identity and all visuals remain subject to narrative and cultural review.",
+        "archetype": "Original antagonist in the supplied brief",
+        "representation": "human",
+        "silhouette": "court",
+        "faction_ids": [
+          "silence-court"
+        ],
+        "powers": [],
+        "variants": [
+          {
+            "id": "base",
+            "label": "Base concept",
+            "cloth_colour": "#AD6E36",
+            "accent_colour": "#D6B675"
+          }
+        ],
+        "source_note": "Supplied ANANSE character brief; a design proposal, not verified cultural canon or exclusive ownership of folklore.",
+        "culture_review_required": true,
+        "in_vertical_slice": false,
+        "stage": "concept"
+      }
+    },
+    {
+      "id": "osebo",
+      "data": {
+        "name": "Osebo, Captain of the Golden Guard",
+        "role": "Enforcer whose loyalty can be tested with evidence",
+        "description": "Enforcer whose loyalty can be tested with evidence. Character identity and all visuals remain subject to narrative and cultural review.",
+        "archetype": "Leopard/Osebo archetype",
+        "representation": "human",
+        "silhouette": "guard",
+        "faction_ids": [
+          "golden-guard"
+        ],
+        "powers": [],
+        "variants": [
+          {
+            "id": "base",
+            "label": "Base concept",
+            "cloth_colour": "#AD6E36",
+            "accent_colour": "#D6B675"
+          }
+        ],
+        "source_note": "Supplied ANANSE character brief; a design proposal, not verified cultural canon or exclusive ownership of folklore.",
+        "culture_review_required": true,
+        "in_vertical_slice": true,
+        "stage": "concept"
+      }
+    },
+    {
+      "id": "onini",
+      "data": {
+        "name": "Onini, Keeper of the Root Archive",
+        "role": "Guardian of knowledge with boundaries, not a generic villain",
+        "description": "Guardian of knowledge with boundaries, not a generic villain. Character identity and all visuals remain subject to narrative and cultural review.",
+        "archetype": "Python/Onini archetype",
+        "representation": "animal",
+        "silhouette": "serpent",
+        "faction_ids": [
+          "root-archive"
+        ],
+        "powers": [],
+        "variants": [
+          {
+            "id": "base",
+            "label": "Base concept",
+            "cloth_colour": "#AD6E36",
+            "accent_colour": "#D6B675"
+          }
+        ],
+        "source_note": "Supplied ANANSE character brief; a design proposal, not verified cultural canon or exclusive ownership of folklore.",
+        "culture_review_required": true,
+        "in_vertical_slice": false,
+        "stage": "concept"
+      }
+    },
+    {
+      "id": "mmoboro",
+      "data": {
+        "name": "The Hive of Mmoboro",
+        "role": "Collective consequence of broken community promises",
+        "description": "Collective consequence of broken community promises. Character identity and all visuals remain subject to narrative and cultural review.",
+        "archetype": "Hornet/Mmoboro archetype",
+        "representation": "collective",
+        "silhouette": "swarm",
+        "faction_ids": [
+          "hive"
+        ],
+        "powers": [],
+        "variants": [
+          {
+            "id": "base",
+            "label": "Base concept",
+            "cloth_colour": "#AD6E36",
+            "accent_colour": "#D6B675"
+          }
+        ],
+        "source_note": "Supplied ANANSE character brief; a design proposal, not verified cultural canon or exclusive ownership of folklore.",
+        "culture_review_required": true,
+        "in_vertical_slice": false,
+        "stage": "concept"
+      }
+    },
+    {
+      "id": "adwoa",
+      "data": {
+        "name": "Lady Adwoa of the Seven Markets",
+        "role": "Merchant rival with leverage over the supply roads",
+        "description": "Merchant rival with leverage over the supply roads. Character identity and all visuals remain subject to narrative and cultural review.",
+        "archetype": "Original merchant-rival adaptation",
+        "representation": "human",
+        "silhouette": "court",
+        "faction_ids": [
+          "seven-markets"
+        ],
+        "powers": [],
+        "variants": [
+          {
+            "id": "base",
+            "label": "Base concept",
+            "cloth_colour": "#AD6E36",
+            "accent_colour": "#D6B675"
+          }
+        ],
+        "source_note": "Supplied ANANSE character brief; a design proposal, not verified cultural canon or exclusive ownership of folklore.",
+        "culture_review_required": true,
+        "in_vertical_slice": false,
+        "stage": "concept"
+      }
+    },
+    {
+      "id": "glass-mask-court",
+      "data": {
+        "name": "The Glass Mask Court",
+        "role": "Court faction that fabricates legitimacy",
+        "description": "Court faction that fabricates legitimacy. Character identity and all visuals remain subject to narrative and cultural review.",
+        "archetype": "Original court-intrigue faction",
+        "representation": "collective",
+        "silhouette": "court",
+        "faction_ids": [
+          "silence-court"
+        ],
+        "powers": [],
+        "variants": [
+          {
+            "id": "base",
+            "label": "Base concept",
+            "cloth_colour": "#AD6E36",
+            "accent_colour": "#D6B675"
+          }
+        ],
+        "source_note": "Supplied ANANSE character brief; a design proposal, not verified cultural canon or exclusive ownership of folklore.",
+        "culture_review_required": true,
+        "in_vertical_slice": false,
+        "stage": "concept"
+      }
+    },
+    {
+      "id": "tiger",
+      "data": {
+        "name": "Tiger — optional diaspora reference",
+        "role": "Research-only expansion candidate; excluded from base setting",
+        "description": "Research-only expansion candidate; excluded from base setting. Character identity and all visuals remain subject to narrative and cultural review.",
+        "archetype": "Diaspora archetype noted in source; requires separate review",
+        "representation": "animal",
+        "silhouette": "guard",
+        "faction_ids": [
+          "silence-court"
+        ],
+        "powers": [],
+        "variants": [
+          {
+            "id": "base",
+            "label": "Base concept",
+            "cloth_colour": "#AD6E36",
+            "accent_colour": "#D6B675"
+          }
+        ],
+        "source_note": "Supplied ANANSE character brief; a design proposal, not verified cultural canon or exclusive ownership of folklore.",
+        "culture_review_required": true,
+        "in_vertical_slice": false,
+        "stage": "concept"
+      }
+    },
+    {
+      "id": "ananse-family",
+      "data": {
+        "name": "Ananse’s Family — research placeholder",
+        "role": "Responsibility and consequences; not yet individually authored",
+        "description": "Responsibility and consequences; not yet individually authored. Character identity and all visuals remain subject to narrative and cultural review.",
+        "archetype": "Family archetype noted in source",
+        "representation": "collective",
+        "silhouette": "scholar",
+        "faction_ids": [
+          "story-road"
+        ],
+        "powers": [],
+        "variants": [
+          {
+            "id": "base",
+            "label": "Base concept",
+            "cloth_colour": "#AD6E36",
+            "accent_colour": "#D6B675"
+          }
+        ],
+        "source_note": "Supplied ANANSE character brief; a design proposal, not verified cultural canon or exclusive ownership of folklore.",
+        "culture_review_required": true,
+        "in_vertical_slice": false,
+        "stage": "concept"
+      }
+    }
+  ],
+  "missions": [
+    {
+      "id": "market-of-stolen-names",
+      "data": {
+        "name": "Market of Stolen Names",
+        "description": "Recover the ledger, establish whether the edict is forged, and choose public exposure or witness protection. Three routes are specified; the browser laboratory tests their rule logic only.",
+        "character_ids": [
+          "kwaku",
+          "aso-yaa",
+          "kojo",
+          "esi",
+          "osebo"
+        ],
+        "faction_ids": [
+          "story-road",
+          "seven-markets",
+          "golden-guard"
+        ],
+        "estimated_minutes": 15,
+        "supported_routes": [
+          "social",
+          "negotiation",
+          "rooftop"
+        ],
+        "endings": [
+          "truth-exposed",
+          "witnesses-protected"
+        ]
+      }
+    }
+  ]
+}

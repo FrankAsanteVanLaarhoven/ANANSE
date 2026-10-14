@@ -1,0 +1,33 @@
+name: Native-Unreal-manual-gate
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native:
+    if: github.ref == 'refs/heads/main'
+    runs-on: [self-hosted, ananse-unreal]
+    environment: native-build-approval
+    timeout-minutes: 90
+    steps:
+      # Provision an authorised engine runner and protect the environment before use.
+      # Never run this job automatically on untrusted PRs or with signing credentials.
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - run: python -m pip install -r requirements.lock
+      - run: python scripts/unreal.py doctor --evidence-dir .local/verification/native-ci/doctor
+      - name: Require reviewed exact engine lock
+        run: python -c "from pathlib import Path; assert Path('toolchain.lock.json').is_file(), 'Commit the reviewed Build.version lock before native CI'"
+      - run: python scripts/unreal.py build --evidence-dir .local/verification/native-ci/build
+      - run: python scripts/unreal.py bootstrap --evidence-dir .local/verification/native-ci/bootstrap
+      - run: python scripts/unreal.py test --evidence-dir .local/verification/native-ci/test
+      # Device packaging additionally requires a reviewed exported catalogue and SDKs.
+      # Studio credentials and mutable local databases must not be copied onto this runner.
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: unreal-native-evidence
+          path: .local/verification/native-ci/
+          include-hidden-files: true
+          if-no-files-found: error
