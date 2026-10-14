@@ -28,3 +28,37 @@ def test_engine_report_is_never_overwritten(tmp_path):
     result=subprocess.run([sys.executable,str(ROOT/'scripts/unreal.py'),'doctor','--evidence-dir',str(tmp_path)],capture_output=True,text=True,timeout=10)
     assert result.returncode==2
     assert report.read_text()=='preserved evidence'
+
+
+def test_native_report_reader_accepts_engine_utf8_bom(tmp_path):
+    from scripts.unreal import verify_automation_report
+    path=tmp_path/'index.json'
+    path.write_text(json.dumps({'failed':0,'tests':[{'fullTestPath':name,'state':'Success'} for name in ['Ananse.Mission.Negotiation','Ananse.Mission.PowerBudget']]}),encoding='utf-8-sig')
+    assert verify_automation_report(path)==2
+
+def test_native_report_reader_rejects_empty_or_wrong_tests(tmp_path):
+    import pytest
+    from scripts.unreal import verify_automation_report
+    path=tmp_path/'index.json'
+    for names in [[],['Other.One','Other.Two'],['Ananse.Mission.Negotiation','Ananse.Mission.Negotiation']]:
+        path.write_text(json.dumps({'tests':[{'fullTestPath':name,'state':'Success'} for name in names]}))
+        with pytest.raises(RuntimeError):verify_automation_report(path)
+
+def test_native_report_reader_rejects_failed_or_unexecuted_tests(tmp_path):
+    import pytest
+    from scripts.unreal import verify_automation_report
+    path=tmp_path/'index.json'
+    for state in ['Fail','Skipped','NotRun','InProcess']:
+        path.write_text(json.dumps({'tests':[{'fullTestPath':'Ananse.Mission.Negotiation','state':'Success'},{'fullTestPath':'Ananse.Mission.PowerBudget','state':state}]}))
+        with pytest.raises(RuntimeError):verify_automation_report(path)
+
+def test_native_report_rejects_stale_and_inconsistent_summary(tmp_path):
+    import pytest,time
+    from scripts.unreal import verify_automation_report
+    path=tmp_path/'index.json'
+    valid={'succeeded':2,'tests':[{'fullTestPath':name,'state':'Success'} for name in ['Ananse.Mission.Negotiation','Ananse.Mission.PowerBudget']]}
+    path.write_text(json.dumps(valid))
+    with pytest.raises(RuntimeError):verify_automation_report(path,not_before=time.time()+1)
+    for extra in [{'succeeded':0},{'notRun':1},{'inProcess':1},{'failed':'0'},{'tests':[None]}, {'tests':{}}]:
+        path.write_text(json.dumps(valid|extra))
+        with pytest.raises(RuntimeError):verify_automation_report(path)

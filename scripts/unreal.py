@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Non-destructive engine checks and native build commands. No signing or store publishing."""
 from __future__ import annotations
-import argparse,json,os,platform,shutil,subprocess,sys
+import argparse,json,os,platform,shutil,subprocess,sys,time
 from datetime import datetime,timezone
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
@@ -39,8 +39,32 @@ def run(command,name,env=None,evidence_dir=None):
     print(f'Exit {result.returncode}; full log: {output}')
     if result.returncode:raise RuntimeError(f'{name} failed. Inspect the log; no success is inferred.')
 
+
+def verify_automation_report(index,not_before=None):
+    if not_before is not None and Path(index).stat().st_mtime<not_before:
+        raise RuntimeError('Stale automation report.')
+    report=json.loads(Path(index).read_text(encoding='utf-8-sig'))
+    if not isinstance(report,dict) or not isinstance(report.get('tests'),list):
+        raise RuntimeError('Malformed automation report.')
+    tests=report.get('tests',[])
+    if any(not isinstance(t,dict) for t in tests):raise RuntimeError('Malformed test record.')
+    for key in ['succeeded','succeededWithWarnings','failed','notRun','inProcess']:
+        if key in report and (type(report[key]) is not int or report[key]<0):raise RuntimeError('Malformed automation summary.')
+    if any(report.get(k,0) for k in ['failed','notRun','inProcess']):raise RuntimeError('Incomplete or failed automation summary.')
+    if 'succeeded' in report and report['succeeded']+report.get('succeededWithWarnings',0)!=len(tests):raise RuntimeError('Inconsistent executed test count.')
+    required={'Ananse.Mission.Negotiation','Ananse.Mission.PowerBudget'}
+    identities=[t.get('fullTestPath') for t in tests]
+    if any(not isinstance(name,str) or not name.startswith('Ananse.') for name in identities):
+        raise RuntimeError('Unexpected or malformed ANANSE test identity.')
+    if not required.issubset(identities) or len(set(identities))!=len(tests):
+        raise RuntimeError('Missing required ANANSE tests or duplicate report identities.')
+    if report.get('failed',0)>0 or any(str(t.get('state','')).lower()!='success' for t in tests):
+        raise RuntimeError('Expected successful ANANSE automation tests and no failures.')
+    return len(tests)
+
 def main():
     p=argparse.ArgumentParser();p.add_argument('command',choices=['doctor','lock-engine','build','bootstrap','test','open','verify-android','package']);p.add_argument('--evidence-dir',type=Path,default=ROOT/'.local/verification'/datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S.%fZ')/'native');p.add_argument('--platform',choices=['Win64','Linux','Mac','Android','IOS']);p.add_argument('--replace-generated',action='store_true');p.add_argument('--variant',default='base');a=p.parse_args()
+    a.evidence_dir=a.evidence_dir.resolve()
     info=environment();a.evidence_dir.mkdir(parents=True,exist_ok=True)
     doctor_report=a.evidence_dir/'unreal-doctor.json'
     if doctor_report.exists():raise RuntimeError('Doctor report exists. Select a fresh --evidence-dir to preserve evidence.')
@@ -67,13 +91,12 @@ def main():
     if a.command=='test':
         target=a.evidence_dir/'unreal-automation'
         if target.exists():raise RuntimeError('Archive or remove the old evidence/unreal-automation folder explicitly before a fresh test run.')
-        run([editor_cmd,PROJECT,'-unattended','-nop4','-NullRHI','-nosound','-ExecCmds=Automation RunTests Ananse','-TestExit=Automation Test Queue Empty',f'-ReportExportPath={target}'],'unreal-automation',evidence_dir=a.evidence_dir)
+        started=time.time()
+        run([editor_cmd,PROJECT,'-unattended','-nop4','-NullRHI','-nosound','-ExecCmds=Automation RunTests Ananse;SoftQuit',f'-ReportExportPath={target}'],'unreal-automation',evidence_dir=a.evidence_dir)
         index=target/'index.json'
         if not index.is_file():raise RuntimeError('No automation report. Tests are NOT verified.')
-        report=json.loads(index.read_text());tests=report.get('tests',[])
-        successes=[t for t in tests if str(t.get('state','')).lower()=='success']
-        if len(successes)<2 or report.get('failed',0)>0 or any(str(t.get('state','')).lower() not in ['success'] for t in tests):raise RuntimeError('Expected two successful ANANSE automation tests and no failures. Inspect exported results.')
-        print(f'Verified {len(successes)} Unreal automation results from a new report.');return 0
+        count=verify_automation_report(index,not_before=started)
+        print(f'Verified {count} Unreal automation results from a new report.');return 0
     if a.command=='open':
         if not (ROOT/'Unreal/Content/Maps/L_Market_Greybox.umap').is_file():raise RuntimeError('Run build and bootstrap before opening the intended greybox map.')
         run([editor,PROJECT,f'-AnanseVariant={a.variant}'],'unreal-editor',evidence_dir=a.evidence_dir);return 0

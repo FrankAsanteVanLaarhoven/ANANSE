@@ -4,7 +4,7 @@
 #include "AbilitySystemInterface.h"
 #include "InputActionValue.h"
 #include "AnansePlayer.generated.h"
-class UAbilitySystemComponent;class UAnanseMission;class UInputMappingContext;class UInputAction;class USpringArmComponent;class UCameraComponent;class UStaticMeshComponent;
+class UAnanseCatalogue;class UAbilitySystemComponent;class UAnanseMission;class UInputMappingContext;class UInputAction;class USpringArmComponent;class UCameraComponent;class UStaticMeshComponent;
 UCLASS()
 class ANANSE_API AAnansePlayer : public ACharacter,public IAbilitySystemInterface
 {
@@ -28,7 +28,10 @@ public:
     UFUNCTION(BlueprintCallable) bool FindWebAnchor(FVector& OutLocation) const;
     UFUNCTION(BlueprintCallable) bool StartWebFlight(const FVector& Destination);
     bool CanWebFlight(const FVector& Destination) const;
-    bool IsWebFlying() const { return bWebFlying; }
+    UFUNCTION(BlueprintPure) bool IsWebFlying() const { return bWebFlying; }
+    UFUNCTION(BlueprintPure) UAnanseCatalogue* GetCatalogue() const;
+    UFUNCTION(BlueprintPure) FString GetNativeWorldType() const;
+    UFUNCTION(BlueprintPure) bool IsNativePlayReady() const;
     void SpawnMirror();
 private:
     UPROPERTY() TObjectPtr<UInputMappingContext> Mapping;
@@ -38,7 +41,7 @@ private:
     void Move(const FInputActionValue& Value);
     void Look(const FInputActionValue& Value);
     void StartJump();
-    void Save();void Load();void Restart();
+    void Save();void Load();void RestartRun();
     void TouchPressed(ETouchIndex::Type Finger,FVector Location);
     FVector WebStart,WebEnd;
     float WebElapsed=0.f;

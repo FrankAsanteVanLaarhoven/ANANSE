@@ -71,8 +71,16 @@ bool UAnanseMission::CommitPower(FName Power)
     if(Power==TEXT("web-step")){State.bOnRooftop=true;AddSuspicion(10.f);Message(TEXT("Web Step consumed one thread. The archive watcher still needs distracting."));}
     Changed.Broadcast();return true;
 }
-bool UAnanseMission::SaveLocal()
+static bool ValidCheckpointSlot(const FString& SlotName)
 {
+    if(SlotName.IsEmpty() || SlotName.Len()>64)return false;
+    for(TCHAR C:SlotName)if(!FChar::IsAlnum(C) && C!=TEXT('_') && C!=TEXT('-'))return false;
+    return true;
+}
+bool UAnanseMission::SaveLocal(const FString& SlotName)
+{
+    if(!ValidCheckpointSlot(SlotName))
+    {Message(TEXT("Invalid local checkpoint slot."));return false;}
     if(!GetWorld() || !GetOwner())return false;
     UAnanseSave* Save=Cast<UAnanseSave>(UGameplayStatics::CreateSaveGameObject(UAnanseSave::StaticClass()));
     if(!Save)return false;
@@ -80,12 +88,14 @@ bool UAnanseMission::SaveLocal()
     Save->State=State;Save->Position=GetOwner()->GetActorLocation();Save->Rotation=GetOwner()->GetActorRotation();
     Save->VoiceRemaining=FMath::Max(0.f,VoiceUntil-Clock());Save->MirrorRemaining=FMath::Max(0.f,MirrorUntil-Clock());
     for(const auto& C:Cooldowns)Save->CooldownRemaining.Add(C.Key,FMath::Max(0.f,C.Value-Clock()));
-    const bool bSaved=UGameplayStatics::SaveGameToSlot(Save,TEXT("AnansePrototype"),0);Message(bSaved?TEXT("Local prototype checkpoint saved."):TEXT("Local save failed."));return bSaved;
+    const bool bSaved=UGameplayStatics::SaveGameToSlot(Save,SlotName,0);Message(bSaved?TEXT("Local prototype checkpoint saved."):TEXT("Local save failed."));return bSaved;
 }
-bool UAnanseMission::LoadLocal()
+bool UAnanseMission::LoadLocal(const FString& SlotName)
 {
+    if(!ValidCheckpointSlot(SlotName))
+    {Message(TEXT("Invalid local checkpoint slot."));return false;}
     if(!GetWorld() || !GetOwner())return false;
-    const UAnanseSave* Save=Cast<UAnanseSave>(UGameplayStatics::LoadGameFromSlot(TEXT("AnansePrototype"),0));
+    const UAnanseSave* Save=Cast<UAnanseSave>(UGameplayStatics::LoadGameFromSlot(SlotName,0));
     if(!Save || Save->SchemaVersion!=1){Message(TEXT("No compatible local checkpoint exists."));return false;}
     const UAnanseCatalogue* C=GetWorld()->GetGameInstance()->GetSubsystem<UAnanseCatalogue>();
     if(!C || C->ContentHash.IsEmpty() || C->ContentHash!=Save->ContentHash){Message(TEXT("Checkpoint uses another content revision. Migration is required; the save was not overwritten."));return false;}

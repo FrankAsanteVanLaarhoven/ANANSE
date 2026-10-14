@@ -45,7 +45,8 @@ try:
     block('Archive side wall',(870,950,150),(6,0.3,3))
     start=actors.spawn_actor_from_class(unreal.PlayerStart,unreal.Vector(-900,-350,110),unreal.Rotator(0,0,0));start.set_actor_label('Start Story Road')
     anchor=actors.spawn_actor_from_class(unreal.TargetPoint,unreal.Vector(-150,650,340));anchor.set_actor_label('Validated Web Step anchor');anchor.set_editor_property('tags',[unreal.Name('WebAnchor')])
-    block('Web anchor visible marker',(-150,650,265),(0.3,0.3,0.4))
+    marker=block('Web anchor visible marker',(-150,650,265),(0.3,0.3,0.4))
+    marker.static_mesh_component.set_collision_profile_name('NoCollision')
     specs=[('evidence','Inspect altered edict',(-650,-350,60),''),('listen','Learn captain call',(-500,150,60),'osebo'),('negotiate','Negotiate witness protection',(50,-200,60),'aso-yaa'),('archive','Request archive access',(650,250,60),''),('archive','Rooftop archive opening',(250,700,300),''),('ledger','Recover stolen names',(1000,250,60),''),('expose','Expose forged history',(1450,-150,60),'esi'),('protect','Protect named witnesses',(1450,350,60),'kojo')]
     for action,label,pos,character in specs:
         a=actors.spawn_actor_from_class(unreal.AnanseInteractable,unreal.Vector(*pos));a.set_actor_label(label)
@@ -64,4 +65,5 @@ except Exception as exc:
     report.update(status='failed',error=str(exc));unreal.log_error(str(exc))
 finally:
     out=Path(os.environ.get('ANANSE_EVIDENCE_DIR',str(ROOT/'evidence')))/'unreal-bootstrap.json';out.parent.mkdir(exist_ok=True);out.write_text(json.dumps(report,indent=2))
-    unreal.SystemLibrary.quit_editor()
+    # Let the command-line Python executor defer shutdown until this script returns.
+    unreal.EditorPythonScripting.set_keep_python_script_alive(False)

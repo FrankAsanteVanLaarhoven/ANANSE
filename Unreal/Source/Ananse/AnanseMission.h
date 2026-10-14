@@ -52,9 +52,9 @@ public:
     UFUNCTION(BlueprintCallable) bool CommitPower(FName Power);
     UFUNCTION(BlueprintCallable) void AddSuspicion(float Amount);
     UFUNCTION(BlueprintCallable) void Message(const FString& Text);
-    UFUNCTION(BlueprintCallable) bool SaveLocal();
-    UFUNCTION(BlueprintCallable) bool LoadLocal();
+    UFUNCTION(BlueprintCallable) bool SaveLocal(const FString& SlotName=TEXT("AnansePrototype"));
+    UFUNCTION(BlueprintCallable) bool LoadLocal(const FString& SlotName=TEXT("AnansePrototype"));
     float Clock() const;
-    bool VoiceActive() const { return Clock()<=VoiceUntil; }
-    bool MirrorActive() const { return Clock()<=MirrorUntil; }
+    UFUNCTION(BlueprintPure) bool VoiceActive() const { return Clock()<=VoiceUntil; }
+    UFUNCTION(BlueprintPure) bool MirrorActive() const { return Clock()<=MirrorUntil; }
 };

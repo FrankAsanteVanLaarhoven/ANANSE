@@ -1,4 +1,5 @@
 #include "AnansePlayer.h"
+#include "AnanseRuntimeVerification.h"
 #include "AnansePowers.h"
 #include "AnanseMission.h"
 #include "AnanseCatalogue.h"
@@ -46,6 +47,23 @@ AAnansePlayer::AAnansePlayer()
     Abilities=CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystem"));Mission=CreateDefaultSubobject<UAnanseMission>(TEXT("Mission"));
 }
 UAbilitySystemComponent* AAnansePlayer::GetAbilitySystemComponent() const{return Abilities;}
+UAnanseCatalogue* AAnansePlayer::GetCatalogue() const
+{
+    UGameInstance* Instance=GetGameInstance();
+    return Instance?Instance->GetSubsystem<UAnanseCatalogue>():nullptr;
+}
+FString AAnansePlayer::GetNativeWorldType() const
+{
+    if(!GetWorld())return TEXT("None");
+    if(GetWorld()->WorldType==EWorldType::PIE)return TEXT("PIE");
+    if(GetWorld()->WorldType==EWorldType::Game)return TEXT("Game");
+    if(GetWorld()->WorldType==EWorldType::Editor)return TEXT("Editor");
+    return TEXT("Other");
+}
+bool AAnansePlayer::IsNativePlayReady() const
+{
+    return HasActorBegunPlay() && GetController() && GetWorld() && GetWorld()->HasBegunPlay();
+}
 void AAnansePlayer::BeginPlay()
 {
     Super::BeginPlay();Abilities->InitAbilityActorInfo(this,this);
@@ -100,12 +118,12 @@ void AAnansePlayer::Move(const FInputActionValue& Value)
 }
 void AAnansePlayer::Look(const FInputActionValue& Value){const FVector2D Axis=Value.Get<FVector2D>();AddControllerYawInput(Axis.X);AddControllerPitchInput(Axis.Y);}
 void AAnansePlayer::StartJump(){if(!bWebFlying && Mission->State.Outcome.IsNone())Jump();}
-void AAnansePlayer::Save(){if(!bWebFlying)Mission->SaveLocal();else Mission->Message(TEXT("Land before saving."));}
-void AAnansePlayer::Load(){if(!bWebFlying)Mission->LoadLocal();}
-void AAnansePlayer::Restart(){UGameplayStatics::OpenLevel(this,FName(*UGameplayStatics::GetCurrentLevelName(this,true)));}
-void AAnansePlayer::WebStep(){Abilities->TryActivateAbilityByClass(UAnanseWebStepAbility::StaticClass());}
-void AAnansePlayer::BorrowVoice(){Abilities->TryActivateAbilityByClass(UAnanseVoiceAbility::StaticClass());}
-void AAnansePlayer::TrickMirror(){Abilities->TryActivateAbilityByClass(UAnanseMirrorAbility::StaticClass());}
+void AAnansePlayer::Save(){NotifyAnanseVerificationAction(this,TEXT("save"));if(!bWebFlying)Mission->SaveLocal(AnanseVerificationSaveSlot());else Mission->Message(TEXT("Land before saving."));}
+void AAnansePlayer::Load(){NotifyAnanseVerificationAction(this,TEXT("load"));if(!bWebFlying)Mission->LoadLocal(AnanseVerificationSaveSlot());}
+void AAnansePlayer::RestartRun(){UGameplayStatics::OpenLevel(this,FName(*UGameplayStatics::GetCurrentLevelName(this,true)));}
+void AAnansePlayer::WebStep(){NotifyAnanseVerificationAction(this,TEXT("web"));Abilities->TryActivateAbilityByClass(UAnanseWebStepAbility::StaticClass());}
+void AAnansePlayer::BorrowVoice(){NotifyAnanseVerificationAction(this,TEXT("voice"));Abilities->TryActivateAbilityByClass(UAnanseVoiceAbility::StaticClass());}
+void AAnansePlayer::TrickMirror(){NotifyAnanseVerificationAction(this,TEXT("mirror"));Abilities->TryActivateAbilityByClass(UAnanseMirrorAbility::StaticClass());}
 void AAnansePlayer::SetupPlayerInputComponent(UInputComponent* Input)
 {
     Super::SetupPlayerInputComponent(Input);
@@ -130,8 +148,12 @@ void AAnansePlayer::SetupPlayerInputComponent(UInputComponent* Input)
     Button(EKeys::One,EKeys::Gamepad_LeftShoulder,&AAnansePlayer::WebStep);
     Button(EKeys::Two,EKeys::Gamepad_RightShoulder,&AAnansePlayer::BorrowVoice);
     Button(EKeys::Three,EKeys::Gamepad_FaceButton_Top,&AAnansePlayer::TrickMirror);
-    Button(EKeys::F5,FKey(),&AAnansePlayer::Save);Button(EKeys::F9,FKey(),&AAnansePlayer::Load);Button(EKeys::R,FKey(),&AAnansePlayer::Restart);
-    if(APlayerController* PC=Cast<APlayerController>(Controller))if(ULocalPlayer* LP=PC->GetLocalPlayer())if(UEnhancedInputLocalPlayerSubsystem* Sub=ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(LP))Sub->AddMappingContext(Mapping,0);
+    Button(EKeys::F5,FKey(),&AAnansePlayer::Save);Button(EKeys::F9,FKey(),&AAnansePlayer::Load);Button(EKeys::R,FKey(),&AAnansePlayer::RestartRun);
+    APlayerController* PC=Cast<APlayerController>(Controller);
+    ULocalPlayer* LP=PC?PC->GetLocalPlayer():nullptr;
+    UEnhancedInputLocalPlayerSubsystem* Sub=LP?ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(LP):nullptr;
+    UE_LOG(LogTemp,Display,TEXT("ANANSE input context: controller=%s local_player=%s subsystem=%s authored_mappings=%d"),*GetNameSafe(PC),*GetNameSafe(LP),*GetNameSafe(Sub),Mapping->GetMappings().Num());
+    if(Sub)Sub->AddMappingContext(Mapping,0);
     Input->BindTouch(IE_Pressed,this,&AAnansePlayer::TouchPressed);
 }
 void AAnansePlayer::TouchPressed(ETouchIndex::Type Finger,FVector Location)
@@ -144,6 +166,7 @@ void AAnansePlayer::TouchPressed(ETouchIndex::Type Finger,FVector Location)
 }
 void AAnansePlayer::Interact()
 {
+    NotifyAnanseVerificationAction(this,TEXT("interact"));
     if(bWebFlying)return;
     TArray<AActor*> Actors;UGameplayStatics::GetAllActorsOfClass(this,AAnanseInteractable::StaticClass(),Actors);
     AAnanseInteractable* Nearest=nullptr;float Best=240.f*240.f;
@@ -171,7 +194,12 @@ bool AAnansePlayer::CanWebFlight(const FVector& Destination) const
     for(int32 I=1;I<=16;I++)
     {
         const float A=I/16.f;const FVector Next=FMath::Lerp(Start,Destination,A)+FVector(0,0,320.f*FMath::Sin(PI*A));FHitResult Hit;
-        if(GetWorld()->SweepSingleByChannel(Hit,Prev,Next,FQuat::Identity,ECC_Pawn,Shape,Params))return false;Prev=Next;
+        if(GetWorld()->SweepSingleByChannel(Hit,Prev,Next,FQuat::Identity,ECC_Pawn,Shape,Params))
+        {
+            UE_LOG(LogTemp,Warning,TEXT("ANANSE Web Step blocked: actor=%s sample=%d impact=%s destination=%s"),*GetNameSafe(Hit.GetActor()),I,*Hit.ImpactPoint.ToString(),*Destination.ToString());
+            return false;
+        }
+        Prev=Next;
     }
     return true;
 }
@@ -181,7 +209,7 @@ bool AAnansePlayer::StartWebFlight(const FVector& Destination)
 }
 void AAnansePlayer::Tick(float Delta)
 {
-    Super::Tick(Delta);if(!bWebFlying)return;WebElapsed+=Delta;const float A=FMath::Clamp(WebElapsed/0.6f,0.f,1.f);
+    Super::Tick(Delta);TickAnanseRuntimeVerification(this,Delta);if(!bWebFlying)return;WebElapsed+=Delta;const float A=FMath::Clamp(WebElapsed/0.6f,0.f,1.f);
     const FVector Next=FMath::Lerp(WebStart,WebEnd,A)+FVector(0,0,320.f*FMath::Sin(PI*A));FHitResult Hit;
     SetActorLocation(Next,true,&Hit);
     if(Hit.bBlockingHit || A>=1.f){bWebFlying=false;GetCharacterMovement()->SetMovementMode(MOVE_Walking);if(Hit.bBlockingHit)Mission->Message(TEXT("Web Step stopped by an obstacle; collision is never bypassed."));}
