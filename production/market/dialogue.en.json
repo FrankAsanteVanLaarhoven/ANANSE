@@ -1,0 +1,367 @@
+{
+  "schema_version": 1,
+  "status": "authored_draft_not_recorded_or_integrated",
+  "locale": "en",
+  "adaptation": "Original game dialogue; not a translation or quotation of traditional stories.",
+  "review_required": [
+    "narrative",
+    "Ghanaian/Akan cultural adviser",
+    "cast/pronunciation",
+    "accessibility"
+  ],
+  "speaker_ids_are_proposed": "Resolve aliases against the existing catalogue; do not create duplicates.",
+  "lines": [
+    {
+      "id": "MSN_OPEN_010",
+      "speaker": "esi",
+      "text": "A name is not a gift from a throne. It is something we owe each other.",
+      "beat": "opening",
+      "direction": "Public performance; conversational, not an exposition speech.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_OPEN_020",
+      "speaker": "guard",
+      "text": "By order of the court, these names are struck from the river roll.",
+      "beat": "opening",
+      "direction": "Practised official announcement; no caricatured accent.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_OPEN_030",
+      "speaker": "market_witness",
+      "text": "That is my father. He built this landing.",
+      "beat": "opening",
+      "direction": "Quiet disbelief before anger.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_OPEN_040",
+      "speaker": "kwaku",
+      "text": "Who told the river he never lived?",
+      "beat": "opening",
+      "direction": "Understated challenge, not a joke at the witness's expense.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_OPEN_050",
+      "speaker": "aso-yaa",
+      "text": "Lower your voice. Look at the seal.",
+      "beat": "opening",
+      "direction": "Close, urgent; move naturally into playable inspection.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_EVID_010",
+      "speaker": "kwaku",
+      "text": "New wax. The old impression is underneath.",
+      "beat": "investigation",
+      "direction": "Observation made while the player inspects the edict.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_EVID_020",
+      "speaker": "aso-yaa",
+      "text": "Then find the original ledger. A broken seal is a question. We need an answer.",
+      "beat": "investigation",
+      "direction": "Give an objective and a reason.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_KOJO_010",
+      "speaker": "kojo",
+      "text": "You notice the missing ink. I remember the people beneath it.",
+      "beat": "investigation",
+      "direction": "Measured; no supernatural memory exposition.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_KOJO_020",
+      "speaker": "kwaku",
+      "text": "Will you tell the market what you remember?",
+      "beat": "investigation",
+      "direction": "A direct request.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_KOJO_030",
+      "speaker": "kojo",
+      "text": "Bring proof. Memory should not have to stand alone.",
+      "beat": "investigation",
+      "direction": "Resolve, not distrust of the witness.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_SOC_010",
+      "speaker": "captain",
+      "text": "River gate. First bell. Count the boats, not the banners.",
+      "beat": "social",
+      "direction": "An original fictional password; easily distinguishable rhythm.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_SOC_020",
+      "speaker": "kwaku",
+      "text": "River gate. First bell. Count the boats, not the banners.",
+      "beat": "social",
+      "direction": "Ability imitation by the same consenting cast; not a cloned real person.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_SOC_030",
+      "speaker": "guard",
+      "text": "The call is right. Keep your hands where I can see them.",
+      "beat": "social",
+      "direction": "Grants bounded access, not permanent immunity.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_SOC_040",
+      "speaker": "guard",
+      "text": "You said you came from the river. Why are your feet dry?",
+      "beat": "social_challenge",
+      "direction": "Telegraph contradiction before escalating suspicion.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_SOC_050",
+      "speaker": "kwaku",
+      "text": "Because your captain sent me by the upper road. Ask him after the bell.",
+      "beat": "social_challenge",
+      "direction": "Valid only when the upper-road evidence token is owned.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_NEG_010",
+      "speaker": "aso-yaa",
+      "text": "I can put my seal on your passage. But the ledger names living witnesses.",
+      "beat": "negotiation",
+      "direction": "Clearly identify the ethical cost.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_NEG_020",
+      "speaker": "kwaku",
+      "text": "You want them kept out of the story.",
+      "beat": "negotiation",
+      "direction": "A question presented as recognition.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_NEG_030",
+      "speaker": "aso-yaa",
+      "text": "Out of the court's reach. Not out of our memory. Promise me that.",
+      "beat": "negotiation",
+      "direction": "Firm; preserves witness dignity.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_NEG_040",
+      "speaker": "kwaku",
+      "text": "I promise.",
+      "beat": "negotiation",
+      "direction": "Only play after explicit player acceptance.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_NEG_050",
+      "speaker": "guard",
+      "text": "The Ledger-Keeper's seal. Through the left door.",
+      "beat": "negotiation",
+      "direction": "Permit has a specific destination.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_ROOF_010",
+      "speaker": "kwaku",
+      "text": "The watcher can see the door. Not the space above it.",
+      "beat": "rooftop",
+      "direction": "Short hint after a delay, not on every attempt.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_ROOF_020",
+      "speaker": "guard",
+      "text": "Who is on that roof?",
+      "beat": "rooftop",
+      "direction": "Threat location readable in captions.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_ROOF_030",
+      "speaker": "kwaku",
+      "text": "One story here. Another over there.",
+      "beat": "rooftop",
+      "direction": "Trick Mirror gesture cue; avoid talking over player feedback.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_LEDGER_010",
+      "speaker": "kwaku",
+      "text": "They did not lose the names. They moved them.",
+      "beat": "ledger",
+      "direction": "Discovery, restrained.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_LEDGER_020",
+      "speaker": "kojo",
+      "text": "From the river roll to the list of enemies.",
+      "beat": "ledger",
+      "direction": "Companion delivery only when Kojo is present; otherwise use a readable annotation.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_LEDGER_030",
+      "speaker": "kwaku",
+      "text": "And every witness is written beside them.",
+      "beat": "ledger",
+      "direction": "Make the final choice understandable.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_CHASE_010",
+      "speaker": "osebo",
+      "text": "Put the ledger down. Walk away with your own name intact.",
+      "beat": "chase",
+      "direction": "Controlled menace; intelligibility above loudness.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_CHASE_020",
+      "speaker": "kwaku",
+      "text": "Is that an offer or the next correction?",
+      "beat": "chase",
+      "direction": "Keeps moving; no forced stop.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_CHASE_030",
+      "speaker": "osebo",
+      "text": "Close the river gates!",
+      "beat": "chase",
+      "direction": "Triggers through an idempotent gameplay event, not audio completion.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_CHASE_040",
+      "speaker": "esi",
+      "text": "The boats! I can keep their eyes on me.",
+      "beat": "chase",
+      "direction": "One timely navigation cue.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_CHASE_050",
+      "speaker": "kofi",
+      "text": "If you are boarding, board. If you are arguing, swim.",
+      "beat": "chase",
+      "direction": "Brief character humour after clear navigation cue.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_CHOICE_010",
+      "speaker": "esi",
+      "text": "Show it to them, and they will know who was erased.",
+      "beat": "choice",
+      "direction": "Explain benefit of exposure.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_CHOICE_020",
+      "speaker": "aso-yaa",
+      "text": "Show every page, and the court will know who helped you.",
+      "beat": "choice",
+      "direction": "Explain exposure risk; not a binary good/evil framing.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_CHOICE_030",
+      "speaker": "kwaku",
+      "text": "There has to be a way to keep the truth without offering them our people.",
+      "beat": "choice",
+      "direction": "Acknowledge incomplete alternatives; do not promise an unavailable third branch.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_EXPOSE_010",
+      "speaker": "esi",
+      "text": "These names were changed by order. Here is the seal. Here is the hand that changed them.",
+      "beat": "expose",
+      "direction": "Public account follows actual evidence ownership.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_EXPOSE_020",
+      "speaker": "market_witness",
+      "text": "Say his name again.",
+      "beat": "expose",
+      "direction": "Personal payoff before systemic consequence.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_EXPOSE_030",
+      "speaker": "aso-yaa",
+      "text": "Now we move the witnesses. Every one we still can.",
+      "beat": "expose",
+      "direction": "Consequence, not celebration without cost.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_BROKEN_010",
+      "speaker": "aso-yaa",
+      "text": "I lent you my name because you gave me your word.",
+      "beat": "expose_after_promise",
+      "direction": "Conditional line only if negotiation promise was made.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_PROTECT_010",
+      "speaker": "kwaku",
+      "text": "Not this page. Not while they can use it to find them.",
+      "beat": "protect",
+      "direction": "Deliberate withholding, not destruction of evidence.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_PROTECT_020",
+      "speaker": "esi",
+      "text": "Then I will tell the names I can stand beside. The rest we keep safe.",
+      "beat": "protect",
+      "direction": "No magical universal update of public belief.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_PROTECT_030",
+      "speaker": "kojo",
+      "text": "A story can wait. A person cannot always wait with it.",
+      "beat": "protect",
+      "direction": "Measured aftermath.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_FOREST_010",
+      "speaker": "ananse",
+      "text": "You have learned that a thread can bind two people, or tighten around one.",
+      "beat": "forest_epilogue",
+      "direction": "The spider is a separate character; no silent Kwaku identity retcon.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_FOREST_020",
+      "speaker": "kwaku",
+      "text": "Which did I weave?",
+      "beat": "forest_epilogue",
+      "direction": "Unresolved accountability.",
+      "recording_status": "not_recorded"
+    },
+    {
+      "id": "MSN_FOREST_030",
+      "speaker": "ananse",
+      "text": "Ask the people holding the other end.",
+      "beat": "forest_epilogue",
+      "direction": "Charismatic, formidable through insight; no lore dump.",
+      "recording_status": "not_recorded"
+    }
+  ]
+}

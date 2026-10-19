@@ -1,0 +1,11 @@
+"""Inset actual eye surfaces behind the orbital rim; retain all bone transforms."""
+import bpy,json,hashlib,struct,shutil
+from pathlib import Path
+R=Path(__file__).resolve().parents[1];src=R/'SourceArt/Characters/Kwaku/Authored_v031';out=src.parent/'Authored_v032';assert not out.exists();out.mkdir();bpy.ops.wm.open_mainfile(filepath=str(src/'Kwaku.blend'));mesh=bpy.data.objects['SK_Kwaku'];rig=next(o for o in bpy.context.scene.objects if o.type=='ARMATURE');rig.animation_data.action=None;bpy.context.scene.frame_set(0);ids={g.index for g in mesh.vertex_groups if g.name in ['eye_L','eye_R']};vertices=[v.index for v in mesh.data.vertices if any(g.group in ids and g.weight>.9 for g in v.groups)]
+for key in mesh.data.shape_keys.key_blocks:
+ for i in vertices:key.data[i].co.y+=.0052
+for i in vertices:mesh.data.vertices[i].co.y=mesh.data.shape_keys.key_blocks['Basis'].data[i].co.y
+for image in bpy.data.images:
+ if image.filepath and Path(image.filepath).is_file()and Path(image.filepath).parent==src:target=out/Path(image.filepath).name;shutil.copyfile(image.filepath,target);image.filepath=str(target);image.pack()
+shutil.copyfile(src/'Ledger.glb',out/'Ledger.glb');bpy.ops.wm.save_as_mainfile(filepath=str(out/'Kwaku.blend'));bpy.ops.object.select_all(action='DESELECT');mesh.hide_set(False);mesh.select_set(True);rig.select_set(True);bpy.ops.export_scene.gltf(filepath=str(out/'Kwaku.glb'),use_selection=True,export_format='GLB',export_animations=True,export_animation_mode='ACTIONS',export_force_sampling=True,export_skins=True,export_all_influences=False,export_def_bones=True,export_yup=True,export_morph=True)
+p=out/'Kwaku.glb';raw=p.read_bytes();n=struct.unpack_from('<I',raw,12)[0];d=json.loads(raw[20:20+n]);d['asset'].pop('generator',None);head=json.dumps(d,separators=(',',':')).encode();head+=b' '*((-len(head))%4);tail=raw[20+n:];p.write_bytes(struct.pack('<III',0x46546c67,2,20+len(head)+len(tail))+struct.pack('<II',len(head),0x4e4f534a)+head+tail);r=json.loads((src/'art-pass2.json').read_text());r.update(scene_sha256=hashlib.sha256((out/'Kwaku.blend').read_bytes()).hexdigest(),glb_sha256=hashlib.sha256(p.read_bytes()).hexdigest(),eye_inset_m=.0052,eye_surface_vertices=len(vertices),bone_transforms_changed=False);(out/'art-pass2.json').write_text(json.dumps(r,indent=2)+'\n');print('ACTUAL_EYES_INSET',len(vertices))

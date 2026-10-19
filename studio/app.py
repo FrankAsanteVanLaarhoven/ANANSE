@@ -9,8 +9,10 @@ from pydantic import ValidationError
 from .models import Kind, CreateRecord, UpdateRecord, Review, Publish, Revert, LabAction, SCHEMAS
 from .store import Store, DomainError, canonical
 from . import lab
+from .visuals import preview_source
 
 STATIC=Path(__file__).parent/"static"
+SOURCE_ROOT=Path(__file__).resolve().parents[1]
 
 def create_app(db_path, tokens: dict[str,str], seed_path: Path | None = None):
     if set(tokens)!={"editor","reviewer","publisher"} or any(len(v)<32 for v in tokens.values()) or len(set(tokens.values()))!=3:
@@ -65,7 +67,7 @@ def create_app(db_path, tokens: dict[str,str], seed_path: Path | None = None):
     def index(): return FileResponse(STATIC/"index.html")
     @app.get("/static/{name}")
     def static(name:str):
-        if name not in {"app.js","style.css"}:raise DomainError(404,"Not found.")
+        if name not in {"app.js","style.css","leopard-preview.js"}:raise DomainError(404,"Not found.")
         return FileResponse(STATIC/name)
     @app.get("/health")
     def health(): return {"status":"ok","mode":"local-authoring-prototype","unreal_verified":False}
@@ -77,6 +79,10 @@ def create_app(db_path, tokens: dict[str,str], seed_path: Path | None = None):
     def schemas(p=Depends(principal)):return {k:v.model_json_schema() for k,v in SCHEMAS.items()}
     @app.get("/api/validation")
     def validation(p=Depends(principal)):return store.validation()
+    @app.get("/api/assets/{id}/preview.glb")
+    def model_preview(id:str,p=Depends(principal)):
+        path,digest=preview_source(SOURCE_ROOT,store.get('assets',id))
+        return FileResponse(path,media_type='model/gltf-binary',headers={'X-Source-SHA256':digest})
     @app.get("/api/audit")
     def audit(p=Depends(principal),limit:int=Query(default=100,ge=1,le=1000)):return {"items":store.audit(limit),"integrity":store.verify_audit()}
     @app.post("/api/publish",status_code=201)

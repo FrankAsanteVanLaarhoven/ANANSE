@@ -24,11 +24,11 @@ State changed files, tests actually run, test counts, failures, untested platfor
 
 Run Python tests and JavaScript syntax checks for local changes. Compile Unreal and execute its automation for C++ changes on an authorised engine host. Check device frame times for rendering/input changes. Use exact engine Build.version pinning. Never auto-download unknown models or install plugins to silence errors. Add hashes, wheel locks and action commit pins before production supply-chain approval.
 
-## First implementation order
+## Production execution order
 
-1. Reproduce local tests and browser UI in an unrestricted, authorised local environment.
-2. Install the exact supported UE family, lock Build.version, compile and fix source integration.
-3. Publish/export a catalogue, generate the greybox, run two native tests and record a real play-through of each route.
-4. Prove edit -> publish -> export -> cook -> visible native appearance change and power removal.
-5. Prove Android package installation, controls and sustained device performance.
-6. Only then add artist-produced assets, AnimBlueprints, UMG, StateTree crowd behaviour and Sequencer story beats.
+1. Continue the existing pinned engine and verified native baseline; preserve original diagnostics and the process-local allocator workaround.
+2. Finish the bounded Market of Stolen Names mission and short sanctuary epilogue. Keep Kwaku and Ananse distinct; no additional kingdoms or multiplayer.
+3. Progress native mission/cinematic/save logic, character import/art, audio/UI, mobile qualification, offline player-service adapters and secure release engineering as independent workstreams. A missing asset, device or account blocks only dependent work.
+4. Reproduce checks affected by each change. Bind rendered, packaged, device and service evidence to actual source/content/toolchain/artifact identities; retain failures.
+5. Replace shipping placeholders with reviewed retrievable production assets. Source contracts, metadata, mocks and test clips do not close final-art, recording, cloud or device gates.
+6. Require explicit approval for software acquisition when needed, signing, accounts/costs, deployment and release. Existing safety, rights and approval boundaries remain in force.

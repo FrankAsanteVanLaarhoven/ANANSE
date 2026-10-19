@@ -1,0 +1,9 @@
+"""Reopen the Aso-only family and inspect actual saved LOD, physics and rig state."""
+import unreal,json,os,sys
+from pathlib import Path
+R=Path(__file__).resolve().parents[1];out=Path(os.environ['ANANSE_EVIDENCE_DIR']);out.mkdir(parents=True,exist_ok=False);r=json.loads((R/'.local/verification/aso-yaa-20261016/native-02/AsoYaa-native.json').read_text());mesh=unreal.load_asset(r['mesh']);before=json.loads(unreal.AnanseAnimationAuthoring.describe_rig(mesh));error=unreal.AnanseAnimationAuthoring.prepare_leopard_quality(mesh);assert not error,str(error);assert unreal.get_editor_subsystem(unreal.SkeletalMeshEditorSubsystem).regenerate_lod(mesh,3,True,False)
+assert unreal.EditorAssetLibrary.save_loaded_asset(mesh.get_editor_property('physics_asset'));assert unreal.EditorAssetLibrary.save_loaded_asset(mesh)
+unreal.AnanseAnimationAuthoring.add_story_sockets(mesh);assert unreal.EditorAssetLibrary.save_loaded_asset(mesh);rig=json.loads(unreal.AnanseAnimationAuthoring.describe_rig(mesh));sys.path.insert(0,str(R));from scripts.aso_yaa_contract import validate_native_sockets;assert validate_native_sockets(rig);assert rig['lod_count']==3;assert all(0<l['max_influences']<=4 for l in rig['lods']);assert all(b['kinematic']for b in rig['physics_bodies'])
+cr=unreal.load_asset(r['control_rig']);assert cr.create_control_rig().execute('Forwards Solve');ik=unreal.load_asset(r['ik']);assert unreal.IKRigController.get_controller(ik).get_num_solvers()==2
+bp=unreal.load_asset(r['animation_blueprint']);unreal.BlueprintEditorLibrary.compile_blueprint(bp);assert unreal.EditorAssetLibrary.save_loaded_asset(bp)
+(out/'quality.json').write_text(json.dumps({'status':'native_reopened_quality_policy_applied','rig':rig,'rig_execution':True,'ik_solvers':2,'collision_authority':'Pawn capsule; mesh NoCollision, kinematic physics bodies','joint_limit_review':'REVIEW_REQUIRED','creative':'REVIEW_REQUIRED'},indent=2)+'\n')

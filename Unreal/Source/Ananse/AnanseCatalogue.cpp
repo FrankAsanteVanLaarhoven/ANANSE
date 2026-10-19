@@ -4,6 +4,17 @@
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
 
+int32 UAnanseCatalogue::KwakuBindingRevision(const FString& Source,const FString& Mesh,const FString& Definition,const FString& Family)
+{
+    if(Family!=TEXT("Kwaku-independent-v001"))return 0;
+    if(Source==TEXT("authored-v002")&&Mesh==TEXT("/Game/Ananse/Characters/Kwaku/Story_v001/Kwaku.Kwaku")&&Definition==TEXT("/Game/Ananse/Characters/Kwaku/Story_v001/DA_Kwaku.DA_Kwaku"))return 1;
+    if(Source==TEXT("authored-v006")&&Mesh==TEXT("/Game/Ananse/Characters/Kwaku/Refined_v001/Kwaku.Kwaku")&&Definition==TEXT("/Game/Ananse/Characters/Kwaku/Refined_v001/DA_Kwaku.DA_Kwaku"))return 2;
+    if(Source==TEXT("authored-v008")&&Mesh==TEXT("/Game/Ananse/Characters/Kwaku/Refined_v002/Kwaku.Kwaku")&&Definition==TEXT("/Game/Ananse/Characters/Kwaku/Refined_v002/DA_Kwaku.DA_Kwaku"))return 3;
+    if(Source==TEXT("authored-v015")&&Mesh==TEXT("/Game/Ananse/Characters/Kwaku/Interactions_v003/Kwaku.Kwaku")&&Definition==TEXT("/Game/Ananse/Characters/Kwaku/Interactions_v003/DA_Kwaku.DA_Kwaku"))return 4;
+    if(Source==TEXT("authored-v016")&&Mesh==TEXT("/Game/Ananse/Characters/Kwaku/Interactions_v005/Kwaku.Kwaku")&&Definition==TEXT("/Game/Ananse/Characters/Kwaku/Interactions_v005/DA_Kwaku.DA_Kwaku"))return 5;
+    return 0;
+}
+
 void UAnanseCatalogue::Initialize(FSubsystemCollectionBase& Collection)
 {
     Super::Initialize(Collection);
@@ -35,7 +46,41 @@ void UAnanseCatalogue::Initialize(FSubsystemCollectionBase& Collection)
             const TSharedPtr<FJsonObject>* Data=nullptr;FString Id,Category,PathValue;
             if (Item->TryGetStringField(TEXT("id"),Id) && Item->TryGetObjectField(TEXT("data"),Data) &&
                 (*Data)->TryGetStringField(TEXT("category"),Category) && Category==TEXT("skeletal-mesh") &&
-                (*Data)->TryGetStringField(TEXT("unreal_path"),PathValue) && PathValue.StartsWith(TEXT("/Game/"))) MeshPaths.Add(Id,PathValue);
+                (*Data)->TryGetStringField(TEXT("unreal_path"),PathValue) && PathValue.StartsWith(TEXT("/Game/")))
+            {
+                MeshPaths.Add(Id,PathValue);
+                const TSharedPtr<FJsonObject>* Visual=nullptr;
+                if((*Data)->TryGetObjectField(TEXT("visual_design"),Visual))
+                {
+                    FString PublishedDesign;(*Visual)->TryGetStringField(TEXT("design_id"),PublishedDesign);
+                    if(PublishedDesign==TEXT("aso-yaa-human-v1"))
+                    {
+                        FString Source,Definition,Family;(*Visual)->TryGetStringField(TEXT("source_revision"),Source);(*Visual)->TryGetStringField(TEXT("definition_path"),Definition);(*Visual)->TryGetStringField(TEXT("skeleton_key"),Family);
+                        const FString Base=Source==TEXT("authored-v007")?TEXT("/Game/Ananse/Characters/AsoYaa/Negotiation_v002/"):Source==TEXT("authored-v004")?TEXT("/Game/Ananse/Characters/AsoYaa/Negotiation_v001/"):TEXT("/Game/Ananse/Characters/AsoYaa/Story_v001/");
+                        if(Id!=TEXT("aso-yaa-human-v1-design")||bAsoVisualPublished||Family!=TEXT("AsoYaa-independent-v001")||(Source!=TEXT("authored-v007")&&Source!=TEXT("authored-v004")&&Source!=TEXT("authored-v001"))||PathValue!=Base+TEXT("AsoYaa.AsoYaa")||Definition!=Base+TEXT("DA_AsoYaa.DA_AsoYaa")){UE_LOG(LogTemp,Error,TEXT("ANANSE rejected incompatible Aso Yaa publication."));return;}
+                        AsoVisualRevision=Source==TEXT("authored-v007")?3:Source==TEXT("authored-v004")?2:1;bAsoVisualPublished=true;continue;
+                    }
+                    if(PublishedDesign==TEXT("kwaku-human-v1"))
+                    {
+                        FString Source,Definition,Family;(*Visual)->TryGetStringField(TEXT("source_revision"),Source);(*Visual)->TryGetStringField(TEXT("definition_path"),Definition);(*Visual)->TryGetStringField(TEXT("skeleton_key"),Family);
+                        const int32 Binding=KwakuBindingRevision(Source,PathValue,Definition,Family);
+                        if(Id!=TEXT("kwaku-human-v1-design")||Binding==0||bKwakuVisualPublished){UE_LOG(LogTemp,Error,TEXT("ANANSE rejected an incompatible or duplicate Kwaku visual publication."));return;}
+                        KwakuVisualRevision=Binding;bKwakuVisualPublished=true;continue;
+                    }
+                    if(PublishedDesign!=TEXT("osebo-leopard-v1"))continue;
+                    FString Design,Key,Definition,Colour,Accent;double Revision=0;
+                    const bool Match=PathValue==TEXT("/Game/Ananse/Characters/OseboLeopard/Authored_v001/OseboLeopard.OseboLeopard") &&
+                      (*Visual)->TryGetStringField(TEXT("design_id"),Design) && Design==TEXT("osebo-leopard-v1") &&
+                      (*Visual)->TryGetStringField(TEXT("skeleton_key"),Key) && Key==TEXT("osebo-feline-biped-v001") &&
+                      (*Visual)->TryGetStringField(TEXT("definition_path"),Definition) && Definition==TEXT("/Game/Ananse/Characters/OseboLeopard/Data/DA_OseboLeopard.DA_OseboLeopard") &&
+                      (*Visual)->TryGetStringField(TEXT("cape_colour"),Colour) && (*Visual)->TryGetStringField(TEXT("accent_colour"),Accent) &&
+                      Item->TryGetNumberField(TEXT("version"),Revision) && Revision>=1;
+                    auto Hex=[](const FString& C){if(C.Len()!=7||C[0]!='#')return false;for(int32 I=1;I<7;++I)if(!FChar::IsHexDigit(C[I]))return false;return true;};
+                    if(Match && Hex(Colour) && Hex(Accent) && !bLeopardVisualPublished)
+                    {LeopardCape=FLinearColor::FromSRGBColor(FColor::FromHex(Colour));LeopardAccent=FLinearColor::FromSRGBColor(FColor::FromHex(Accent));LeopardVisualRevision=int32(Revision);bLeopardVisualPublished=true;}
+                    else UE_LOG(LogTemp,Warning,TEXT("ANANSE rejected incompatible or duplicate leopard visual publication; character identity unchanged."));
+                }
+            }
         }
     }
     const TArray<TSharedPtr<FJsonValue>>* List=nullptr;

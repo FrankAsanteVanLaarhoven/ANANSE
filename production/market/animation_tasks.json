@@ -1,0 +1,316 @@
+{
+  "schema_version": 1,
+  "status": "production_task_list_not_animation_assets",
+  "spider_contract": {
+    "grasping_arms": 4,
+    "walking_legs": 4,
+    "independent_fingers": true,
+    "custom_skeleton": true,
+    "avoid": "Do not force extra appendages through a biped-only retargeter."
+  },
+  "tasks": [
+    {
+      "id": "AN_Idle",
+      "category": "idle",
+      "status": "missing",
+      "requires": [
+        "approved_mesh_and_skeleton",
+        "deformation_review",
+        "in_engine_playback",
+        "root_motion_or_in_place_policy",
+        "notify_binding_review"
+      ]
+    },
+    {
+      "id": "AN_Walk",
+      "category": "locomotion",
+      "status": "missing",
+      "requires": [
+        "approved_mesh_and_skeleton",
+        "deformation_review",
+        "in_engine_playback",
+        "root_motion_or_in_place_policy",
+        "notify_binding_review"
+      ]
+    },
+    {
+      "id": "AN_Run",
+      "category": "locomotion",
+      "status": "missing",
+      "requires": [
+        "approved_mesh_and_skeleton",
+        "deformation_review",
+        "in_engine_playback",
+        "root_motion_or_in_place_policy",
+        "notify_binding_review"
+      ]
+    },
+    {
+      "id": "AN_Start",
+      "category": "locomotion",
+      "status": "missing",
+      "requires": [
+        "approved_mesh_and_skeleton",
+        "deformation_review",
+        "in_engine_playback",
+        "root_motion_or_in_place_policy",
+        "notify_binding_review"
+      ]
+    },
+    {
+      "id": "AN_Stop",
+      "category": "locomotion",
+      "status": "missing",
+      "requires": [
+        "approved_mesh_and_skeleton",
+        "deformation_review",
+        "in_engine_playback",
+        "root_motion_or_in_place_policy",
+        "notify_binding_review"
+      ]
+    },
+    {
+      "id": "AN_TurnLeft",
+      "category": "locomotion",
+      "status": "missing",
+      "requires": [
+        "approved_mesh_and_skeleton",
+        "deformation_review",
+        "in_engine_playback",
+        "root_motion_or_in_place_policy",
+        "notify_binding_review"
+      ]
+    },
+    {
+      "id": "AN_TurnRight",
+      "category": "locomotion",
+      "status": "missing",
+      "requires": [
+        "approved_mesh_and_skeleton",
+        "deformation_review",
+        "in_engine_playback",
+        "root_motion_or_in_place_policy",
+        "notify_binding_review"
+      ]
+    },
+    {
+      "id": "AN_Jump",
+      "category": "traversal",
+      "status": "missing",
+      "requires": [
+        "approved_mesh_and_skeleton",
+        "deformation_review",
+        "in_engine_playback",
+        "root_motion_or_in_place_policy",
+        "notify_binding_review"
+      ]
+    },
+    {
+      "id": "AN_LandSoft",
+      "category": "traversal",
+      "status": "missing",
+      "requires": [
+        "approved_mesh_and_skeleton",
+        "deformation_review",
+        "in_engine_playback",
+        "root_motion_or_in_place_policy",
+        "notify_binding_review"
+      ]
+    },
+    {
+      "id": "AN_LandHard",
+      "category": "traversal",
+      "status": "missing",
+      "requires": [
+        "approved_mesh_and_skeleton",
+        "deformation_review",
+        "in_engine_playback",
+        "root_motion_or_in_place_policy",
+        "notify_binding_review"
+      ]
+    },
+    {
+      "id": "AN_WebStepLaunch",
+      "category": "traversal",
+      "status": "missing",
+      "requires": [
+        "approved_mesh_and_skeleton",
+        "deformation_review",
+        "in_engine_playback",
+        "root_motion_or_in_place_policy",
+        "notify_binding_review"
+      ]
+    },
+    {
+      "id": "AN_WebStepTravel",
+      "category": "traversal",
+      "status": "missing",
+      "requires": [
+        "approved_mesh_and_skeleton",
+        "deformation_review",
+        "in_engine_playback",
+        "root_motion_or_in_place_policy",
+        "notify_binding_review"
+      ]
+    },
+    {
+      "id": "AN_WebStepLand",
+      "category": "traversal",
+      "status": "missing",
+      "requires": [
+        "approved_mesh_and_skeleton",
+        "deformation_review",
+        "in_engine_playback",
+        "root_motion_or_in_place_policy",
+        "notify_binding_review"
+      ]
+    },
+    {
+      "id": "AN_Crouch",
+      "category": "stealth",
+      "status": "missing",
+      "requires": [
+        "approved_mesh_and_skeleton",
+        "deformation_review",
+        "in_engine_playback",
+        "root_motion_or_in_place_policy",
+        "notify_binding_review"
+      ]
+    },
+    {
+      "id": "AN_InspectEdict",
+      "category": "interaction",
+      "status": "missing",
+      "requires": [
+        "approved_mesh_and_skeleton",
+        "deformation_review",
+        "in_engine_playback",
+        "root_motion_or_in_place_policy",
+        "notify_binding_review"
+      ]
+    },
+    {
+      "id": "AN_TakeLedger",
+      "category": "interaction",
+      "status": "missing",
+      "requires": [
+        "approved_mesh_and_skeleton",
+        "deformation_review",
+        "in_engine_playback",
+        "root_motion_or_in_place_policy",
+        "notify_binding_review"
+      ]
+    },
+    {
+      "id": "AN_Negotiate",
+      "category": "dialogue",
+      "status": "missing",
+      "requires": [
+        "approved_mesh_and_skeleton",
+        "deformation_review",
+        "in_engine_playback",
+        "root_motion_or_in_place_policy",
+        "notify_binding_review"
+      ]
+    },
+    {
+      "id": "AN_BorrowedVoice",
+      "category": "ability",
+      "status": "missing",
+      "requires": [
+        "approved_mesh_and_skeleton",
+        "deformation_review",
+        "in_engine_playback",
+        "root_motion_or_in_place_policy",
+        "notify_binding_review"
+      ]
+    },
+    {
+      "id": "AN_TrickMirror",
+      "category": "ability",
+      "status": "missing",
+      "requires": [
+        "approved_mesh_and_skeleton",
+        "deformation_review",
+        "in_engine_playback",
+        "root_motion_or_in_place_policy",
+        "notify_binding_review"
+      ]
+    },
+    {
+      "id": "AN_HitReact",
+      "category": "combat",
+      "status": "missing",
+      "requires": [
+        "approved_mesh_and_skeleton",
+        "deformation_review",
+        "in_engine_playback",
+        "root_motion_or_in_place_policy",
+        "notify_binding_review"
+      ]
+    },
+    {
+      "id": "AN_Captured",
+      "category": "failure",
+      "status": "missing",
+      "requires": [
+        "approved_mesh_and_skeleton",
+        "deformation_review",
+        "in_engine_playback",
+        "root_motion_or_in_place_policy",
+        "notify_binding_review"
+      ]
+    },
+    {
+      "id": "AN_StoryWeaveFourArms",
+      "category": "spider",
+      "status": "missing",
+      "requires": [
+        "approved_mesh_and_skeleton",
+        "deformation_review",
+        "in_engine_playback",
+        "root_motion_or_in_place_policy",
+        "notify_binding_review"
+      ]
+    },
+    {
+      "id": "AN_ListenFace",
+      "category": "face",
+      "status": "missing",
+      "requires": [
+        "approved_mesh_and_skeleton",
+        "deformation_review",
+        "in_engine_playback",
+        "root_motion_or_in_place_policy",
+        "notify_binding_review"
+      ]
+    },
+    {
+      "id": "AN_SpeakFace",
+      "category": "face",
+      "status": "missing",
+      "requires": [
+        "approved_mesh_and_skeleton",
+        "deformation_review",
+        "in_engine_playback",
+        "root_motion_or_in_place_policy",
+        "notify_binding_review"
+      ]
+    }
+  ],
+  "runtime_requirements": [
+    "bounded_ground_traces",
+    "per_leg_stance_locks",
+    "stable_bend_directions",
+    "body_height_and_abdomen_constraints",
+    "ability_transition_interrupts",
+    "cloth_low_cost_fallback",
+    "animation_lod",
+    "footstep_notifies_from_actual_contact",
+    "face_and_eye_targeting"
+  ],
+  "targets_are_proposed": {
+    "stance_drift_p95_cm": 2.0,
+    "penetration_p95_cm": 0.5
+  }
+}

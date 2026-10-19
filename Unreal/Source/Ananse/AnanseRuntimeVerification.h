@@ -3,4 +3,5 @@
 class AAnansePlayer;
 void TickAnanseRuntimeVerification(AAnansePlayer* Player,float DeltaSeconds);
 void NotifyAnanseVerificationAction(AAnansePlayer* Player,FName Action);
-FString AnanseVerificationSaveSlot();
+FString AnanseVerificationSaveSlot(FName CharacterId=TEXT("kwaku"));
+bool AnanseUsesDiagnosticCheckpoint();

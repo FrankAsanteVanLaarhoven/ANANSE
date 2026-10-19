@@ -1,0 +1,41 @@
+{
+  "technical": {
+    "editable_geometry": "PASS",
+    "native_meshes_lods": "PASS",
+    "instancing": "PASS",
+    "scale_and_named_axes": "PASS",
+    "canonical_anchor_preservation": "PASS",
+    "declared_route_collision": "PASS",
+    "static_crossing_clearance": "PASS",
+    "six_route_outcomes": "PASS",
+    "two_process_restarts": "PASS",
+    "cinematic_exit_recovery": "PASS",
+    "packaged_materials": "PASS",
+    "prior_character_asset_protection": "PASS",
+    "baked_lighting": "BLOCKED",
+    "physical_devices": "BLOCKED"
+  },
+  "creative": {
+    "market_architecture": "REVIEW_REQUIRED",
+    "materials": "REVIEW_REQUIRED",
+    "props": "REVIEW_REQUIRED",
+    "river_edge_integration": "REVIEW_REQUIRED",
+    "forest_forms": "REVIEW_REQUIRED",
+    "foliage": "REVIEW_REQUIRED",
+    "lighting": "REVIEW_REQUIRED",
+    "navigation_readability": "REVIEW_REQUIRED",
+    "cinematic_readability": "REVIEW_REQUIRED"
+  },
+  "voice_audio": "INCOMPLETE",
+  "long_session_memory": "NOT_QUALIFIED",
+  "broad_terrain_navigation": "NOT_QUALIFIED",
+  "aso_creative": "REVIEW_REQUIRED",
+  "human_approved": false,
+  "limitations": [
+    "Mobile baked lighting blocked by installed Lightmass worker failure. Dynamic fallback is engineering review only.",
+    "Static crossing over opaque shallow-water surface and retained collision ground; no quest-unlocked bridge or water simulation.",
+    "River is decorative; retained boundary limits access and edge integration still needs art review.",
+    "Bare boundary/roof surfaces, remaining watcher/character proxies, low-detail tree/leaf forms and lighting need review.",
+    "HUD remains development presentation; no final ambience/voice/audio."
+  ]
+}

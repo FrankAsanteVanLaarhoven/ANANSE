@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "release_id": "ANANSE_Market_RC1",
+  "basis_commit": "ec7bf0bcf16634a13c12e92433e9731064890e80",
+  "scope": "One finished 15–20 minute market mission and short forest epilogue; native Linux, Android, iOS plus optional-online campaign services. Not the entire multi-kingdom game.",
+  "status": "proposed_release_contract",
+  "gates": [
+    {
+      "id": "reproducibility",
+      "required_checks": [
+        "clean_checkout_build",
+        "all_required_assets_retrievable",
+        "content_digest_matches",
+        "engine_and_dependency_pins_verified"
+      ],
+      "min_tests_executed": 1
+    },
+    {
+      "id": "art",
+      "required_checks": [
+        "reference_comparison_approved",
+        "cultural_review_approved",
+        "mesh_material_lod_checks",
+        "all_runtime_assets_production"
+      ],
+      "min_tests_executed": 1
+    },
+    {
+      "id": "animation",
+      "required_checks": [
+        "four_arms_four_legs",
+        "limb_isolation",
+        "locomotion_contact_tests",
+        "ability_interrupts",
+        "facial_performance_review"
+      ],
+      "min_tests_executed": 1
+    },
+    {
+      "id": "mission",
+      "required_checks": [
+        "three_routes_two_outcomes",
+        "cutscene_skip_every_boundary",
+        "chase_capture_retry",
+        "save_load_process_restart",
+        "no_debug_completion_shortcut"
+      ],
+      "min_tests_executed": 1
+    },
+    {
+      "id": "audio",
+      "required_checks": [
+        "approved_recordings_and_rights",
+        "mix_phone_and_headphones",
+        "captions_and_subtitles",
+        "mute_and_interruption_tests"
+      ],
+      "min_tests_executed": 1
+    },
+    {
+      "id": "linux",
+      "required_checks": [
+        "fresh_shipping_package",
+        "packaged_playthrough",
+        "orderly_exit",
+        "shipping_debug_hooks_absent",
+        "allocator_limitation_review"
+      ],
+      "min_tests_executed": 1
+    },
+    {
+      "id": "android",
+      "required_checks": [
+        "fresh_aab_and_derived_apk",
+        "arm64_and_target_api_36_or_higher",
+        "native_16k_compatibility",
+        "two_named_devices_twenty_minute_runs",
+        "touch_controller_lifecycle",
+        "frame_budget_passed"
+      ],
+      "min_tests_executed": 1
+    },
+    {
+      "id": "ios",
+      "required_checks": [
+        "qualified_mac_xcode_sdk",
+        "signed_candidate",
+        "physical_iphone_twenty_minute_run",
+        "touch_controller_lifecycle",
+        "frame_budget_passed"
+      ],
+      "min_tests_executed": 1
+    },
+    {
+      "id": "cloud",
+      "required_checks": [
+        "real_staging_auth",
+        "cross_account_denied",
+        "stale_save_conflict_preserved",
+        "offline_and_token_expiry",
+        "signed_config_rollback",
+        "deletion_and_restore_drill"
+      ],
+      "min_tests_executed": 1
+    },
+    {
+      "id": "security",
+      "required_checks": [
+        "secret_scan",
+        "licence_and_voice_clearance",
+        "dependency_review",
+        "signing_access_separation",
+        "candidate_and_raw_evidence_bound"
+      ],
+      "min_tests_executed": 1
+    }
+  ],
+  "required_asset_ids": [
+    "CHAR_ANANSE",
+    "CHAR_KWAKU",
+    "CHAR_ASO",
+    "CHAR_KOJO",
+    "CHAR_ESI",
+    "CHAR_OSEBO",
+    "ENV_MARKET_HERO",
+    "ENV_FOREST_CLEARING",
+    "UI_SHIPPING",
+    "VO_EN_MISSION",
+    "AMB_MARKET",
+    "AMB_RIVER",
+    "AMB_FOREST",
+    "MUS_MARKET_BASE",
+    "MUS_MARKET_PULSE",
+    "MUS_CHASE",
+    "MUS_REVEAL",
+    "MUS_EXPOSE",
+    "MUS_PROTECT",
+    "MUS_FOREST",
+    "FOL_EARTH",
+    "FOL_WOOD",
+    "FOL_STONE",
+    "FOL_CLOTH",
+    "FOL_LEDGER",
+    "FX_WEB_START",
+    "FX_WEB_LAND",
+    "FX_VOICE",
+    "FX_MIRROR",
+    "FX_BRIDGE",
+    "UI_FOCUS",
+    "UI_DENIED",
+    "UI_SAVE",
+    "UI_CHOICE",
+    "ANIMATION_PRODUCTION_SET",
+    "VFX_PRODUCTION_SET"
+  ],
+  "limitations": [
+    "The checker verifies declared evidence consistency and hashes, not honesty, visual quality or independent certification.",
+    "A real release still needs human review, engine/device execution and an authorised release decision."
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "character": "AsoYaa",
+  "source_scene": "SourceArt/Characters/AsoYaa/Authored_v018/AsoYaa.blend",
+  "source_scene_sha256": "fcd3f295863bf8ddb43cc155facd7c6e61b7fb3c367c4be90f8d127657de2521",
+  "source_glb_sha256": "b48d260dcdeb866a9d29613ca77e1e353fcb8ec1e7211ff9f11e904913c9d291",
+  "native_definition_revision": 5,
+  "published_Aso_native_revision": 3,
+  "current_publication_id": "f024326dc79048c7aec7055c6d6dc7b6",
+  "unpublished_development_review_override": true,
+  "technical": {
+    "mesh": "PASS",
+    "skeleton": "PASS",
+    "normal_play_physics_policy": "PASS",
+    "authoring_IK": "PASS",
+    "authoring_Control_Rig": "PASS",
+    "runtime_Anim_Blueprint": "PASS",
+    "Blueprint": "PASS",
+    "ledger_motion_binding": "PASS",
+    "selection": "PASS",
+    "save_restore": "PASS",
+    "mission_binding": "PASS",
+    "sequence_lifecycle": "PASS",
+    "package": "PASS"
+  },
+  "creative": {
+    "reference_likeness": "REVIEW_REQUIRED",
+    "face": "REVIEW_REQUIRED",
+    "hands": "REVIEW_REQUIRED",
+    "robe": "REVIEW_REQUIRED",
+    "gesture_quality": "REVIEW_REQUIRED",
+    "prop_contact": "REVIEW_REQUIRED",
+    "deformation": "REVIEW_REQUIRED",
+    "gameplay_readability": "REVIEW_REQUIRED",
+    "cinematic_readability": "REVIEW_REQUIRED"
+  },
+  "voice_lip_sync": "INCOMPLETE",
+  "human_creative_approval": false,
+  "limitations": [
+    "Creative likeness, face, hand anatomy, robe/fold quality, prop credibility and cinematic composition await human approval.",
+    "Hands remain stylised with blunt forms and two-segment finger chains; a numerical contact pass is not hero-hand art approval.",
+    "Robe material detail, cuff fit and deformation away from the declared pose set require visual review.",
+    "Source hand-to-book measurements cover 133 held frames (1.6\u20136.0 s), not every possible gesture, terrain or interaction. Ring/little fingers are relaxed support digits and do not all press the book.",
+    "No approved voice recordings, speech visemes or lip-sync. Both review videos are silent.",
+    "LOD0 281172 triangles / LOD2 70291 triangles remain heavy, unapproved mobile budgets; physical controller/touch, Android/iOS, long-session memory and broad terrain/navigation remain unqualified.",
+    "Normal-play physics is kinematic with non-blocking render mesh/prop; ragdoll and detailed joint/physics art review remain open.",
+    "Corrective appearance is unpublished. Existing studio publication remains unchanged; the new native revision is selected only by the explicit development-review flag.",
+    "Source/environment blockouts, world debug labels and other cast drafts remain. No other character was authored in this pass."
+  ],
+  "evidence_root": ".local/verification/aso-corrective-20261016",
+  "final_package": "Builds/Linux/20261016T232829.030413Z",
+  "elf_sha256": "812dfa37b9e1743ae11b1a86f18641dddb3905f273b4116c79701c39ab3750b1",
+  "payload_manifest_sha256": "a829acd7ee12d7db60fb52f1dce73d526acb15f947f7cbc1927f2607a3ce1f52"
+}

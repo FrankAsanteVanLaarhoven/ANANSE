@@ -1,0 +1,47 @@
+{
+  "character": "AsoYaa",
+  "design_id": "aso-yaa-human-v1",
+  "source": "SourceArt/Characters/AsoYaa/Authored_v007/AsoYaa.blend",
+  "technical": {
+    "mesh": "PASS",
+    "skeleton": "PASS",
+    "physics": "PASS",
+    "IK": "PASS",
+    "Control_Rig": "PASS",
+    "Anim_Blueprint": "PASS",
+    "Blueprint": "PASS",
+    "selection": "PASS",
+    "save_restore": "PASS",
+    "mission_binding": "PASS",
+    "package": "PASS"
+  },
+  "creative": {
+    "reference_likeness": "REVIEW_REQUIRED",
+    "face": "REVIEW_REQUIRED",
+    "hands": "REVIEW_REQUIRED",
+    "robe": "FAIL",
+    "gesture_quality": "REVIEW_REQUIRED",
+    "deformation": "REVIEW_REQUIRED",
+    "gameplay_readability": "REVIEW_REQUIRED",
+    "cinematic_readability": "REVIEW_REQUIRED",
+    "prop_contact": "FAIL"
+  },
+  "human_creative_approval": false,
+  "limitations": [
+    "Hero prop contact not qualified: InspectEvidence is a gesture, no held ledger contact test.",
+    "Speech viseme range is not authored; facial correctives and eye/blink controls are distinct from lip sync.",
+    "Headwrap fold/seam, shoulder yoke, face likeness and digit surfaces remain draft visual work.",
+    "Physics is kinematic engineering policy; deformation and joint-limit review remain open.",
+    "Neutral lab lighting is harsh; cinematic framing and lighting need human review.",
+    "No final recordings, physical controller/touch, Android/iOS or long memory qualification.",
+    "Visible sleeve/yoke seam gaps remain; face and hand anatomy require human review.",
+    "Eleven facial morphs exist; suspicion/controlled anger authoring targets are not mapped to current mission poses.",
+    "Only flat-fixture bone-derived sole markers were qualified; this is not mesh-surface or broad terrain acceptance."
+  ],
+  "evidence_root": ".local/verification/aso-yaa-20261016",
+  "rig_role": "IK and Control Rig are mapped authoring assets; Animation Blueprint applies the existing single contact/deformation path. No second runtime FK solver.",
+  "source_scene_sha256": "0fd31f7086e6458b9216d4de8f1c423fca7429da184606f29e38b632c9966298",
+  "technical_scope": "Engineering checks only. Physics is kinematic normal-play policy; authoring IK/Control Rig execute in authoring, single existing ABP contact path executes at runtime. No ragdoll, broad terrain or creative acceptance.",
+  "package": "Builds/Linux/20261016T204016.914795Z/",
+  "package_elf_sha256": "37f6d4a5f5cad1d75bc81cd5d6c7aa0c37f7bf7a5edb927b34491f73ae8eeec5"
+}

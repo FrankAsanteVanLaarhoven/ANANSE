@@ -1,0 +1,198 @@
+{
+  "schema_version": 1,
+  "id": "market-of-stolen-names-production",
+  "status": "authored_not_integrated",
+  "adaptation_notice": "Proposed production expansion; inspect and extend UAnanseMission, do not create a parallel authoritative state machine.",
+  "duration_minutes_target": [
+    15,
+    20
+  ],
+  "single_player": true,
+  "offline_campaign_required": true,
+  "player_identity": {
+    "current_campaign": "kwaku",
+    "separate_spider_character": "ananse",
+    "release_decision": "Confirm before casting final protagonist lines; default preserves current Kwaku campaign and uses Ananse in epilogue plus controllable Character Lab."
+  },
+  "maps": {
+    "primary": "L_RiverMarket",
+    "epilogue": "L_StoryForest",
+    "legacy_regression": "L_Market_Greybox"
+  },
+  "beats": [
+    {
+      "id": "arrival",
+      "entry_event": "player_spawned",
+      "exit_events": [
+        "opening_finished_or_skipped"
+      ],
+      "next": "investigation",
+      "checkpoint": "CP_Arrival",
+      "implementation_note": "35-second skippable opening; control always restored."
+    },
+    {
+      "id": "investigation",
+      "entry_event": "opening_finished_or_skipped",
+      "exit_events": [
+        "evidence_inspected"
+      ],
+      "next": "route_selection",
+      "checkpoint": "CP_Evidence",
+      "implementation_note": "Inspect altered edict; optional Kojo testimony."
+    },
+    {
+      "id": "route_selection",
+      "entry_event": "evidence_inspected",
+      "exit_events": [
+        "archive_access_granted"
+      ],
+      "next": "ledger",
+      "checkpoint": "CP_Archive",
+      "implementation_note": "Choose social / negotiation / rooftop; recoverable failure."
+    },
+    {
+      "id": "ledger",
+      "entry_event": "archive_access_granted",
+      "exit_events": [
+        "ledger_recovered"
+      ],
+      "next": "chase",
+      "checkpoint": "CP_Ledger",
+      "implementation_note": "Eight-second optional discovery beat; preserve inventory on skip."
+    },
+    {
+      "id": "chase",
+      "entry_event": "ledger_recovered",
+      "exit_events": [
+        "river_escape_reached"
+      ],
+      "next": "choice",
+      "checkpoint": "CP_Escape",
+      "implementation_note": "60–90 s proposed active chase: canopy, lower alley, dock."
+    },
+    {
+      "id": "choice",
+      "entry_event": "river_escape_reached",
+      "exit_events": [
+        "choice_committed"
+      ],
+      "next": "consequence",
+      "checkpoint": "CP_Choice",
+      "implementation_note": "Expose requires corroborating evidence; protect keeps evidence privately."
+    },
+    {
+      "id": "consequence",
+      "entry_event": "choice_committed",
+      "exit_events": [
+        "consequence_finished_or_skipped"
+      ],
+      "next": "forest_epilogue",
+      "checkpoint": "CP_Consequence",
+      "implementation_note": "Exactly once trust/witness updates; branch-specific performance."
+    },
+    {
+      "id": "forest_epilogue",
+      "entry_event": "consequence_finished_or_skipped",
+      "exit_events": [
+        "epilogue_finished_or_skipped"
+      ],
+      "next": "mission_complete",
+      "checkpoint": "CP_Forest",
+      "implementation_note": "Small sanctuary epilogue, not a second full mission."
+    },
+    {
+      "id": "mission_complete",
+      "entry_event": "epilogue_finished_or_skipped",
+      "exit_events": [],
+      "next": "mission_complete",
+      "checkpoint": "CP_Complete",
+      "implementation_note": "Results and voluntary replay; no forced sharing."
+    }
+  ],
+  "routes": [
+    {
+      "id": "social",
+      "existing_route_id": "social",
+      "preconditions": [
+        "learned_captain_call",
+        "borrowed_voice_active"
+      ],
+      "counterplay": "Witness contradiction or expired call raises bounded suspicion. No global disguise immunity."
+    },
+    {
+      "id": "negotiation",
+      "existing_route_id": "negotiation",
+      "preconditions": [
+        "evidence_inspected",
+        "promise_accepted",
+        "permit_granted"
+      ],
+      "counterplay": "Exposure after a promise uses the existing broken-promise consequence; do not change historical saves."
+    },
+    {
+      "id": "rooftop",
+      "existing_route_id": "rooftop",
+      "preconditions": [
+        "valid_rooftop_anchor",
+        "web_step_completed",
+        "watcher_distracted"
+      ],
+      "counterplay": "Denied space, occluded anchor, expired mirror and blocked landing fail without softlock."
+    }
+  ],
+  "outcomes": [
+    "truth-exposed",
+    "witnesses-protected"
+  ],
+  "failure_states": [
+    "detained",
+    "chase_captured",
+    "invalid_landing"
+  ],
+  "checkpoint_schema_extension": {
+    "fields": [
+      "schema_version",
+      "content_hash",
+      "map_id",
+      "mission_beat",
+      "route",
+      "outcome",
+      "player_identity",
+      "player_transform",
+      "story_facts",
+      "witness_states",
+      "completed_event_ids",
+      "relative_power_timers",
+      "bridge_states"
+    ],
+    "legacy": "Current C++ saves require SchemaVersion 1 and identical ContentHash. Implement explicit migration or preserve old playable content; never silently discard or overwrite a mismatched save."
+  },
+  "skip_contract": {
+    "gameplay_commits": "Apply semantic end-state exactly once independent of sequence time/audio length.",
+    "restore": "Camera, input, movement mode, pawn possession, audio ducking and UI restored on finish, skip, cancellation, level unload and app interruption.",
+    "save": "Checkpoint durable semantic state; do not serialize a half-evaluated Sequencer frame as the world truth."
+  },
+  "required_failure_tests": [
+    "all_routes_both_outcomes",
+    "repeated_interaction",
+    "skip_each_cutscene",
+    "pause_background_resume",
+    "death_during_chase",
+    "load_checkpoint_after_process_restart",
+    "content_version_mismatch",
+    "power_denied_no_charge",
+    "missing_localization_entry",
+    "audio_missing_no_progression_block",
+    "bridge_deactivation_with_player_on_span",
+    "spider_collision_width_on_navigation"
+  ],
+  "scope_exclusions": [
+    "open_world",
+    "co_op",
+    "competitive_economy",
+    "live_generated_dialogue",
+    "UGC",
+    "unrestricted_voice_chat",
+    "real_time_image_to_mesh_in_shipping_client"
+  ]
+}

@@ -1,0 +1,15 @@
+"""Final bounded ecological placement and restrained water surface response."""
+import unreal,json,os
+from pathlib import Path
+M=unreal.MaterialEditingLibrary;m=unreal.load_asset('/Game/Ananse/Environments/HeroCells_v002/Surface/M_Water');old=M.get_material_property_input_node(m,unreal.MaterialProperty.MP_NORMAL)
+if old:
+ scale=M.create_material_expression(m,unreal.MaterialExpressionConstant3Vector,-400,-400);scale.set_editor_property('constant',unreal.LinearColor(.15,.15,1,1));mul=M.create_material_expression(m,unreal.MaterialExpressionMultiply,-200,-400);assert M.connect_material_expressions(old,M.get_material_expression_output_names(old)[0],mul,'A');assert M.connect_material_expressions(scale,'',mul,'B');assert M.connect_material_property(mul,'',unreal.MaterialProperty.MP_NORMAL)
+rough=M.create_material_expression(m,unreal.MaterialExpressionConstant,-200,200);rough.set_editor_property('r',.38);assert M.connect_material_property(rough,'',unreal.MaterialProperty.MP_ROUGHNESS);M.recompile_material(m);assert unreal.EditorAssetLibrary.save_loaded_asset(m)
+def transform(a):
+ p=a.get_actor_location();r=a.get_actor_rotation();s=a.get_actor_scale3d();return[p.x,p.y,p.z,r.pitch,r.yaw,r.roll,s.x,s.y,s.z]
+levels=unreal.get_editor_subsystem(unreal.LevelEditorSubsystem);actors=unreal.get_editor_subsystem(unreal.EditorActorSubsystem);levels.load_level('/Game/Ananse/Maps/EnvironmentRoute_v002/L_StoryForest_Route');before={a.get_name():transform(a)for a in actors.get_all_level_actors()};patches=[(-650,-100),(-650,150),(-570,350),(-500,560),(-320,650),(100,620),(300,560),(600,400),(680,150),(650,-150),(600,-450),(450,-440),(200,-400),(800,-650)]
+for a in actors.get_all_level_actors():
+ if isinstance(a,unreal.AnanseEnvironmentCluster)and a.get_actor_label()=='Pass2 GroveFloor':
+  c=a.get_editor_property('instances')
+  for i,(x,y)in enumerate(patches):c.add_instance(unreal.Transform(unreal.Vector(x,y,0),unreal.Rotator(pitch=0,yaw=i*47,roll=0),unreal.Vector(.85+(i%3)*.15,.9+(i%2)*.2,1)))
+assert all(transform(a)==before[a.get_name()]for a in actors.get_all_level_actors());a=actors.spawn_actor_from_class(unreal.AnanseEnvironmentCluster,unreal.Vector());a.set_actor_label('Pass2 distant forest ground');c=a.get_editor_property('instances');c.set_static_mesh(unreal.load_asset('/Game/Ananse/Environments/HeroCells_v002/BackshoreTerrain/BackshoreTerrain'));c.set_material(0,unreal.load_asset('/Game/Ananse/Environments/HeroCells_v002/Surface/M_DistantBark'));c.set_collision_profile_name('NoCollision');c.set_mobility(unreal.ComponentMobility.STATIC);c.add_instance(unreal.Transform(unreal.Vector(0,0,-35),unreal.Rotator(),unreal.Vector(3,.9,.1)));assert levels.save_current_level();Path(os.environ['ANANSE_EVIDENCE_DIR']).write_text(json.dumps({'extra_cluster_centres_cm':patches,'old_actor_transforms_unchanged':True,'lighting_changes':False,'water_normal_xy_scale':.15,'water_roughness':.38,'background_ground':'NoCollision; below existing floor; no new playable support'},indent=2))

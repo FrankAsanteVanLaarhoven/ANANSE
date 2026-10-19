@@ -22,6 +22,9 @@ Unreal/*.sln
 Unreal/*.suo
 Unreal/*.code-workspace
 Unreal/Content/Data/catalogue.json
+Unreal/Content/Data/market-dialogue.en.json
+Unreal/Content/Production/Sanctuary/Technical_v001/
+Unreal/Content/Production/Characters/SpiderLook_v001/
 # Evidence can contain local paths: inspect and redact before committing.
 
 # Preserve verification artifacts locally; source control contains authored project files only.
@@ -33,3 +36,9 @@ Unreal/Content/Art/Prototype/M_AnansePrototype.uasset
 Unreal/Build/*/FileOpenOrder/
 # Preserve supplied kit and reference artifacts locally without modifying their manifest.
 SourceArt/ANANSE_Spider_Character_Kit/
+
+# Local native character/technical presentation candidates; not approved shipping art.
+Unreal/Content/Characters/AnanseSpider/
+Unreal/Content/Production/Market/Technical_v001/
+
+Unreal/Content/Production/Market/Technical_v002/

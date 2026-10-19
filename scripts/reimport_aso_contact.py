@@ -1,0 +1,10 @@
+"""Reimport only the unpublished corrective working revision; freeze previous bytes first."""
+import unreal,os,json,hashlib,zipfile
+from pathlib import Path
+R=Path(__file__).resolve().parents[1];out=Path(os.environ['ANANSE_EVIDENCE_DIR']);out.mkdir(parents=True,exist_ok=False);dest='/Game/Ananse/Characters/AsoYaa/Contact_v001';source=R/'SourceArt/Characters/AsoYaa/Authored_v017';mesh=unreal.load_asset(dest+'/AsoYaa');before=json.loads(unreal.AnanseAnimationAuthoring.describe_rig(mesh))
+with zipfile.ZipFile(out/'unpublished-native-before.zip','x',zipfile.ZIP_DEFLATED)as z:
+ for p in (R/'Unreal/Content/Ananse/Characters/AsoYaa/Contact_v001').rglob('*.uasset'):z.write(p,p.relative_to(R))
+task=unreal.AssetImportTask()
+for k,v in dict(filename=str(source/'AsoYaa.glb'),destination_path=dest,automated=True,replace_existing=True,save=True,async_=False).items():task.set_editor_property(k,v)
+pipeline=unreal.InterchangeGenericAssetsPipeline();pipeline.set_editor_property('import_offset_rotation',unreal.Rotator(pitch=0,yaw=-90,roll=0));options=unreal.InterchangePipelineStackOverride();options.set_editor_property('override_pipelines',[unreal.SoftObjectPath(pipeline.get_path_name())]);task.set_editor_property('options',options);unreal.AssetToolsHelpers.get_asset_tools().import_asset_tasks([task]);mesh=unreal.load_asset(dest+'/AsoYaa');assert unreal.get_editor_subsystem(unreal.SkeletalMeshEditorSubsystem).regenerate_lod(mesh,3,True,False);clip=unreal.load_asset(dest+'/AsoYaaInspectEvidence');assert not unreal.AnanseAnimationAuthoring.author_aso_ledger_grip(mesh,clip);assert unreal.EditorAssetLibrary.save_loaded_asset(mesh);after=json.loads(unreal.AnanseAnimationAuthoring.describe_rig(mesh));assert after['bones']==before['bones'];assert after['lod_count']==3
+out.joinpath('native.json').write_text(json.dumps({'status':'unpublished_working_mesh_reimported','source_scene_sha256':hashlib.sha256((source/'AsoYaa.blend').read_bytes()).hexdigest(),'source_glb_sha256':hashlib.sha256((source/'AsoYaa.glb').read_bytes()).hexdigest(),'rig':after,'rest_bones_unchanged':True,'creative':'REVIEW_REQUIRED'},indent=2)+'\n')

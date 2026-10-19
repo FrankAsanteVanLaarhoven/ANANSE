@@ -1,0 +1,224 @@
+{
+  "schema_version": 1,
+  "status": "commission_and_implementation_spec_no_audio_files",
+  "capture_target": {
+    "sample_rate_hz": 48000,
+    "source_bits": 24,
+    "note": "Authoring target, not a claim of existing recordings; compression settings qualified per target."
+  },
+  "mix_buses": [
+    "master",
+    "dialogue",
+    "music",
+    "ambience",
+    "foley",
+    "abilities",
+    "ui"
+  ],
+  "requirements": [
+    "real_recordings_or_licensed_sources",
+    "performer_consent",
+    "music_composition_and_recording_rights",
+    "independent_dialogue_music_sfx_controls",
+    "speaker_identified_subtitles",
+    "caption_critical_non_speech_cues",
+    "phone_speaker_and_headphone_mix",
+    "voice_priority_and_concurrency",
+    "no_audio_length_driven_progression",
+    "mute_and_background_resume_tests"
+  ],
+  "cues": [
+    {
+      "id": "AMB_MARKET",
+      "category": "ambient",
+      "brief": "Market crowd, vendors and nonverbal activity",
+      "attachment": "spatial_clusters",
+      "form": "loop",
+      "asset_status": "missing"
+    },
+    {
+      "id": "AMB_RIVER",
+      "category": "ambient",
+      "brief": "River lap and distant boats",
+      "attachment": "river_spline",
+      "form": "loop",
+      "asset_status": "missing"
+    },
+    {
+      "id": "AMB_FOREST",
+      "category": "ambient",
+      "brief": "Night canopy, sparse insects and stream",
+      "attachment": "forest_zones",
+      "form": "loop",
+      "asset_status": "missing"
+    },
+    {
+      "id": "MUS_MARKET_BASE",
+      "category": "music",
+      "brief": "Original market bed",
+      "attachment": "music_submix",
+      "form": "stem",
+      "asset_status": "missing"
+    },
+    {
+      "id": "MUS_MARKET_PULSE",
+      "category": "music",
+      "brief": "Original suspicion/tension pulse",
+      "attachment": "music_submix",
+      "form": "stem",
+      "asset_status": "missing"
+    },
+    {
+      "id": "MUS_CHASE",
+      "category": "music",
+      "brief": "Original active pursuit layer",
+      "attachment": "music_submix",
+      "form": "stem",
+      "asset_status": "missing"
+    },
+    {
+      "id": "MUS_REVEAL",
+      "category": "music",
+      "brief": "Original discovery accent",
+      "attachment": "music_submix",
+      "form": "one_shot",
+      "asset_status": "missing"
+    },
+    {
+      "id": "MUS_EXPOSE",
+      "category": "music",
+      "brief": "Original consequence variation: exposed truth",
+      "attachment": "music_submix",
+      "form": "stem",
+      "asset_status": "missing"
+    },
+    {
+      "id": "MUS_PROTECT",
+      "category": "music",
+      "brief": "Original consequence variation: guarded truth",
+      "attachment": "music_submix",
+      "form": "stem",
+      "asset_status": "missing"
+    },
+    {
+      "id": "MUS_FOREST",
+      "category": "music",
+      "brief": "Original sanctuary resolution",
+      "attachment": "music_submix",
+      "form": "stem",
+      "asset_status": "missing"
+    },
+    {
+      "id": "FOL_EARTH",
+      "category": "foley",
+      "brief": "Foot contacts on earth, multiple takes",
+      "attachment": "foot_contact",
+      "form": "one_shot",
+      "asset_status": "missing"
+    },
+    {
+      "id": "FOL_WOOD",
+      "category": "foley",
+      "brief": "Foot contacts on roof and dock, multiple takes",
+      "attachment": "foot_contact",
+      "form": "one_shot",
+      "asset_status": "missing"
+    },
+    {
+      "id": "FOL_STONE",
+      "category": "foley",
+      "brief": "Foot contacts on sanctuary stone",
+      "attachment": "foot_contact",
+      "form": "one_shot",
+      "asset_status": "missing"
+    },
+    {
+      "id": "FOL_CLOTH",
+      "category": "foley",
+      "brief": "Character cloth movement",
+      "attachment": "character",
+      "form": "one_shot",
+      "asset_status": "missing"
+    },
+    {
+      "id": "FOL_LEDGER",
+      "category": "foley",
+      "brief": "Ledger handle, page and stow",
+      "attachment": "interaction",
+      "form": "one_shot",
+      "asset_status": "missing"
+    },
+    {
+      "id": "FX_WEB_START",
+      "category": "ability",
+      "brief": "Thread tension and launch",
+      "attachment": "web_socket",
+      "form": "one_shot",
+      "asset_status": "missing"
+    },
+    {
+      "id": "FX_WEB_LAND",
+      "category": "ability",
+      "brief": "Landing and thread release",
+      "attachment": "landing",
+      "form": "one_shot",
+      "asset_status": "missing"
+    },
+    {
+      "id": "FX_VOICE",
+      "category": "ability",
+      "brief": "Subtle voice transformation onset/end",
+      "attachment": "character",
+      "form": "one_shot",
+      "asset_status": "missing"
+    },
+    {
+      "id": "FX_MIRROR",
+      "category": "ability",
+      "brief": "Mirror onset, sustain and dissipate",
+      "attachment": "decoy",
+      "form": "one_shot",
+      "asset_status": "missing"
+    },
+    {
+      "id": "FX_BRIDGE",
+      "category": "ability",
+      "brief": "Bridge weave and release",
+      "attachment": "bridge",
+      "form": "one_shot",
+      "asset_status": "missing"
+    },
+    {
+      "id": "UI_FOCUS",
+      "category": "ui",
+      "brief": "Interaction focus",
+      "attachment": "ui_submix",
+      "form": "one_shot",
+      "asset_status": "missing"
+    },
+    {
+      "id": "UI_DENIED",
+      "category": "ui",
+      "brief": "Denied action distinct from success",
+      "attachment": "ui_submix",
+      "form": "one_shot",
+      "asset_status": "missing"
+    },
+    {
+      "id": "UI_SAVE",
+      "category": "ui",
+      "brief": "Checkpoint confirmation",
+      "attachment": "ui_submix",
+      "form": "one_shot",
+      "asset_status": "missing"
+    },
+    {
+      "id": "UI_CHOICE",
+      "category": "ui",
+      "brief": "Choice commit acknowledgement",
+      "attachment": "ui_submix",
+      "form": "one_shot",
+      "asset_status": "missing"
+    }
+  ]
+}

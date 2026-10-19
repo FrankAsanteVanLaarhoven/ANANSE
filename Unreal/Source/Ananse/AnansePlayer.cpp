@@ -1,7 +1,13 @@
 #include "AnansePlayer.h"
+#include "AnanseAuthoredAnimation.h"
+#include "AnanseGroundContact.h"
 #include "AnanseRuntimeVerification.h"
+#include "AnanseLabSelection.h"
 #include "AnansePowers.h"
 #include "AnanseMission.h"
+#include "AnanseCinematic.h"
+#include "LevelSequence.h"
+#include "Misc/ConfigCacheIni.h"
 #include "AnanseCatalogue.h"
 #include "AnanseWorld.h"
 #include "AbilitySystemComponent.h"
@@ -67,20 +73,30 @@ bool AAnansePlayer::IsNativePlayReady() const
 void AAnansePlayer::BeginPlay()
 {
     Super::BeginPlay();Abilities->InitAbilityActorInfo(this,this);
+    GConfig->GetFloat(TEXT("/Script/Ananse.PresentationSettings"),TEXT("SubtitleScale"),SubtitleScale,GGameUserSettingsIni);
+    if(!FMath::IsFinite(SubtitleScale))SubtitleScale=1.f;
+    SubtitleScale=FMath::Clamp(SubtitleScale,.75f,2.f);
+    if(CharacterId==TEXT("kwaku") && FParse::Param(FCommandLine::Get(),TEXT("AnanseEpisode")))
+    {
+        FString Verify;const bool Verification=FParse::Value(FCommandLine::Get(),TEXT("AnanseVerifyMode="),Verify);
+        const bool Continuing=FCString::Strlen(GetWorld()->URL.GetOption(TEXT("AnanseContinueSlot="),TEXT("")))>0;
+        bOpeningPending=FCString::Atoi(GetWorld()->URL.GetOption(TEXT("AnanseStart="),TEXT("0")))==1;
+        if(!Verification && !Continuing && !bOpeningPending)SetEpisodeMenu(true);
+    }
     // Local-only proof of mechanics. Networking/replication is deliberately not claimed.
     const UAnanseCatalogue* Catalogue=GetGameInstance()->GetSubsystem<UAnanseCatalogue>();
-    const FAnanseCharacterSpec* PlayerSpec=Catalogue?Catalogue->Find(TEXT("kwaku")):nullptr;
-    if(HasAuthority() && PlayerSpec)
+    const FAnanseCharacterSpec* PlayerSpec=Catalogue?Catalogue->Find(CharacterId):nullptr;
+    if(HasAuthority() && PlayerSpec && !bLabSelectionPawn)
     {
         if(PlayerSpec->PowerIds.Contains(TEXT("web-step")))Abilities->GiveAbility(FGameplayAbilitySpec(UAnanseWebStepAbility::StaticClass(),1));
         if(PlayerSpec->PowerIds.Contains(TEXT("borrowed-voice")))Abilities->GiveAbility(FGameplayAbilitySpec(UAnanseVoiceAbility::StaticClass(),1));
         if(PlayerSpec->PowerIds.Contains(TEXT("trick-mirror")))Abilities->GiveAbility(FGameplayAbilitySpec(UAnanseMirrorAbility::StaticClass(),1));
     }
-    if(!PlayerSpec)Mission->Message(TEXT("BLOCKED: missing Kwaku catalogue record. Export a prototype publication; abilities are not silently fabricated."));
+    if(!PlayerSpec)Mission->Message(TEXT("BLOCKED: missing active character catalogue record. Export a prototype publication; abilities are not silently fabricated."));
     FAnanseAppearance Appearance;
     if(Catalogue)
     {
-        if(const FAnanseCharacterSpec* Spec=Catalogue->Find(TEXT("kwaku")))
+        if(const FAnanseCharacterSpec* Spec=Catalogue->Find(CharacterId))
         {
             FString Requested=TEXT("base");FParse::Value(FCommandLine::Get(),TEXT("AnanseVariant="),Requested);
             for(const FAnanseAppearance& Candidate:Spec->Variants)if(Candidate.Id==FName(*Requested)){Appearance=Candidate;break;}
@@ -112,20 +128,63 @@ void AAnansePlayer::BeginPlay()
 }
 void AAnansePlayer::Move(const FInputActionValue& Value)
 {
-    if(!Controller || bWebFlying || !Mission->State.Outcome.IsNone())return;
+    if(!Controller || bWebFlying)return;
     const FVector2D Axis=Value.Get<FVector2D>();const FRotator R(0,Controller->GetControlRotation().Yaw,0);
     AddMovementInput(FRotationMatrix(R).GetUnitAxis(EAxis::X),Axis.Y);AddMovementInput(FRotationMatrix(R).GetUnitAxis(EAxis::Y),Axis.X);
 }
 void AAnansePlayer::Look(const FInputActionValue& Value){const FVector2D Axis=Value.Get<FVector2D>();AddControllerYawInput(Axis.X);AddControllerPitchInput(Axis.Y);}
-void AAnansePlayer::StartJump(){if(!bWebFlying && Mission->State.Outcome.IsNone())Jump();}
-void AAnansePlayer::Save(){NotifyAnanseVerificationAction(this,TEXT("save"));if(!bWebFlying)Mission->SaveLocal(AnanseVerificationSaveSlot());else Mission->Message(TEXT("Land before saving."));}
-void AAnansePlayer::Load(){NotifyAnanseVerificationAction(this,TEXT("load"));if(!bWebFlying)Mission->LoadLocal(AnanseVerificationSaveSlot());}
+void AAnansePlayer::StartJump(){if(!bWebFlying)Jump();}
+void AAnansePlayer::SkipPresentation()
+{
+    NotifyAnanseVerificationAction(this,TEXT("skip"));
+    if(bEpisodeMenu && Mission->State.bEpisodeSession){SetEpisodeMenu(false);return;}
+    if(Mission->Cinematic && Mission->Cinematic->bActive){Mission->SkipCinematic();return;}
+    if(Mission->State.bEpisodeSession)SetEpisodeMenu(!bEpisodeMenu);
+}
+void AAnansePlayer::SetEpisodeMenu(bool Show)
+{
+    bEpisodeMenu=Show;UGameplayStatics::SetGamePaused(this,Show);
+    UE_LOG(LogTemp,Display,TEXT("ANANSE episode menu=%d paused=%d"),bEpisodeMenu,UGameplayStatics::IsGamePaused(this));
+    if(Mission && Mission->Cinematic && Mission->Cinematic->bActive)UE_LOG(LogTemp,Display,TEXT("ANANSE paused presentation time=%.4f"),Mission->Cinematic->PlaybackSeconds());
+}
+void AAnansePlayer::ToggleEpisodePause(){if(Mission->State.bEpisodeSession)SetEpisodeMenu(!bEpisodeMenu);}
+void AAnansePlayer::SetSubtitleScale(float Scale)
+{
+    SubtitleScale=FMath::Clamp(Scale,.75f,2.f);
+    GConfig->SetFloat(TEXT("/Script/Ananse.PresentationSettings"),TEXT("SubtitleScale"),SubtitleScale,GGameUserSettingsIni);
+    GConfig->Flush(false,GGameUserSettingsIni);
+    UE_LOG(LogTemp,Display,TEXT("ANANSE subtitle scale=%.2f"),SubtitleScale);
+}
+void AAnansePlayer::LargerSubtitles(){if(bEpisodeMenu)SetSubtitleScale(SubtitleScale+.1f);}
+void AAnansePlayer::SmallerSubtitles(){if(bEpisodeMenu)SetSubtitleScale(SubtitleScale-.1f);}
+void AAnansePlayer::NewEpisode()
+{
+    if(!bEpisodeMenu || !Mission->State.bEpisodeSession)return;
+    Mission->CancelCinematic();ResetTransientMotion();SetEpisodeMenu(false);
+    UGameplayStatics::OpenLevel(this,FName(*UAnanseMission::MarketMap()),true,TEXT("AnanseStart=1"));
+}
+void AAnansePlayer::ContinueEpisode()
+{
+    if(!bEpisodeMenu || !Mission->State.bEpisodeSession)return;
+    const FString Slot=AnanseVerificationSaveSlot(CharacterId);
+    if(!UAnanseMission::ValidCheckpointSlot(Slot)){Mission->Message(TEXT("Invalid checkpoint slot; no file accessed."));return;}
+    const UAnanseSave* Save=Cast<UAnanseSave>(UGameplayStatics::LoadGameFromSlot(Slot,0));
+    const UAnanseCatalogue* Catalogue=GetCatalogue();FString Reason;
+    if(!Save || (Save->MapIdentity!=UAnanseMission::MarketMap() && Save->MapIdentity!=UAnanseMission::SanctuaryMap()) ||
+       !UAnanseMission::CheckpointCompatible(Save,Catalogue?Catalogue->ContentHash:FString(),CharacterId,Save->MapIdentity,Reason))
+    {Mission->Message(Reason.IsEmpty()?TEXT("No compatible episode checkpoint in the selected slot; existing saves retained."):Reason);return;}
+    Mission->CancelCinematic();ResetTransientMotion();SetEpisodeMenu(false);
+    UGameplayStatics::OpenLevel(this,FName(*Save->MapIdentity),true,TEXT("AnanseContinueSlot=")+Slot);
+}
+void AAnansePlayer::Save(){if(auto* Lab=Cast<AAnanseLabController>(Controller);Lab && !AnanseUsesDiagnosticCheckpoint()){Lab->SaveSelection();return;}NotifyAnanseVerificationAction(this,TEXT("save"));if(!bWebFlying)Mission->SaveLocal(AnanseVerificationSaveSlot(CharacterId));else Mission->Message(TEXT("Land before saving."));}
+void AAnansePlayer::Load(){if(auto* Lab=Cast<AAnanseLabController>(Controller);Lab && !AnanseUsesDiagnosticCheckpoint()){Lab->LoadSelection();return;}NotifyAnanseVerificationAction(this,TEXT("load"));if(!bWebFlying)Mission->LoadLocal(AnanseVerificationSaveSlot(CharacterId));}
 void AAnansePlayer::RestartRun(){UGameplayStatics::OpenLevel(this,FName(*UGameplayStatics::GetCurrentLevelName(this,true)));}
 void AAnansePlayer::WebStep(){NotifyAnanseVerificationAction(this,TEXT("web"));Abilities->TryActivateAbilityByClass(UAnanseWebStepAbility::StaticClass());}
 void AAnansePlayer::BorrowVoice(){NotifyAnanseVerificationAction(this,TEXT("voice"));Abilities->TryActivateAbilityByClass(UAnanseVoiceAbility::StaticClass());}
 void AAnansePlayer::TrickMirror(){NotifyAnanseVerificationAction(this,TEXT("mirror"));Abilities->TryActivateAbilityByClass(UAnanseMirrorAbility::StaticClass());}
 void AAnansePlayer::SetupPlayerInputComponent(UInputComponent* Input)
 {
+    ReleaseInputMapping();ButtonActions.Reset();
     Super::SetupPlayerInputComponent(Input);
     UEnhancedInputComponent* Enhanced=Cast<UEnhancedInputComponent>(Input);if(!Enhanced)return;
     Mapping=NewObject<UInputMappingContext>(this);MoveAction=NewObject<UInputAction>(this);MoveAction->ValueType=EInputActionValueType::Axis2D;LookAction=NewObject<UInputAction>(this);LookAction->ValueType=EInputActionValueType::Axis2D;
@@ -148,13 +207,35 @@ void AAnansePlayer::SetupPlayerInputComponent(UInputComponent* Input)
     Button(EKeys::One,EKeys::Gamepad_LeftShoulder,&AAnansePlayer::WebStep);
     Button(EKeys::Two,EKeys::Gamepad_RightShoulder,&AAnansePlayer::BorrowVoice);
     Button(EKeys::Three,EKeys::Gamepad_FaceButton_Top,&AAnansePlayer::TrickMirror);
+    Input->BindKey(EKeys::Escape,IE_Pressed,this,&AAnansePlayer::SkipPresentation).bExecuteWhenPaused=true;
+    Input->BindKey(EKeys::Gamepad_Special_Right,IE_Pressed,this,&AAnansePlayer::SkipPresentation).bExecuteWhenPaused=true;
+    Input->BindKey(EKeys::N,IE_Pressed,this,&AAnansePlayer::NewEpisode).bExecuteWhenPaused=true;
+    Input->BindKey(EKeys::C,IE_Pressed,this,&AAnansePlayer::ContinueEpisode).bExecuteWhenPaused=true;
+    Input->BindKey(EKeys::P,IE_Pressed,this,&AAnansePlayer::ToggleEpisodePause).bExecuteWhenPaused=true;
+    Input->BindKey(EKeys::Equals,IE_Pressed,this,&AAnansePlayer::LargerSubtitles).bExecuteWhenPaused=true;
+    Input->BindKey(EKeys::Hyphen,IE_Pressed,this,&AAnansePlayer::SmallerSubtitles).bExecuteWhenPaused=true;
     Button(EKeys::F5,FKey(),&AAnansePlayer::Save);Button(EKeys::F9,FKey(),&AAnansePlayer::Load);Button(EKeys::R,FKey(),&AAnansePlayer::RestartRun);
     APlayerController* PC=Cast<APlayerController>(Controller);
     ULocalPlayer* LP=PC?PC->GetLocalPlayer():nullptr;
     UEnhancedInputLocalPlayerSubsystem* Sub=LP?ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(LP):nullptr;
     UE_LOG(LogTemp,Display,TEXT("ANANSE input context: controller=%s local_player=%s subsystem=%s authored_mappings=%d"),*GetNameSafe(PC),*GetNameSafe(LP),*GetNameSafe(Sub),Mapping->GetMappings().Num());
-    if(Sub)Sub->AddMappingContext(Mapping,0);
+    if(Sub){Sub->AddMappingContext(Mapping,0);MappingOwner=LP;}
     Input->BindTouch(IE_Pressed,this,&AAnansePlayer::TouchPressed);
+}
+void AAnansePlayer::ReleaseInputMapping()
+{
+    if(ULocalPlayer* LP=MappingOwner.Get())
+        if(auto* Sub=ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(LP))
+            if(Mapping)Sub->RemoveMappingContext(Mapping);
+    MappingOwner.Reset();
+}
+void AAnansePlayer::UnPossessed()
+{
+    ReleaseInputMapping();ResetTransientMotion();Super::UnPossessed();
+}
+void AAnansePlayer::EndPlay(const EEndPlayReason::Type Reason)
+{
+    ReleaseInputMapping();Super::EndPlay(Reason);
 }
 void AAnansePlayer::TouchPressed(ETouchIndex::Type Finger,FVector Location)
 {
@@ -209,6 +290,12 @@ bool AAnansePlayer::StartWebFlight(const FVector& Destination)
 }
 void AAnansePlayer::Tick(float Delta)
 {
+    if(bOpeningPending && IsNativePlayReady() && !bEpisodeMenu)
+    {
+        bOpeningPending=false;
+        ULevelSequence* Opening=LoadObject<ULevelSequence>(nullptr,TEXT("/Game/Production/Market/Technical_v001/LS_MarketOpening_Technical.LS_MarketOpening_Technical"));
+        if(!Mission->BeginCinematic(Opening,TEXT("opening_finished_or_skipped")))Mission->Message(TEXT("Opening presentation unavailable; inspect the bound sequence before episode acceptance."));
+    }
     Super::Tick(Delta);TickAnanseRuntimeVerification(this,Delta);if(!bWebFlying)return;WebElapsed+=Delta;const float A=FMath::Clamp(WebElapsed/0.6f,0.f,1.f);
     const FVector Next=FMath::Lerp(WebStart,WebEnd,A)+FVector(0,0,320.f*FMath::Sin(PI*A));FHitResult Hit;
     SetActorLocation(Next,true,&Hit);
@@ -216,7 +303,10 @@ void AAnansePlayer::Tick(float Delta)
 }
 void AAnansePlayer::SpawnMirror()
 {
+    if(IsValid(MirrorActor))MirrorActor->Destroy();MirrorActor=nullptr;
     AStaticMeshActor* Actor=GetWorld()->SpawnActor<AStaticMeshActor>(GetActorLocation()+GetActorForwardVector()*160.f,GetActorRotation());if(!Actor)return;
     Actor->SetMobility(EComponentMobility::Movable);Actor->GetStaticMeshComponent()->SetStaticMesh(Body->GetStaticMesh());Actor->SetActorScale3D(FVector(0.55f,0.4f,1.8f));Actor->GetStaticMeshComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-    if(Body->GetMaterial(0))Actor->GetStaticMeshComponent()->SetMaterial(0,Body->GetMaterial(0));Actor->SetLifeSpan(8.f);
+    if(Body->GetMaterial(0))Actor->GetStaticMeshComponent()->SetMaterial(0,Body->GetMaterial(0));Actor->SetLifeSpan(8.f);MirrorActor=Actor;Actor->SetOwner(this);
 }
+
+void AAnansePlayer::ResetTransientMotion(){if(auto* A=Cast<UAnanseLeopardAnimInstance>(GetMesh()->GetAnimInstance()))A->bResetSecondaryMotion=true;if(auto* A=Cast<UAnanseContactAnimInstance>(GetMesh()->GetAnimInstance()))A->bResetSecondaryMotion=true;if(IsValid(MirrorActor))MirrorActor->Destroy();MirrorActor=nullptr;bWebFlying=false;WebElapsed=0;WebStart=WebEnd=GetActorLocation();GetCharacterMovement()->StopMovementImmediately();}

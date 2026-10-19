@@ -1,0 +1,2771 @@
+{
+  "character": "OseboLeopard",
+  "phase": "CORRECTED_REVIEW_CANDIDATE",
+  "human_creative_approval": false,
+  "final_character_accepted": false,
+  "source_scene": "SourceArt/Characters/OseboLeopard/Authored_v013/OseboLeopard.blend",
+  "source_scene_sha256": "436f107db5a20eab90ec2b5364c0861c5d81e30f08482f1f53c9165ccfdb46d7",
+  "source_glb_sha256": "18056d4b29fd1e0c0810ae542dbdd2afc55d56e268d23bacf20ba632ecb1422f",
+  "geometry_regression_candidate": {
+    "package": "/home/favl/Downloads/ANANSE_Production_Starter/Builds/Linux/20261016T144626.515262Z",
+    "executable": "/home/favl/Downloads/ANANSE_Production_Starter/Builds/Linux/20261016T144626.515262Z/Ananse/Binaries/Linux/Ananse",
+    "executable_sha256": "e5ff3840434688705f5c5167cd790b70972797f1c2eedc784b02c08556e8a312",
+    "build_identity": "/home/favl/Downloads/ANANSE_Production_Starter/.local/verification/visual-acceptance-20261016/inputs-05.json",
+    "publication_hash": "edd86d324f4db0e0980ab55d248c8e6dd97df69277a1051a4670aa13faa82bab"
+  },
+  "lighting_only_final_candidate": {
+    "package": "/home/favl/Downloads/ANANSE_Production_Starter/Builds/Linux/20261016T145831.944219Z",
+    "executable": "/home/favl/Downloads/ANANSE_Production_Starter/Builds/Linux/20261016T145831.944219Z/Ananse/Binaries/Linux/Ananse",
+    "executable_sha256": "e5ff3840434688705f5c5167cd790b70972797f1c2eedc784b02c08556e8a312",
+    "build_identity": "/home/favl/Downloads/ANANSE_Production_Starter/.local/verification/visual-acceptance-20261016/inputs-06.json",
+    "publication_hash": "edd86d324f4db0e0980ab55d248c8e6dd97df69277a1051a4670aa13faa82bab",
+    "catalogue_file_sha256": "801f2290be4235734366d897dd3e0f1317967565020c52033ef8dc2d225c7334"
+  },
+  "final_candidate_scope": "Unchanged binary/model/native gameplay/character map; only leopard review-map front fill and its authoring script changed; final06 reruns nine-motion leopard scenario only",
+  "package": "/home/favl/Downloads/ANANSE_Production_Starter/Builds/Linux/20261016T145831.944219Z",
+  "package_elf_sha256": "e5ff3840434688705f5c5167cd790b70972797f1c2eedc784b02c08556e8a312",
+  "publication_changed": false,
+  "gates": {
+    "reference_likeness": {
+      "status": "REVIEW_REQUIRED",
+      "reason": "Frank has not approved likeness. Feline skull, physique, costume and surface treatment remain substantially different from the reference.",
+      "evidence": [
+        ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/dialogue_solid.png",
+        ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/interaction_solid.png",
+        ".local/verification/visual-acceptance-20261016/source-checks-05.json",
+        ".local/verification/visual-acceptance-20261016/package-05/execution.json"
+      ]
+    },
+    "silhouette": {
+      "status": "FAIL",
+      "reason": "Two arms/two legs/one tail retained, but segmented neck/shoulder forms, round head/ears, short paws and armour silhouette remain proxy-like rather than the reference muscular feline.",
+      "evidence": [
+        ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/dialogue_solid.png",
+        ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/interaction_solid.png",
+        ".local/verification/visual-acceptance-20261016/source-checks-05.json",
+        ".local/verification/visual-acceptance-20261016/package-05/execution.json"
+      ]
+    },
+    "face": {
+      "status": "FAIL",
+      "reason": "Muzzle/eye/ear proportions improved and iris/pupil conformed to globe; rounded skull, separate muzzle/jaw and orbital seams still fail close-up quality. Full mouth/speech/fear range missing despite seven real targets.",
+      "evidence": [
+        ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/dialogue_solid.png",
+        ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/interaction_solid.png",
+        ".local/verification/visual-acceptance-20261016/source-checks-05.json",
+        ".local/verification/visual-acceptance-20261016/package-05/execution.json"
+      ]
+    },
+    "hands_digits": {
+      "status": "FAIL",
+      "reason": "Five paw digit chains retained and two-paw reach authored. Rounded paw/digit masses and wrist/cuff joins lack convincing feline anatomy.",
+      "evidence": [
+        ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/dialogue_solid.png",
+        ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/interaction_solid.png",
+        ".local/verification/visual-acceptance-20261016/source-checks-05.json",
+        ".local/verification/visual-acceptance-20261016/package-05/execution.json"
+      ]
+    },
+    "prop_contact": {
+      "status": "BLOCKED",
+      "reason": "No new weapon or held prop introduced. CaptureReach now visibly extends both paws, but actual paw-to-capture-target contact through a played leopard AI interaction is unverified. Campaign species binding is unapproved; original human pursuit regression is not leopard contact acceptance.",
+      "evidence": [
+        ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/dialogue_solid.png",
+        ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/interaction_solid.png",
+        ".local/verification/visual-acceptance-20261016/source-checks-05.json",
+        ".local/verification/visual-acceptance-20261016/package-05/execution.json"
+      ]
+    },
+    "clothing_deformation": {
+      "status": "FAIL",
+      "reason": "Cape attachment/clearance and arm weights improved; armour/chest/neck seams, cuff joins and rigid cape folds remain visible. No all-surface collision-free certification.",
+      "evidence": [
+        ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/dialogue_solid.png",
+        ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/interaction_solid.png",
+        ".local/verification/visual-acceptance-20261016/source-checks-05.json",
+        ".local/verification/visual-acceptance-20261016/package-05/execution.json"
+      ]
+    },
+    "limb_deformation": {
+      "status": "FAIL",
+      "reason": "Rest64-bone hierarchy preserved and axial arm weights remove the earlier transfer crumple; shoulder/elbow/cuff/paw transitions, tail-root and neck integration still need sculpted deformation review.",
+      "evidence": [
+        ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/dialogue_solid.png",
+        ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/interaction_solid.png",
+        ".local/verification/visual-acceptance-20261016/source-checks-05.json",
+        ".local/verification/visual-acceptance-20261016/package-05/execution.json"
+      ]
+    },
+    "material_quality": {
+      "status": "FAIL",
+      "reason": "Oversized/repetitive rosettes, flat fur, simplified leather panels and cape edges remain far below reference surface detail.",
+      "evidence": [
+        ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/dialogue_solid.png",
+        ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/interaction_solid.png",
+        ".local/verification/visual-acceptance-20261016/source-checks-05.json",
+        ".local/verification/visual-acceptance-20261016/package-05/execution.json"
+      ]
+    },
+    "cinematic_readability": {
+      "status": "FAIL",
+      "reason": "Controlled source close views show segmented neck, stylized muzzle, orbital seams and simplistic paw/armour construction. Original packaged leopard close/capture fixture was severely backlit; new front fill is separately reviewed in06 and improves visibility but leaves harsh highlights and cropped close framing. Underlying anatomy, expression, close framing and blur remain subject to failed cinematic acceptance.",
+      "evidence": [
+        ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/dialogue_solid.png",
+        ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/interaction_solid.png",
+        ".local/verification/visual-acceptance-20261016/source-checks-05.json",
+        ".local/verification/visual-acceptance-20261016/package-05/execution.json"
+      ]
+    },
+    "gameplay_readability": {
+      "status": "REVIEW_REQUIRED",
+      "reason": "Nine real motion categories, terrain and cross-family operation execute. Human review of expression, pursuit weight, paw pose and costume readability remains open.",
+      "evidence": [
+        ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/dialogue_solid.png",
+        ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/interaction_solid.png",
+        ".local/verification/visual-acceptance-20261016/source-checks-05.json",
+        ".local/verification/visual-acceptance-20261016/package-05/execution.json"
+      ]
+    },
+    "source_scene_verified": {
+      "status": "PASS",
+      "reason": "Exact editable013 scene verified: all9 actions, normalized max2 influences,64 original rest bones. Mesh/rest/weights/morphs identical to012 imported mesh source; only CaptureReach imported separately from013.",
+      "evidence": [
+        ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/dialogue_solid.png",
+        ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/interaction_solid.png",
+        ".local/verification/visual-acceptance-20261016/source-checks-05.json",
+        ".local/verification/visual-acceptance-20261016/package-05/execution.json"
+      ]
+    },
+    "package_verified": {
+      "status": "PASS",
+      "reason": "Geometry candidate05 executes nine-motion/morph inspection,40 committed cross-family transitions/20 round trips,LOD2 terrain and preserved original pursuit logic. Lighting-only06 reruns leopard nine-motion inspection; other unchanged scenarios were not rerun in06. Not a campaign species mapping, physical device or art pass.",
+      "evidence": [
+        ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/dialogue_solid.png",
+        ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/interaction_solid.png",
+        ".local/verification/visual-acceptance-20261016/source-checks-05.json",
+        ".local/verification/visual-acceptance-20261016/package-05/execution.json"
+      ]
+    }
+  },
+  "prop_binding": {
+    "capture_target_contact": "Not exercised with played leopard AI target",
+    "approved_named_capture_sockets_verified": false,
+    "new_held_weapon_or_prop": false
+  },
+  "fixed_views": {
+    "front": ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/front_solid.png",
+    "rear": ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/rear_solid.png",
+    "left": ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/left_solid.png",
+    "right": ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/right_solid.png",
+    "three_quarter": ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/three_quarter_solid.png",
+    "dialogue": ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/dialogue_solid.png",
+    "gameplay": ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/gameplay_solid.png",
+    "movement": ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/movement_solid.png",
+    "interaction": ".local/verification/visual-acceptance-20261016/OseboLeopard-selected5/interaction_solid.png"
+  },
+  "before_after": ".local/verification/visual-acceptance-20261016/comparisons-final",
+  "source_checks": {
+    "bones": 64,
+    "vertices": 60155,
+    "max_influences": 2,
+    "actions": [
+      "CaptureReach",
+      "Command",
+      "IdleGuard",
+      "Investigate",
+      "LimbIsolation",
+      "Patrol",
+      "RunPursuit",
+      "StaggerRecover",
+      "TurnStop"
+    ]
+  },
+  "blink_coverage": {
+    "open_visible_samples": {
+      "L": 27,
+      "R": 27
+    },
+    "covered": 54,
+    "excluded_open_not_eye": 16,
+    "scope": "Paired open-visible eye rays against actual evaluated mesh; not artistic blink/lid-deformation approval"
+  },
+  "native_assets": {
+    "mesh": "/Game/Ananse/Characters/OseboLeopard/Visual_v003/OseboLeopard.OseboLeopard",
+    "definition": "/Game/Ananse/Characters/OseboLeopard/Visual_v003/DA_OseboLeopard.DA_OseboLeopard",
+    "blueprint": "/Game/Ananse/Characters/OseboLeopard/Visual_v003/BP_OseboLeopard.BP_OseboLeopard_C",
+    "skeleton": "/Game/Ananse/Characters/OseboLeopard/Authored_v001/OseboLeopard_Skeleton.OseboLeopard_Skeleton",
+    "physics": "/Game/Ananse/Characters/OseboLeopard/Visual_v003/OseboLeopard_PhysicsAsset.OseboLeopard_PhysicsAsset",
+    "clips": [
+      "/Game/Ananse/Characters/OseboLeopard/Authored_v001/OseboLeopardIdleGuard.OseboLeopardIdleGuard",
+      "/Game/Ananse/Characters/OseboLeopard/Authored_v001/OseboLeopardPatrol.OseboLeopardPatrol",
+      "/Game/Ananse/Characters/OseboLeopard/Authored_v001/OseboLeopardRunPursuit.OseboLeopardRunPursuit",
+      "/Game/Ananse/Characters/OseboLeopard/Authored_v001/OseboLeopardTurnStop.OseboLeopardTurnStop",
+      "/Game/Ananse/Characters/OseboLeopard/Authored_v001/OseboLeopardInvestigate.OseboLeopardInvestigate",
+      "/Game/Ananse/Characters/OseboLeopard/Visual_v003/Capture_v002/OseboCapture.OseboCapture",
+      "/Game/Ananse/Characters/OseboLeopard/Authored_v001/OseboLeopardStaggerRecover.OseboLeopardStaggerRecover",
+      "/Game/Ananse/Characters/OseboLeopard/Authored_v001/OseboLeopardCommand.OseboLeopardCommand",
+      "/Game/Ananse/Characters/OseboLeopard/Authored_v001/OseboLeopardLimbIsolation.OseboLeopardLimbIsolation"
+    ],
+    "revision": 5,
+    "rig": {
+      "mesh": "/Game/Ananse/Characters/OseboLeopard/Visual_v003/OseboLeopard.OseboLeopard",
+      "skeleton": "/Game/Ananse/Characters/OseboLeopard/Authored_v001/OseboLeopard_Skeleton.OseboLeopard_Skeleton",
+      "units": "Native Unreal centimetres; rotations xyzw quaternion; local parent frame",
+      "physics": "/Game/Ananse/Characters/OseboLeopard/Visual_v003/OseboLeopard_PhysicsAsset.OseboLeopard_PhysicsAsset",
+      "bones": [
+        {
+          "name": "root",
+          "parent_index": -1,
+          "local_translation_cm": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "local_rotation_xyzw": [
+            0,
+            0,
+            -0.7071067811865475,
+            0.7071067811865476
+          ],
+          "local_x_axis": [
+            2.220446049250313e-16,
+            -1,
+            0
+          ],
+          "local_y_axis": [
+            1,
+            2.220446049250313e-16,
+            0
+          ],
+          "local_z_axis": [
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "name": "pelvis",
+          "parent_index": 0,
+          "local_translation_cm": [
+            0,
+            0,
+            95.99999189376831
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "local_rotation_xyzw": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "local_x_axis": [
+            1,
+            0,
+            0
+          ],
+          "local_y_axis": [
+            0,
+            1,
+            0
+          ],
+          "local_z_axis": [
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "name": "spine_01",
+          "parent_index": 1,
+          "local_translation_cm": [
+            0,
+            0,
+            16.000008583068848
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "local_rotation_xyzw": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "local_x_axis": [
+            1,
+            0,
+            0
+          ],
+          "local_y_axis": [
+            0,
+            1,
+            0
+          ],
+          "local_z_axis": [
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "name": "spine_02",
+          "parent_index": 2,
+          "local_translation_cm": [
+            0,
+            0,
+            17.99999475479126
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "local_rotation_xyzw": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "local_x_axis": [
+            1,
+            0,
+            0
+          ],
+          "local_y_axis": [
+            0,
+            1,
+            0
+          ],
+          "local_z_axis": [
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "name": "chest",
+          "parent_index": 3,
+          "local_translation_cm": [
+            0,
+            0,
+            18.000006675720215
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ],
+          "local_rotation_xyzw": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "local_x_axis": [
+            1,
+            0,
+            0
+          ],
+          "local_y_axis": [
+            0,
+            1,
+            0
+          ],
+          "local_z_axis": [
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "name": "neck",
+          "parent_index": 4,
+          "local_translation_cm": [
+            0,
+            -3.338111783471286e-08,
+            14.000003962649266
+          ],
+          "scale": [
+            1,
+            0.9999999662142441,
+            0.9999999662142441
+          ],
+          "local_rotation_xyzw": [
+            -0.04672138613541676,
+            0,
+            0,
+            0.998907959762853
+          ],
+          "local_x_axis": [
+            1,
+            0,
+            0
+          ],
+          "local_y_axis": [
+            0,
+            0.9956342241551706,
+            -0.0933407290036432
+          ],
+          "local_z_axis": [
+            0,
+            0.0933407290036432,
+            0.9956342241551706
+          ]
+        },
+        {
+          "name": "head",
+          "parent_index": 5,
+          "local_translation_cm": [
+            0,
+            1.2235699120566323e-06,
+            16.07015451645917
+          ],
+          "scale": [
+            1,
+            0.9999999489828545,
+            0.9999999489828545
+          ],
+          "local_rotation_xyzw": [
+            -0.0007374482637190827,
+            0,
+            0,
+            0.9999997280849923
+          ],
+          "local_x_axis": [
+            1,
+            0,
+            0
+          ],
+          "local_y_axis": [
+            0,
+            0.9999989123401167,
+            -0.0014748961263916648
+          ],
+          "local_z_axis": [
+            0,
+            0.0014748961263916648,
+            0.9999989123401167
+          ]
+        },
+        {
+          "name": "jaw",
+          "parent_index": 6,
+          "local_translation_cm": [
+            0,
+            5.498925673626492,
+            5.546341084448092
+          ],
+          "scale": [
+            1,
+            1.0000000215840117,
+            1.0000000591978973
+          ],
+          "local_rotation_xyzw": [
+            -0.7614284532477001,
+            0,
+            0,
+            0.6482489572570209
+          ],
+          "local_x_axis": [
+            1,
+            0,
+            0
+          ],
+          "local_y_axis": [
+            0,
+            -0.15954657883037027,
+            -0.9871904016872959
+          ],
+          "local_z_axis": [
+            0,
+            0.9871904016872959,
+            -0.15954657883037027
+          ]
+        },
+        {
+          "name": "ear_L",
+          "parent_index": 6,
+          "local_translation_cm": [
+            -10.199999528786478,
+            -3.266170666904869,
+            18.47354163367012
+          ],
+          "scale": [
+            0.9999999667045182,
+            1.0000000945271867,
+            1.000000057358916
+          ],
+          "local_rotation_xyzw": [
+            0.07442472467951104,
+            -0.15789025003614807,
+            -0.17364189619969048,
+            0.9692162406728839
+          ],
+          "local_x_axis": [
+            0.8898383216553971,
+            -0.3600949684929892,
+            0.28021308852289384
+          ],
+          "local_y_axis": [
+            0.3130912149389113,
+            0.9286189044811097,
+            0.1991000285494202
+          ],
+          "local_z_axis": [
+            -0.33190608979285463,
+            -0.0894345789185402,
+            0.9390632585998032
+          ]
+        },
+        {
+          "name": "eye_L",
+          "parent_index": 6,
+          "local_translation_cm": [
+            -6.199999955008223,
+            8.788803326746459,
+            15.30219037281797
+          ],
+          "scale": [
+            0.9999999999999962,
+            0.999999965593622,
+            0.999999727175134
+          ],
+          "local_rotation_xyzw": [
+            2.940693008470809e-08,
+            -0.6727521752114536,
+            -0.7398679008770794,
+            -3.234064933769593e-08
+          ],
+          "local_x_axis": [
+            -0.9999999999999964,
+            8.28846431540859e-09,
+            -8.702897164539561e-08
+          ],
+          "local_y_axis": [
+            -8.74227690385226e-08,
+            -0.09480902149651338,
+            0.9954954793683728
+          ],
+          "local_z_axis": [
+            -2.886652430926185e-15,
+            0.9954954793683766,
+            0.09480902149651349
+          ]
+        },
+        {
+          "name": "ear_R",
+          "parent_index": 6,
+          "local_translation_cm": [
+            10.199999528786478,
+            -3.266170666904869,
+            18.47354163367012
+          ],
+          "scale": [
+            0.9999999667045182,
+            1.0000000945271867,
+            1.000000057358916
+          ],
+          "local_rotation_xyzw": [
+            0.07442472467951104,
+            0.15789025003614807,
+            0.17364189619969048,
+            0.9692162406728839
+          ],
+          "local_x_axis": [
+            0.8898383216553971,
+            0.3600949684929892,
+            -0.28021308852289384
+          ],
+          "local_y_axis": [
+            -0.3130912149389113,
+            0.9286189044811097,
+            0.1991000285494202
+          ],
+          "local_z_axis": [
+            0.33190608979285463,
+            -0.0894345789185402,
+            0.9390632585998032
+          ]
+        },
+        {
+          "name": "eye_R",
+          "parent_index": 6,
+          "local_translation_cm": [
+            6.199999842335891,
+            8.788803223969403,
+            15.302191451977265
+          ],
+          "scale": [
+            0.9999999999999962,
+            0.999999965593622,
+            0.999999727175134
+          ],
+          "local_rotation_xyzw": [
+            2.940693008470809e-08,
+            -0.6727521752114536,
+            -0.7398679008770794,
+            -3.234064933769593e-08
+          ],
+          "local_x_axis": [
+            -0.9999999999999964,
+            8.28846431540859e-09,
+            -8.702897164539561e-08
+          ],
+          "local_y_axis": [
+            -8.74227690385226e-08,
+            -0.09480902149651338,
+            0.9954954793683728
+          ],
+          "local_z_axis": [
+            -2.886652430926185e-15,
+            0.9954954793683766,
+            0.09480902149651349
+          ]
+        },
+        {
+          "name": "clavicle_L",
+          "parent_index": 4,
+          "local_translation_cm": [
+            -5.740831061678173e-07,
+            -1.1267919121009081e-06,
+            4.999993626916854
+          ],
+          "scale": [
+            0.9999999249044575,
+            0.9999999527424809,
+            0.9999998657746162
+          ],
+          "local_rotation_xyzw": [
+            0.4787426499281336,
+            -0.49954791642070745,
+            -0.4995479088772253,
+            0.5212573654884024
+          ],
+          "local_x_axis": [
+            0.0018075318722425848,
+            -0.9990958403798205,
+            0.04247628237347589
+          ],
+          "local_y_axis": [
+            0.04247626728651133,
+            0.042514723752359984,
+            0.9981924989608295
+          ],
+          "local_z_axis": [
+            -0.9990958410212385,
+            -3.083307215101527e-08,
+            0.04251470867903684
+          ]
+        },
+        {
+          "name": "upperarm_L",
+          "parent_index": 12,
+          "local_translation_cm": [
+            -8.486930369588919e-06,
+            -2.8929716844317e-06,
+            23.521256189731332
+          ],
+          "scale": [
+            0.9999999726422839,
+            0.999999874864333,
+            0.9999999768950316
+          ],
+          "local_rotation_xyzw": [
+            -0.47750048775053006,
+            -0.2603648856601866,
+            0.46599942176290343,
+            -0.6978882069714343
+          ],
+          "local_x_axis": [
+            0.43010933046359523,
+            -0.40178228201597543,
+            -0.808441068789923
+          ],
+          "local_y_axis": [
+            0.8990797215993759,
+            0.10967564622929105,
+            0.4238241461183826
+          ],
+          "local_z_axis": [
+            -0.08161873594308244,
+            -0.9091436907784284,
+            0.40840682102632764
+          ]
+        },
+        {
+          "name": "lowerarm_L",
+          "parent_index": 13,
+          "local_translation_cm": [
+            -6.397602203556119e-06,
+            9.342972506765079e-07,
+            27.976585977481005
+          ],
+          "scale": [
+            1.0000000345632791,
+            1.0000000122526385,
+            0.9999999502962978
+          ],
+          "local_rotation_xyzw": [
+            -0.05131554436501663,
+            -0.13580153736071576,
+            0.1507465912715284,
+            -0.9778548576230539
+          ],
+          "local_x_axis": [
+            0.9176668153409617,
+            -0.2808791134594196,
+            -0.2810596727462474
+          ],
+          "local_y_axis": [
+            0.3087540327205047,
+            0.9492843602530735,
+            0.05941507096468367
+          ],
+          "local_z_axis": [
+            0.2501170991771708,
+            -0.14130154635092773,
+            0.9578493147139763
+          ]
+        },
+        {
+          "name": "hand_L",
+          "parent_index": 14,
+          "local_translation_cm": [
+            3.11356088689152e-06,
+            -5.532000442107221e-06,
+            23.381420860637327
+          ],
+          "scale": [
+            0.9999999693639199,
+            0.9999999431630617,
+            0.9999999903420418
+          ],
+          "local_rotation_xyzw": [
+            -0.026259776193475377,
+            -0.05956686188795292,
+            0.0668018136782589,
+            -0.995640362183246
+          ],
+          "local_x_axis": [
+            0.9839786133082334,
+            -0.1298927390067882,
+            -0.12212274524150031
+          ],
+          "local_y_axis": [
+            0.1361495888536894,
+            0.9896958836871276,
+            0.044332237341770386
+          ],
+          "local_z_axis": [
+            0.11510594253546304,
+            -0.06024893497872083,
+            0.9915244262381803
+          ]
+        },
+        {
+          "name": "digit_L_0_01",
+          "parent_index": 15,
+          "local_translation_cm": [
+            3.4156518396130653,
+            -0.7714516149958967,
+            7.334721046814341
+          ],
+          "scale": [
+            0.9999998970091164,
+            1.0000000970896668,
+            1.000000016911662
+          ],
+          "local_rotation_xyzw": [
+            -0.09345677641195803,
+            -0.02115313706897656,
+            0.028122852094236615,
+            -0.9950012466951548
+          ],
+          "local_x_axis": [
+            0.9975232999644535,
+            -0.05201073778584407,
+            -0.047351337710765606
+          ],
+          "local_y_axis": [
+            0.05991835379171144,
+            0.980949872265542,
+            0.18478944499377728
+          ],
+          "local_z_axis": [
+            0.036838253309815064,
+            -0.18716899117425703,
+            0.9816367514696528
+          ]
+        },
+        {
+          "name": "digit_L_0_02",
+          "parent_index": 16,
+          "local_translation_cm": [
+            -7.613613517420958e-07,
+            -1.2237523722147259e-05,
+            2.524023776515072
+          ],
+          "scale": [
+            1.0000000000000144,
+            0.9999999822886835,
+            0.9999999492275958
+          ],
+          "local_rotation_xyzw": [
+            -2.7422987512427166e-07,
+            2.0298108750927525e-09,
+            1.023128528773544e-08,
+            -0.9999999999999625
+          ],
+          "local_x_axis": [
+            0.9999999999999998,
+            -2.046257168873968e-08,
+            4.059616138737179e-09
+          ],
+          "local_y_axis": [
+            2.0462569462200545e-08,
+            0.9999999999998493,
+            5.484597502900579e-07
+          ],
+          "local_z_axis": [
+            -4.059627361633527e-09,
+            -5.484597502069877e-07,
+            0.9999999999998496
+          ]
+        },
+        {
+          "name": "digit_L_1_01",
+          "parent_index": 15,
+          "local_translation_cm": [
+            1.021592416930911,
+            -0.6466326251668653,
+            7.448357070206313
+          ],
+          "scale": [
+            1.0000000162183662,
+            1.0000001008273163,
+            1.0000001418342817
+          ],
+          "local_rotation_xyzw": [
+            -0.07656733920801846,
+            -0.02162707534262475,
+            0.02776004328729082,
+            -0.9964432207483859
+          ],
+          "local_x_axis": [
+            0.9975232992176244,
+            -0.052010758654933105,
+            -0.047351330521160556
+          ],
+          "local_y_axis": [
+            0.058634469110277594,
+            0.986733645126584,
+            0.15138927507376665
+          ],
+          "local_z_axis": [
+            0.03884927991793147,
+            -0.1537907492645217,
+            0.9873394243574574
+          ]
+        },
+        {
+          "name": "digit_L_1_02",
+          "parent_index": 18,
+          "local_translation_cm": [
+            -1.2716640185317374e-06,
+            -3.267324066857924e-06,
+            2.861930980324312
+          ],
+          "scale": [
+            1.0000000000000129,
+            0.9999999932312933,
+            0.9999999713632107
+          ],
+          "local_rotation_xyzw": [
+            8.675644219977931e-08,
+            -4.960577232644044e-09,
+            -5.513617898769949e-10,
+            -0.9999999999999963
+          ],
+          "local_x_axis": [
+            1,
+            1.1027227190299217e-09,
+            -9.921154560956426e-09
+          ],
+          "local_y_axis": [
+            -1.1027244404780496e-09,
+            0.9999999999999849,
+            -1.7351288439408785e-07
+          ],
+          "local_z_axis": [
+            9.921154369619677e-09,
+            1.7351288440502813e-07,
+            0.9999999999999849
+          ]
+        },
+        {
+          "name": "digit_L_2_01",
+          "parent_index": 15,
+          "local_translation_cm": [
+            -1.3724671971134084,
+            -0.5218020637299009,
+            7.56200704944241
+          ],
+          "scale": [
+            1.000000016218366,
+            1.0000001008273143,
+            1.0000000840400327
+          ],
+          "local_rotation_xyzw": [
+            -0.07656733561132764,
+            -0.021627073277367202,
+            0.027760039351172678,
+            -0.9964432211792397
+          ],
+          "local_x_axis": [
+            0.9975232998333534,
+            -0.052010751306452004,
+            -0.047351325621528266
+          ],
+          "local_y_axis": [
+            0.05863446081812781,
+            0.9867336466652074,
+            0.15138926825686563
+          ],
+          "local_z_axis": [
+            0.03884927662318866,
+            -0.15379074187778727,
+            0.9873394256376754
+          ]
+        },
+        {
+          "name": "digit_L_2_02",
+          "parent_index": 20,
+          "local_translation_cm": [
+            1.1599492311109572e-06,
+            -3.7920304507554903e-06,
+            2.861931438626686
+          ],
+          "scale": [
+            1.000000000000014,
+            0.9999999932312922,
+            0.9999999713632097
+          ],
+          "local_rotation_xyzw": [
+            8.675644012491706e-08,
+            -7.232215950612751e-09,
+            3.0520012657535363e-09,
+            -0.9999999999999963
+          ],
+          "local_x_axis": [
+            0.9999999999999999,
+            -6.10400378638967e-09,
+            -1.4464431371663919e-08
+          ],
+          "local_y_axis": [
+            6.10400127662443e-09,
+            0.9999999999999849,
+            -1.7351288029397895e-07
+          ],
+          "local_z_axis": [
+            1.4464432430786978e-08,
+            1.7351288020568804e-07,
+            0.9999999999999848
+          ]
+        },
+        {
+          "name": "digit_L_3_01",
+          "parent_index": 15,
+          "local_translation_cm": [
+            -3.7665154676738144,
+            -0.39697776836112586,
+            7.675650372688869
+          ],
+          "scale": [
+            0.9999998970091168,
+            1.000000146090933,
+            1.0000000824434534
+          ],
+          "local_rotation_xyzw": [
+            -0.09345678458032015,
+            -0.02115313729129978,
+            0.028122855113526312,
+            -0.9950012458378666
+          ],
+          "local_x_axis": [
+            0.9975232996059981,
+            -0.052010743358891116,
+            -0.0473513391407022
+          ],
+          "local_y_axis": [
+            0.05991836013901488,
+            0.9809498688723425,
+            0.18478946094835985
+          ],
+          "local_z_axis": [
+            0.03683825269218866,
+            -0.18716900740931885,
+            0.9816367483972861
+          ]
+        },
+        {
+          "name": "digit_L_3_02",
+          "parent_index": 22,
+          "local_translation_cm": [
+            -6.471929558937717e-06,
+            -3.9675356999779865e-06,
+            2.524023422166566
+          ],
+          "scale": [
+            1.0000000000000142,
+            0.9999999822886863,
+            0.9999999822886863
+          ],
+          "local_rotation_xyzw": [
+            -2.455966323130541e-07,
+            3.225789990125689e-09,
+            6.679149016055575e-09,
+            -0.9999999999999699
+          ],
+          "local_x_axis": [
+            0.9999999999999999,
+            -1.3358299616597064e-08,
+            6.451576699498173e-09
+          ],
+          "local_y_axis": [
+            1.3358296447624432e-08,
+            0.9999999999998793,
+            4.911932646691845e-07
+          ],
+          "local_z_axis": [
+            -6.451583261004194e-09,
+            -4.911932645830023e-07,
+            0.9999999999998793
+          ]
+        },
+        {
+          "name": "clavicle_R",
+          "parent_index": 4,
+          "local_translation_cm": [
+            5.740831061678173e-07,
+            -1.1267919121009081e-06,
+            4.999993626916854
+          ],
+          "scale": [
+            0.9999999249044575,
+            0.9999999527424809,
+            0.9999998657746162
+          ],
+          "local_rotation_xyzw": [
+            0.4787426499281336,
+            0.49954791642070745,
+            0.4995479088772253,
+            0.5212573654884024
+          ],
+          "local_x_axis": [
+            0.0018075318722425848,
+            0.9990958403798205,
+            -0.04247628237347589
+          ],
+          "local_y_axis": [
+            -0.04247626728651133,
+            0.042514723752359984,
+            0.9981924989608295
+          ],
+          "local_z_axis": [
+            0.9990958410212385,
+            -3.083307215101527e-08,
+            0.04251470867903684
+          ]
+        },
+        {
+          "name": "upperarm_R",
+          "parent_index": 24,
+          "local_translation_cm": [
+            8.486930369588919e-06,
+            -2.8929716844317e-06,
+            23.521256189731332
+          ],
+          "scale": [
+            0.9999999726422839,
+            0.999999874864333,
+            0.9999999768950316
+          ],
+          "local_rotation_xyzw": [
+            -0.47750048775053006,
+            0.2603648856601866,
+            -0.46599942176290343,
+            -0.6978882069714343
+          ],
+          "local_x_axis": [
+            0.43010933046359523,
+            0.40178228201597543,
+            0.808441068789923
+          ],
+          "local_y_axis": [
+            -0.8990797215993759,
+            0.10967564622929105,
+            0.4238241461183826
+          ],
+          "local_z_axis": [
+            0.08161873594308244,
+            -0.9091436907784284,
+            0.40840682102632764
+          ]
+        },
+        {
+          "name": "lowerarm_R",
+          "parent_index": 25,
+          "local_translation_cm": [
+            6.397602203556119e-06,
+            9.342972506765079e-07,
+            27.976585977481005
+          ],
+          "scale": [
+            1.0000000345632791,
+            1.0000000122526385,
+            0.9999999502962978
+          ],
+          "local_rotation_xyzw": [
+            -0.05131554436501663,
+            0.13580153736071576,
+            -0.1507465912715284,
+            -0.9778548576230539
+          ],
+          "local_x_axis": [
+            0.9176668153409617,
+            0.2808791134594196,
+            0.2810596727462474
+          ],
+          "local_y_axis": [
+            -0.3087540327205047,
+            0.9492843602530735,
+            0.05941507096468367
+          ],
+          "local_z_axis": [
+            -0.2501170991771708,
+            -0.14130154635092773,
+            0.9578493147139763
+          ]
+        },
+        {
+          "name": "hand_R",
+          "parent_index": 26,
+          "local_translation_cm": [
+            -3.11356088689152e-06,
+            -5.532000442107221e-06,
+            23.381420860637327
+          ],
+          "scale": [
+            0.9999999693639199,
+            0.9999999431630617,
+            0.9999999903420418
+          ],
+          "local_rotation_xyzw": [
+            -0.026259776193475377,
+            0.05956686188795292,
+            -0.0668018136782589,
+            -0.995640362183246
+          ],
+          "local_x_axis": [
+            0.9839786133082334,
+            0.1298927390067882,
+            0.12212274524150031
+          ],
+          "local_y_axis": [
+            -0.1361495888536894,
+            0.9896958836871276,
+            0.044332237341770386
+          ],
+          "local_z_axis": [
+            -0.11510594253546304,
+            -0.06024893497872083,
+            0.9915244262381803
+          ]
+        },
+        {
+          "name": "digit_R_0_01",
+          "parent_index": 27,
+          "local_translation_cm": [
+            -3.4156518396130653,
+            -0.7714516149958967,
+            7.334721046814341
+          ],
+          "scale": [
+            0.9999998970091164,
+            1.0000000970896668,
+            1.000000016911662
+          ],
+          "local_rotation_xyzw": [
+            -0.09345677641195803,
+            0.02115313706897656,
+            -0.028122852094236615,
+            -0.9950012466951548
+          ],
+          "local_x_axis": [
+            0.9975232999644535,
+            0.05201073778584407,
+            0.047351337710765606
+          ],
+          "local_y_axis": [
+            -0.05991835379171144,
+            0.980949872265542,
+            0.18478944499377728
+          ],
+          "local_z_axis": [
+            -0.036838253309815064,
+            -0.18716899117425703,
+            0.9816367514696528
+          ]
+        },
+        {
+          "name": "digit_R_0_02",
+          "parent_index": 28,
+          "local_translation_cm": [
+            7.613613517420958e-07,
+            -1.2237523722147259e-05,
+            2.524023776515072
+          ],
+          "scale": [
+            1.0000000000000144,
+            0.9999999822886835,
+            0.9999999492275958
+          ],
+          "local_rotation_xyzw": [
+            -2.7422987512427166e-07,
+            -2.0298108750927525e-09,
+            -1.023128528773544e-08,
+            -0.9999999999999625
+          ],
+          "local_x_axis": [
+            0.9999999999999998,
+            2.046257168873968e-08,
+            -4.059616138737179e-09
+          ],
+          "local_y_axis": [
+            -2.0462569462200545e-08,
+            0.9999999999998493,
+            5.484597502900579e-07
+          ],
+          "local_z_axis": [
+            4.059627361633527e-09,
+            -5.484597502069877e-07,
+            0.9999999999998496
+          ]
+        },
+        {
+          "name": "digit_R_1_01",
+          "parent_index": 27,
+          "local_translation_cm": [
+            -1.021592416930911,
+            -0.6466326251668653,
+            7.448357070206313
+          ],
+          "scale": [
+            1.0000000162183662,
+            1.0000001008273163,
+            1.0000001418342817
+          ],
+          "local_rotation_xyzw": [
+            -0.07656733920801846,
+            0.02162707534262475,
+            -0.02776004328729082,
+            -0.9964432207483859
+          ],
+          "local_x_axis": [
+            0.9975232992176244,
+            0.052010758654933105,
+            0.047351330521160556
+          ],
+          "local_y_axis": [
+            -0.058634469110277594,
+            0.986733645126584,
+            0.15138927507376665
+          ],
+          "local_z_axis": [
+            -0.03884927991793147,
+            -0.1537907492645217,
+            0.9873394243574574
+          ]
+        },
+        {
+          "name": "digit_R_1_02",
+          "parent_index": 30,
+          "local_translation_cm": [
+            1.2716640185317374e-06,
+            -3.267324066857924e-06,
+            2.861930980324312
+          ],
+          "scale": [
+            1.0000000000000129,
+            0.9999999932312933,
+            0.9999999713632107
+          ],
+          "local_rotation_xyzw": [
+            8.675644219977931e-08,
+            4.960577232644044e-09,
+            5.513617898769949e-10,
+            -0.9999999999999963
+          ],
+          "local_x_axis": [
+            1,
+            -1.1027227190299217e-09,
+            9.921154560956426e-09
+          ],
+          "local_y_axis": [
+            1.1027244404780496e-09,
+            0.9999999999999849,
+            -1.7351288439408785e-07
+          ],
+          "local_z_axis": [
+            -9.921154369619677e-09,
+            1.7351288440502813e-07,
+            0.9999999999999849
+          ]
+        },
+        {
+          "name": "digit_R_2_01",
+          "parent_index": 27,
+          "local_translation_cm": [
+            1.3724671971134084,
+            -0.5218020637299009,
+            7.56200704944241
+          ],
+          "scale": [
+            1.000000016218366,
+            1.0000001008273143,
+            1.0000000840400327
+          ],
+          "local_rotation_xyzw": [
+            -0.07656733561132764,
+            0.021627073277367202,
+            -0.027760039351172678,
+            -0.9964432211792397
+          ],
+          "local_x_axis": [
+            0.9975232998333534,
+            0.052010751306452004,
+            0.047351325621528266
+          ],
+          "local_y_axis": [
+            -0.05863446081812781,
+            0.9867336466652074,
+            0.15138926825686563
+          ],
+          "local_z_axis": [
+            -0.03884927662318866,
+            -0.15379074187778727,
+            0.9873394256376754
+          ]
+        },
+        {
+          "name": "digit_R_2_02",
+          "parent_index": 32,
+          "local_translation_cm": [
+            -1.1599492311109572e-06,
+            -3.7920304507554903e-06,
+            2.861931438626686
+          ],
+          "scale": [
+            1.000000000000014,
+            0.9999999932312922,
+            0.9999999713632097
+          ],
+          "local_rotation_xyzw": [
+            8.675644012491706e-08,
+            7.232215950612751e-09,
+            -3.0520012657535363e-09,
+            -0.9999999999999963
+          ],
+          "local_x_axis": [
+            0.9999999999999999,
+            6.10400378638967e-09,
+            1.4464431371663919e-08
+          ],
+          "local_y_axis": [
+            -6.10400127662443e-09,
+            0.9999999999999849,
+            -1.7351288029397895e-07
+          ],
+          "local_z_axis": [
+            -1.4464432430786978e-08,
+            1.7351288020568804e-07,
+            0.9999999999999848
+          ]
+        },
+        {
+          "name": "digit_R_3_01",
+          "parent_index": 27,
+          "local_translation_cm": [
+            3.7665154676738144,
+            -0.39697776836112586,
+            7.675650372688869
+          ],
+          "scale": [
+            0.9999998970091168,
+            1.000000146090933,
+            1.0000000824434534
+          ],
+          "local_rotation_xyzw": [
+            -0.09345678458032015,
+            0.02115313729129978,
+            -0.028122855113526312,
+            -0.9950012458378666
+          ],
+          "local_x_axis": [
+            0.9975232996059981,
+            0.052010743358891116,
+            0.0473513391407022
+          ],
+          "local_y_axis": [
+            -0.05991836013901488,
+            0.9809498688723425,
+            0.18478946094835985
+          ],
+          "local_z_axis": [
+            -0.03683825269218866,
+            -0.18716900740931885,
+            0.9816367483972861
+          ]
+        },
+        {
+          "name": "digit_R_3_02",
+          "parent_index": 34,
+          "local_translation_cm": [
+            6.471929558937717e-06,
+            -3.9675356999779865e-06,
+            2.524023422166566
+          ],
+          "scale": [
+            1.0000000000000142,
+            0.9999999822886863,
+            0.9999999822886863
+          ],
+          "local_rotation_xyzw": [
+            -2.455966323130541e-07,
+            -3.225789990125689e-09,
+            -6.679149016055575e-09,
+            -0.9999999999999699
+          ],
+          "local_x_axis": [
+            0.9999999999999999,
+            1.3358299616597064e-08,
+            -6.451576699498173e-09
+          ],
+          "local_y_axis": [
+            -1.3358296447624432e-08,
+            0.9999999999998793,
+            4.911932646691845e-07
+          ],
+          "local_z_axis": [
+            6.451583261004194e-09,
+            -4.911932645830023e-07,
+            0.9999999999998793
+          ]
+        },
+        {
+          "name": "cape_L_01",
+          "parent_index": 4,
+          "local_translation_cm": [
+            -16.999999969958534,
+            -2.0000112746560488,
+            10.999997054377264
+          ],
+          "scale": [
+            1.0000000873881427,
+            1.0000003806046627,
+            1.0000000153818536
+          ],
+          "local_rotation_xyzw": [
+            -0.9638631941958682,
+            0.08032202835730784,
+            0.08032193191190445,
+            -0.24096576912301337
+          ],
+          "local_x_axis": [
+            0.9741935180290144,
+            -0.1935485658347284,
+            -0.11612898903190419
+          ],
+          "local_y_axis": [
+            -0.11612922143233494,
+            -0.8709677397430451,
+            0.477419312823027
+          ],
+          "local_z_axis": [
+            -0.19354842639446088,
+            -0.4516128308520601,
+            -0.870967770729788
+          ]
+        },
+        {
+          "name": "cape_L_02",
+          "parent_index": 36,
+          "local_translation_cm": [
+            -4.05886865784133e-06,
+            8.266107631715869e-06,
+            30.999981440197956
+          ],
+          "scale": [
+            0.9999999808433498,
+            0.9999997784497909,
+            0.999999852012296
+          ],
+          "local_rotation_xyzw": [
+            -0.12410350492490715,
+            0.02757847627689968,
+            4.686543146267817e-08,
+            -0.9918859549926069
+          ],
+          "local_x_axis": [
+            0.9984788552924846,
+            -0.006845264103229795,
+            0.05470939492597858
+          ],
+          "local_y_axis": [
+            -0.0068450781625768245,
+            0.9691966401307027,
+            0.24619304958569685
+          ],
+          "local_z_axis": [
+            -0.054709418190635795,
+            -0.24619304441578807,
+            0.9676754954231961
+          ]
+        },
+        {
+          "name": "cape_L_03",
+          "parent_index": 37,
+          "local_translation_cm": [
+            7.716296990256666e-07,
+            1.8771756371549486e-06,
+            28.30197479386061
+          ],
+          "scale": [
+            1.0000000597930971,
+            1.0000001707082438,
+            1.0000001767086932
+          ],
+          "local_rotation_xyzw": [
+            -0.03934877413510762,
+            -0.007184449415811882,
+            0.012537841173961523,
+            -0.9991210438176912
+          ],
+          "local_x_axis": [
+            0.9995823724505764,
+            -0.02448824336720195,
+            -0.015342966560154866
+          ],
+          "local_y_axis": [
+            0.025619040476593503,
+            0.9965889530255216,
+            0.07844822160223497
+          ],
+          "local_z_axis": [
+            0.01336957183817061,
+            -0.0788085315450262,
+            0.9968001153213119
+          ]
+        },
+        {
+          "name": "cape_R_01",
+          "parent_index": 4,
+          "local_translation_cm": [
+            16.999999969958534,
+            -2.0000112746560488,
+            10.999997054377264
+          ],
+          "scale": [
+            1.0000000873881427,
+            1.0000003806046627,
+            1.0000000153818536
+          ],
+          "local_rotation_xyzw": [
+            -0.9638631941958682,
+            -0.08032202835730784,
+            -0.08032193191190445,
+            -0.24096576912301337
+          ],
+          "local_x_axis": [
+            0.9741935180290144,
+            0.1935485658347284,
+            0.11612898903190419
+          ],
+          "local_y_axis": [
+            0.11612922143233494,
+            -0.8709677397430451,
+            0.477419312823027
+          ],
+          "local_z_axis": [
+            0.19354842639446088,
+            -0.4516128308520601,
+            -0.870967770729788
+          ]
+        },
+        {
+          "name": "cape_R_02",
+          "parent_index": 39,
+          "local_translation_cm": [
+            4.05886865784133e-06,
+            8.266107631715869e-06,
+            30.999981440197956
+          ],
+          "scale": [
+            0.9999999808433498,
+            0.9999997784497909,
+            0.999999852012296
+          ],
+          "local_rotation_xyzw": [
+            -0.12410350492490715,
+            -0.02757847627689968,
+            -4.686543146267817e-08,
+            -0.9918859549926069
+          ],
+          "local_x_axis": [
+            0.9984788552924846,
+            0.006845264103229795,
+            -0.05470939492597858
+          ],
+          "local_y_axis": [
+            0.0068450781625768245,
+            0.9691966401307027,
+            0.24619304958569685
+          ],
+          "local_z_axis": [
+            0.054709418190635795,
+            -0.24619304441578807,
+            0.9676754954231961
+          ]
+        },
+        {
+          "name": "cape_R_03",
+          "parent_index": 40,
+          "local_translation_cm": [
+            -7.716296990256666e-07,
+            1.8771756371549486e-06,
+            28.30197479386061
+          ],
+          "scale": [
+            1.0000000597930971,
+            1.0000001707082438,
+            1.0000001767086932
+          ],
+          "local_rotation_xyzw": [
+            -0.03934877413510762,
+            0.007184449415811882,
+            -0.012537841173961523,
+            -0.9991210438176912
+          ],
+          "local_x_axis": [
+            0.9995823724505764,
+            0.02448824336720195,
+            0.015342966560154866
+          ],
+          "local_y_axis": [
+            -0.025619040476593503,
+            0.9965889530255216,
+            0.07844822160223497
+          ],
+          "local_z_axis": [
+            -0.01336957183817061,
+            -0.0788085315450262,
+            0.9968001153213119
+          ]
+        },
+        {
+          "name": "thigh_L",
+          "parent_index": 1,
+          "local_translation_cm": [
+            -12.699999375486943,
+            -7.063243744836137e-07,
+            4.000010722080671
+          ],
+          "scale": [
+            1.0000003434225384,
+            1.0000029444643344,
+            0.9999999627097269
+          ],
+          "local_rotation_xyzw": [
+            -0.998001772696386,
+            0.020084149429421078,
+            0.02008462544140824,
+            0.05644197425184665
+          ],
+          "local_x_axis": [
+            0.9983864695251501,
+            -0.03782080164327879,
+            -0.04235616167886797
+          ],
+          "local_y_axis": [
+            -0.04235526529136659,
+            -0.9928218609685011,
+            -0.11185161547845507
+          ],
+          "local_z_axis": [
+            -0.03782180549900547,
+            0.11346514595285184,
+            -0.9928218227268644
+          ]
+        },
+        {
+          "name": "shin_L",
+          "parent_index": 42,
+          "local_translation_cm": [
+            2.7275478736710213e-06,
+            9.815564286363987e-06,
+            42.30367561697636
+          ],
+          "scale": [
+            0.9999999709139231,
+            0.9999998116085485,
+            0.9999999823152724
+          ],
+          "local_rotation_xyzw": [
+            0.13399531790419444,
+            -0.01643642946003409,
+            0.012690433438843827,
+            -0.9907643773700655
+          ],
+          "local_x_axis": [
+            0.9991375933714792,
+            -0.029551267950598994,
+            -0.029168340274355553
+          ],
+          "local_y_axis": [
+            0.020741649587770458,
+            0.9637684153577762,
+            -0.265932746255776
+          ],
+          "local_z_axis": [
+            0.03597017492627515,
+            0.26509840459963674,
+            0.9635501971327184
+          ]
+        },
+        {
+          "name": "foot_L",
+          "parent_index": 43,
+          "local_translation_cm": [
+            1.1005848732370538e-06,
+            1.4882323384757257e-05,
+            42.51834822503409
+          ],
+          "scale": [
+            1.0000000551939707,
+            0.9999982293624692,
+            1.0000018505322896
+          ],
+          "local_rotation_xyzw": [
+            -0.5267894830036151,
+            -0.0023494007245102463,
+            0.007371326668531246,
+            -0.8499605781776974
+          ],
+          "local_x_axis": [
+            0.9998802877187629,
+            -0.010055394968176855,
+            -0.011760070725884331
+          ],
+          "local_y_axis": [
+            0.01500595334030914,
+            0.44487700827985954,
+            0.8954659507029346
+          ],
+          "local_z_axis": [
+            -0.00377247873318101,
+            -0.8955352235037972,
+            0.4449746418260393
+          ]
+        },
+        {
+          "name": "ball_L",
+          "parent_index": 44,
+          "local_translation_cm": [
+            1.1235623309513443e-05,
+            1.4858168045916997e-05,
+            18.146309921506443
+          ],
+          "scale": [
+            1.0000000000046925,
+            0.9999971610863261,
+            1.0000028903551132
+          ],
+          "local_rotation_xyzw": [
+            -0.2717776450707138,
+            1.0903041551453089e-07,
+            -2.7365386795597813e-07,
+            -0.9623600737976045
+          ],
+          "local_x_axis": [
+            0.9999999999998265,
+            4.6744305398298885e-07,
+            3.5859904503663044e-07
+          ],
+          "local_y_axis": [
+            -5.859711722614714e-07,
+            0.8522738232794844,
+            0.5230959091335229
+          ],
+          "local_z_axis": [
+            -6.110702984635926e-08,
+            -0.5230959091336421,
+            0.8522738232796104
+          ]
+        },
+        {
+          "name": "toe_L0",
+          "parent_index": 45,
+          "local_translation_cm": [
+            -5.249976626928088,
+            -0.5321760588311714,
+            0.46562175561020713
+          ],
+          "scale": [
+            1.0000000000047056,
+            0.9999971751143502,
+            1.0000026901812749
+          ],
+          "local_rotation_xyzw": [
+            -0.0352418164340063,
+            -1.5409226375678273e-07,
+            1.1920174621606597e-06,
+            0.999378814250626
+          ],
+          "local_x_axis": [
+            0.9999999999971106,
+            2.393414978346755e-06,
+            2.2397536650170447e-07
+          ],
+          "local_y_axis": [
+            -2.371693013253887e-06,
+            0.9975160287460217,
+            -0.07043984944007824
+          ],
+          "local_z_axis": [
+            -3.920108088520885e-07,
+            0.07043984943934352,
+            0.9975160287488161
+          ]
+        },
+        {
+          "name": "toe_L1",
+          "parent_index": 45,
+          "local_translation_cm": [
+            -1.749978474668551,
+            -0.5321714108438138,
+            0.4656183763598637
+          ],
+          "scale": [
+            1.0000000000047056,
+            0.9999971751143502,
+            1.0000026901812749
+          ],
+          "local_rotation_xyzw": [
+            -0.0352418164340063,
+            -1.5409226375678273e-07,
+            1.1920174621606597e-06,
+            0.999378814250626
+          ],
+          "local_x_axis": [
+            0.9999999999971106,
+            2.393414978346755e-06,
+            2.2397536650170447e-07
+          ],
+          "local_y_axis": [
+            -2.371693013253887e-06,
+            0.9975160287460217,
+            -0.07043984944007824
+          ],
+          "local_z_axis": [
+            -3.920108088520885e-07,
+            0.07043984943934352,
+            0.9975160287488161
+          ]
+        },
+        {
+          "name": "toe_L2",
+          "parent_index": 45,
+          "local_translation_cm": [
+            1.7500181874751304,
+            -0.5321669635244066,
+            0.4656150112778673
+          ],
+          "scale": [
+            1.0000000000047056,
+            0.9999971771504148,
+            1.0000026901812895
+          ],
+          "local_rotation_xyzw": [
+            -0.03524181274594549,
+            -1.5409225991333537e-07,
+            1.1920174571984432e-06,
+            0.9993788143806807
+          ],
+          "local_x_axis": [
+            0.9999999999971106,
+            2.3934149673310387e-06,
+            2.2397536800188632e-07
+          ],
+          "local_y_axis": [
+            -2.371693005053177e-06,
+            0.9975160292659176,
+            -0.07043984207770529
+          ],
+          "local_z_axis": [
+            -3.920107920678288e-07,
+            0.07043984207697057,
+            0.997516029268712
+          ]
+        },
+        {
+          "name": "toe_L3",
+          "parent_index": 45,
+          "local_translation_cm": [
+            5.250017829851775,
+            -0.5321630587427351,
+            0.46561168451112467
+          ],
+          "scale": [
+            1.0000000000047056,
+            0.9999971771504148,
+            1.0000026901812895
+          ],
+          "local_rotation_xyzw": [
+            -0.03524181274594549,
+            -1.5409225991333537e-07,
+            1.1920174571984432e-06,
+            0.9993788143806807
+          ],
+          "local_x_axis": [
+            0.9999999999971106,
+            2.3934149673310387e-06,
+            2.2397536800188632e-07
+          ],
+          "local_y_axis": [
+            -2.371693005053177e-06,
+            0.9975160292659176,
+            -0.07043984207770529
+          ],
+          "local_z_axis": [
+            -3.920107920678288e-07,
+            0.07043984207697057,
+            0.997516029268712
+          ]
+        },
+        {
+          "name": "thigh_R",
+          "parent_index": 1,
+          "local_translation_cm": [
+            12.699999375486943,
+            -7.063243744836137e-07,
+            4.000010722080671
+          ],
+          "scale": [
+            1.0000003434225384,
+            1.0000029444643344,
+            0.9999999627097269
+          ],
+          "local_rotation_xyzw": [
+            -0.998001772696386,
+            -0.020084149429421078,
+            -0.02008462544140824,
+            0.05644197425184665
+          ],
+          "local_x_axis": [
+            0.9983864695251501,
+            0.03782080164327879,
+            0.04235616167886797
+          ],
+          "local_y_axis": [
+            0.04235526529136659,
+            -0.9928218609685011,
+            -0.11185161547845507
+          ],
+          "local_z_axis": [
+            0.03782180549900547,
+            0.11346514595285184,
+            -0.9928218227268644
+          ]
+        },
+        {
+          "name": "shin_R",
+          "parent_index": 50,
+          "local_translation_cm": [
+            -2.7275478736710213e-06,
+            9.815564286363987e-06,
+            42.30367561697636
+          ],
+          "scale": [
+            0.9999999709139231,
+            0.9999998116085485,
+            0.9999999823152724
+          ],
+          "local_rotation_xyzw": [
+            0.13399531790419444,
+            0.01643642946003409,
+            -0.012690433438843827,
+            -0.9907643773700655
+          ],
+          "local_x_axis": [
+            0.9991375933714792,
+            0.029551267950598994,
+            0.029168340274355553
+          ],
+          "local_y_axis": [
+            -0.020741649587770458,
+            0.9637684153577762,
+            -0.265932746255776
+          ],
+          "local_z_axis": [
+            -0.03597017492627515,
+            0.26509840459963674,
+            0.9635501971327184
+          ]
+        },
+        {
+          "name": "foot_R",
+          "parent_index": 51,
+          "local_translation_cm": [
+            -1.1005848732370538e-06,
+            1.4882323384757257e-05,
+            42.51834822503409
+          ],
+          "scale": [
+            1.0000000551939707,
+            0.9999982293624692,
+            1.0000018505322896
+          ],
+          "local_rotation_xyzw": [
+            -0.5267894830036151,
+            0.0023494007245102463,
+            -0.007371326668531246,
+            -0.8499605781776974
+          ],
+          "local_x_axis": [
+            0.9998802877187629,
+            0.010055394968176855,
+            0.011760070725884331
+          ],
+          "local_y_axis": [
+            -0.01500595334030914,
+            0.44487700827985954,
+            0.8954659507029346
+          ],
+          "local_z_axis": [
+            0.00377247873318101,
+            -0.8955352235037972,
+            0.4449746418260393
+          ]
+        },
+        {
+          "name": "ball_R",
+          "parent_index": 52,
+          "local_translation_cm": [
+            -1.1235623309513443e-05,
+            1.4858168045916997e-05,
+            18.146309921506443
+          ],
+          "scale": [
+            1.0000000000046925,
+            0.9999971610863261,
+            1.0000028903551132
+          ],
+          "local_rotation_xyzw": [
+            -0.2717776450707138,
+            -1.0903041551453089e-07,
+            2.7365386795597813e-07,
+            -0.9623600737976045
+          ],
+          "local_x_axis": [
+            0.9999999999998265,
+            -4.6744305398298885e-07,
+            -3.5859904503663044e-07
+          ],
+          "local_y_axis": [
+            5.859711722614714e-07,
+            0.8522738232794844,
+            0.5230959091335229
+          ],
+          "local_z_axis": [
+            6.110702984635926e-08,
+            -0.5230959091336421,
+            0.8522738232796104
+          ]
+        },
+        {
+          "name": "toe_R0",
+          "parent_index": 53,
+          "local_translation_cm": [
+            -5.250017829851775,
+            -0.5321630587427351,
+            0.46561168451112467
+          ],
+          "scale": [
+            1.0000000000047056,
+            0.9999971771504148,
+            1.0000026901812895
+          ],
+          "local_rotation_xyzw": [
+            -0.03524181274594549,
+            1.5409225991333537e-07,
+            -1.1920174571984432e-06,
+            0.9993788143806807
+          ],
+          "local_x_axis": [
+            0.9999999999971106,
+            -2.3934149673310387e-06,
+            -2.2397536800188632e-07
+          ],
+          "local_y_axis": [
+            2.371693005053177e-06,
+            0.9975160292659176,
+            -0.07043984207770529
+          ],
+          "local_z_axis": [
+            3.920107920678288e-07,
+            0.07043984207697057,
+            0.997516029268712
+          ]
+        },
+        {
+          "name": "toe_R1",
+          "parent_index": 53,
+          "local_translation_cm": [
+            -1.7500181874751304,
+            -0.5321669635244066,
+            0.4656150112778673
+          ],
+          "scale": [
+            1.0000000000047056,
+            0.9999971771504148,
+            1.0000026901812895
+          ],
+          "local_rotation_xyzw": [
+            -0.03524181274594549,
+            1.5409225991333537e-07,
+            -1.1920174571984432e-06,
+            0.9993788143806807
+          ],
+          "local_x_axis": [
+            0.9999999999971106,
+            -2.3934149673310387e-06,
+            -2.2397536800188632e-07
+          ],
+          "local_y_axis": [
+            2.371693005053177e-06,
+            0.9975160292659176,
+            -0.07043984207770529
+          ],
+          "local_z_axis": [
+            3.920107920678288e-07,
+            0.07043984207697057,
+            0.997516029268712
+          ]
+        },
+        {
+          "name": "toe_R2",
+          "parent_index": 53,
+          "local_translation_cm": [
+            1.749978474668551,
+            -0.5321714108438138,
+            0.4656183763598637
+          ],
+          "scale": [
+            1.0000000000047056,
+            0.9999971751143502,
+            1.0000026901812749
+          ],
+          "local_rotation_xyzw": [
+            -0.0352418164340063,
+            1.5409226375678273e-07,
+            -1.1920174621606597e-06,
+            0.999378814250626
+          ],
+          "local_x_axis": [
+            0.9999999999971106,
+            -2.393414978346755e-06,
+            -2.2397536650170447e-07
+          ],
+          "local_y_axis": [
+            2.371693013253887e-06,
+            0.9975160287460217,
+            -0.07043984944007824
+          ],
+          "local_z_axis": [
+            3.920108088520885e-07,
+            0.07043984943934352,
+            0.9975160287488161
+          ]
+        },
+        {
+          "name": "toe_R3",
+          "parent_index": 53,
+          "local_translation_cm": [
+            5.249976626928088,
+            -0.5321760588311714,
+            0.46562175561020713
+          ],
+          "scale": [
+            1.0000000000047056,
+            0.9999971751143502,
+            1.0000026901812749
+          ],
+          "local_rotation_xyzw": [
+            -0.0352418164340063,
+            1.5409226375678273e-07,
+            -1.1920174621606597e-06,
+            0.999378814250626
+          ],
+          "local_x_axis": [
+            0.9999999999971106,
+            -2.393414978346755e-06,
+            -2.2397536650170447e-07
+          ],
+          "local_y_axis": [
+            2.371693013253887e-06,
+            0.9975160287460217,
+            -0.07043984944007824
+          ],
+          "local_z_axis": [
+            3.920108088520885e-07,
+            0.07043984943934352,
+            0.9975160287488161
+          ]
+        },
+        {
+          "name": "tail_01",
+          "parent_index": 1,
+          "local_translation_cm": [
+            8.000003453637943,
+            -10.000000005074774,
+            4.000006511689913
+          ],
+          "scale": [
+            1.0000001135059295,
+            1.0000000850353348,
+            1.0000000691831412
+          ],
+          "local_rotation_xyzw": [
+            -0.8055212582960017,
+            -0.3340947292322845,
+            -0.33409471889515313,
+            -0.35762680707519906
+          ],
+          "local_x_axis": [
+            0.5535228614111503,
+            0.7772032685208232,
+            0.29927833415695526
+          ],
+          "local_y_axis": [
+            0.299278358204184,
+            -0.5209675575208108,
+            0.7993905605656164
+          ],
+          "local_z_axis": [
+            0.7772032592609356,
+            -0.3529134219767669,
+            -0.5209675713351349
+          ]
+        },
+        {
+          "name": "tail_02",
+          "parent_index": 58,
+          "local_translation_cm": [
+            -1.2154116657558944e-06,
+            1.0799916450032754e-05,
+            19.83488540450642
+          ],
+          "scale": [
+            0.9999999556963566,
+            0.9999998201024913,
+            0.9999998407515507
+          ],
+          "local_rotation_xyzw": [
+            0.012895654409602456,
+            0.020926524111564787,
+            -0.0006500783967396395,
+            -0.9996976343295179
+          ],
+          "local_x_axis": [
+            0.9991233159733723,
+            0.0018394861165725918,
+            0.04182362692545486
+          ],
+          "local_y_axis": [
+            -0.0007600412248247815,
+            0.9996665589908524,
+            -0.02581071817530874
+          ],
+          "local_z_axis": [
+            -0.041857159670828877,
+            0.02575630265033362,
+            0.9987915653719124
+          ]
+        },
+        {
+          "name": "tail_03",
+          "parent_index": 59,
+          "local_translation_cm": [
+            -5.296180638492132e-06,
+            -9.41049576042019e-06,
+            17.568668819061315
+          ],
+          "scale": [
+            1.0000000514236649,
+            1.000000060124164,
+            1.0000000505842153
+          ],
+          "local_rotation_xyzw": [
+            0.002138877765932607,
+            0.0664686059550506,
+            -0.023185127292598393,
+            -0.997516816648582
+          ],
+          "local_x_axis": [
+            0.9900887485896365,
+            0.0465394451878294,
+            0.1325079241321692
+          ],
+          "local_y_axis": [
+            -0.04597077229419023,
+            0.9989157501486569,
+            -0.007349299260605874
+          ],
+          "local_z_axis": [
+            -0.13270628474523502,
+            0.001184966900488227,
+            0.9911546992485892
+          ]
+        },
+        {
+          "name": "tail_04",
+          "parent_index": 60,
+          "local_translation_cm": [
+            -7.399811319253047e-06,
+            6.942722463598727e-06,
+            14.099180924894517
+          ],
+          "scale": [
+            1.0000000381761136,
+            1.0000000639777606,
+            0.9999999871560626
+          ],
+          "local_rotation_xyzw": [
+            7.15673781406037e-05,
+            0.15589371132338534,
+            -0.05661363645913971,
+            -0.9861501111974807
+          ],
+          "local_x_axis": [
+            0.9449840938733868,
+            0.11168140158732479,
+            0.30746109813403205
+          ],
+          "local_y_axis": [
+            -0.1116367739705727,
+            0.9935897820899655,
+            -0.017792572154079353
+          ],
+          "local_z_axis": [
+            -0.3074773048921456,
+            -0.01751026744243348,
+            0.9513942912958627
+          ]
+        },
+        {
+          "name": "tail_05",
+          "parent_index": 61,
+          "local_translation_cm": [
+            -8.722665156835063e-06,
+            -2.6532127717082687e-06,
+            10.434111043983174
+          ],
+          "scale": [
+            0.9999999237988385,
+            1.00000004633663,
+            0.9999998553391259
+          ],
+          "local_rotation_xyzw": [
+            0.03875292334982987,
+            0.2900745780595004,
+            -0.0954953305104416,
+            -0.9514386958423262
+          ],
+          "local_x_axis": [
+            0.8134747620286087,
+            0.20419838121832104,
+            0.5445749100448125
+          ],
+          "local_y_axis": [
+            -0.1592334296612248,
+            0.9787577055650875,
+            -0.1291435971130173
+          ],
+          "local_z_axis": [
+            -0.5593778029389638,
+            0.018340526295141775,
+            0.8287099001908901
+          ]
+        },
+        {
+          "name": "tail_06",
+          "parent_index": 62,
+          "local_translation_cm": [
+            4.312343337975477e-06,
+            4.724121638322032e-06,
+            8.691313345080498
+          ],
+          "scale": [
+            1.000000082510575,
+            0.9999999895787972,
+            0.9999999234536122
+          ],
+          "local_rotation_xyzw": [
+            -0.09378064737934952,
+            -0.2689720402320076,
+            0.0931214007838645,
+            0.9540375445791389
+          ],
+          "local_x_axis": [
+            0.8379648925789643,
+            0.22813136922302021,
+            0.4957528791460064
+          ],
+          "local_y_axis": [
+            -0.12723388098341173,
+            0.965067189786322,
+            -0.22903462342587036
+          ],
+          "local_z_axis": [
+            -0.5306848201475372,
+            0.12884641079347633,
+            0.8377184635010828
+          ]
+        }
+      ],
+      "socket_objects": [
+        {
+          "name": "socket_capture_L",
+          "bone": "hand_L",
+          "relative_location_cm": [
+            -0.11403249133952548,
+            -0.3797404117412413,
+            4.878369525112187
+          ],
+          "relative_rotation_pitch_yaw_roll": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "socket_capture_R",
+          "bone": "hand_R",
+          "relative_location_cm": [
+            0.11403249133953303,
+            -0.37974041174124085,
+            4.878369525112191
+          ],
+          "relative_rotation_pitch_yaw_roll": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "socket_voice",
+          "bone": "jaw",
+          "relative_location_cm": [
+            3.552713678800501e-15,
+            -1.413570730150932,
+            12.549574738160054
+          ],
+          "relative_rotation_pitch_yaw_roll": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "name": "socket_cape",
+          "bone": "chest",
+          "relative_location_cm": [
+            -1.262982832983539e-05,
+            13.8,
+            10
+          ],
+          "relative_rotation_pitch_yaw_roll": [
+            0,
+            0,
+            0
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "material_slots": [
+        {
+          "slot": "Fur_Gold_Rosettes",
+          "material": "/Game/Ananse/Characters/OseboLeopard/Visual_v003/Fur_Gold_Rosettes.Fur_Gold_Rosettes"
+        },
+        {
+          "slot": "FelineFaceSurface",
+          "material": "/Game/Ananse/Characters/OseboLeopard/Visual_v003/FelineFaceSurface1.FelineFaceSurface1"
+        },
+        {
+          "slot": "Muzzle_Chest_Cream",
+          "material": "/Game/Ananse/Characters/OseboLeopard/Visual_v003/Muzzle_Chest_Cream.Muzzle_Chest_Cream"
+        },
+        {
+          "slot": "Nose_Lips_Claws",
+          "material": "/Game/Ananse/Characters/OseboLeopard/Visual_v003/Nose_Lips_Claws.Nose_Lips_Claws"
+        },
+        {
+          "slot": "Eye_Sclera",
+          "material": "/Game/Ananse/Characters/OseboLeopard/Visual_v003/Eye_Sclera.Eye_Sclera"
+        },
+        {
+          "slot": "Iris_Amber",
+          "material": "/Game/Ananse/Characters/OseboLeopard/Visual_v003/Iris_Amber.Iris_Amber"
+        },
+        {
+          "slot": "Armour_Brown_Leather",
+          "material": "/Game/Ananse/Characters/OseboLeopard/Visual_v003/Armour_Brown_Leather.Armour_Brown_Leather"
+        },
+        {
+          "slot": "Leather_Edge",
+          "material": "/Game/Ananse/Characters/OseboLeopard/Visual_v003/Leather_Edge.Leather_Edge"
+        },
+        {
+          "slot": "Clasp_Brass",
+          "material": "/Game/Ananse/Characters/OseboLeopard/Visual_v003/Clasp_Brass.Clasp_Brass"
+        },
+        {
+          "slot": "Cape_Burgundy",
+          "material": "/Game/Ananse/Characters/OseboLeopard/Visual_v003/Cape_Burgundy.Cape_Burgundy"
+        },
+        {
+          "slot": "Cape_WovenGold_Trim",
+          "material": "/Game/Ananse/Characters/OseboLeopard/Visual_v003/Cape_WovenGold_Trim.Cape_WovenGold_Trim"
+        }
+      ],
+      "physics_bodies": [
+        {
+          "bone": "pelvis",
+          "primitive_count": 1,
+          "kinematic": true,
+          "collision_disabled": false
+        },
+        {
+          "bone": "spine_01",
+          "primitive_count": 1,
+          "kinematic": true,
+          "collision_disabled": false
+        },
+        {
+          "bone": "spine_02",
+          "primitive_count": 1,
+          "kinematic": true,
+          "collision_disabled": false
+        },
+        {
+          "bone": "chest",
+          "primitive_count": 1,
+          "kinematic": true,
+          "collision_disabled": false
+        },
+        {
+          "bone": "head",
+          "primitive_count": 1,
+          "kinematic": true,
+          "collision_disabled": false
+        },
+        {
+          "bone": "upperarm_L",
+          "primitive_count": 1,
+          "kinematic": true,
+          "collision_disabled": false
+        },
+        {
+          "bone": "hand_L",
+          "primitive_count": 1,
+          "kinematic": true,
+          "collision_disabled": false
+        },
+        {
+          "bone": "upperarm_R",
+          "primitive_count": 1,
+          "kinematic": true,
+          "collision_disabled": false
+        },
+        {
+          "bone": "hand_R",
+          "primitive_count": 1,
+          "kinematic": true,
+          "collision_disabled": false
+        },
+        {
+          "bone": "cape_L_01",
+          "primitive_count": 1,
+          "kinematic": true,
+          "collision_disabled": true
+        },
+        {
+          "bone": "cape_L_02",
+          "primitive_count": 1,
+          "kinematic": true,
+          "collision_disabled": true
+        },
+        {
+          "bone": "cape_L_03",
+          "primitive_count": 1,
+          "kinematic": true,
+          "collision_disabled": true
+        },
+        {
+          "bone": "cape_R_01",
+          "primitive_count": 1,
+          "kinematic": true,
+          "collision_disabled": true
+        },
+        {
+          "bone": "cape_R_02",
+          "primitive_count": 1,
+          "kinematic": true,
+          "collision_disabled": true
+        },
+        {
+          "bone": "cape_R_03",
+          "primitive_count": 1,
+          "kinematic": true,
+          "collision_disabled": true
+        },
+        {
+          "bone": "shin_L",
+          "primitive_count": 1,
+          "kinematic": true,
+          "collision_disabled": false
+        },
+        {
+          "bone": "foot_L",
+          "primitive_count": 1,
+          "kinematic": true,
+          "collision_disabled": false
+        },
+        {
+          "bone": "ball_L",
+          "primitive_count": 1,
+          "kinematic": true,
+          "collision_disabled": false
+        },
+        {
+          "bone": "shin_R",
+          "primitive_count": 1,
+          "kinematic": true,
+          "collision_disabled": false
+        },
+        {
+          "bone": "foot_R",
+          "primitive_count": 1,
+          "kinematic": true,
+          "collision_disabled": false
+        },
+        {
+          "bone": "ball_R",
+          "primitive_count": 1,
+          "kinematic": true,
+          "collision_disabled": false
+        },
+        {
+          "bone": "tail_01",
+          "primitive_count": 1,
+          "kinematic": true,
+          "collision_disabled": true
+        },
+        {
+          "bone": "tail_03",
+          "primitive_count": 1,
+          "kinematic": true,
+          "collision_disabled": true
+        }
+      ],
+      "lod_count": 3,
+      "imported_bounds_extent_cm": [
+        38.66077995300293,
+        49.563411712646484,
+        101.04128324985504
+      ],
+      "lods": [
+        {
+          "lod": 0,
+          "vertices": 67100,
+          "triangles": 119596,
+          "max_influences": 2
+        },
+        {
+          "lod": 1,
+          "vertices": 36430,
+          "triangles": 59614,
+          "max_influences": 2
+        },
+        {
+          "lod": 2,
+          "vertices": 20613,
+          "triangles": 29716,
+          "max_influences": 2
+        }
+      ],
+      "morph_targets": [
+        "Blink_L",
+        "Blink_R",
+        "BrowUp",
+        "BrowDown",
+        "Concern",
+        "Suspicion",
+        "Determination"
+      ]
+    },
+    "source": "SourceArt/Characters/OseboLeopard/Authored_v012",
+    "source_scene_sha256": "54a6d7edbfbf0df1e77cb1347106a110301b8cbed4c76f7623afb472184dda76",
+    "capture_animation_source": "SourceArt/Characters/OseboLeopard/Authored_v013",
+    "capture_scene_sha256": "436f107db5a20eab90ec2b5364c0861c5d81e30f08482f1f53c9165ccfdb46d7",
+    "capture_glb_sha256": "31b38c31a85b278a87d40a63252c6c49f87593347ac8f0929e8fe1f85b666245"
+  },
+  "limitations": [
+    "Creative/cultural/rights approval not granted",
+    "No physical controller/touch/device qualification",
+    "No long-session memory qualification",
+    "No campaign mapping changes",
+    "Only frame traces/native timing; detailed CPU tracing defect unresolved",
+    "Allocator workaround -ansimalloc retained"
+  ]
+}

@@ -1,0 +1,223 @@
+{
+  "schema_version": 1,
+  "status": "authored_shot_list_not_level_sequences",
+  "timing_note": "Proposed seconds; final timing follows approved performances/subtitle reading checks.",
+  "sequence_policy": "Subsequences per beat; gameplay-owned idempotent completion, skip and interruption paths.",
+  "shots": [
+    {
+      "id": "OPEN_01",
+      "sequence": "opening",
+      "in_seconds": 0,
+      "out_seconds": 6,
+      "camera_intent": "River skyline to market landing",
+      "checkpoint": "CP_Arrival",
+      "art_note": "Establish sunset, boats and readable escape geography.",
+      "dialogue_ids": []
+    },
+    {
+      "id": "OPEN_02",
+      "sequence": "opening",
+      "in_seconds": 6,
+      "out_seconds": 12,
+      "camera_intent": "Esi medium shot; crowd listens",
+      "checkpoint": "CP_Arrival",
+      "art_note": "Performance begins without generic exposition.",
+      "dialogue_ids": [
+        "MSN_OPEN_010"
+      ]
+    },
+    {
+      "id": "OPEN_03",
+      "sequence": "opening",
+      "in_seconds": 12,
+      "out_seconds": 19,
+      "camera_intent": "Insert guard posting altered edict",
+      "checkpoint": "CP_Arrival",
+      "art_note": "Readable names/seal; no real private names.",
+      "dialogue_ids": [
+        "MSN_OPEN_020"
+      ]
+    },
+    {
+      "id": "OPEN_04",
+      "sequence": "opening",
+      "in_seconds": 19,
+      "out_seconds": 25,
+      "camera_intent": "Witness reaction then Kwaku",
+      "checkpoint": "CP_Arrival",
+      "art_note": "Human cost; no caricatured facial animation.",
+      "dialogue_ids": [
+        "MSN_OPEN_030",
+        "MSN_OPEN_040"
+      ]
+    },
+    {
+      "id": "OPEN_05",
+      "sequence": "opening",
+      "in_seconds": 25,
+      "out_seconds": 35,
+      "camera_intent": "Aso joins; camera blends to play camera",
+      "checkpoint": "CP_Arrival",
+      "art_note": "Land precisely at controllable pawn transform.",
+      "dialogue_ids": [
+        "MSN_OPEN_050"
+      ]
+    },
+    {
+      "id": "LEDGER_01",
+      "sequence": "discovery",
+      "in_seconds": 0,
+      "out_seconds": 4,
+      "camera_intent": "Over shoulder: ledger and changed entries",
+      "checkpoint": "CP_Ledger",
+      "art_note": "Use localizable readable prop layers.",
+      "dialogue_ids": [
+        "MSN_LEDGER_010"
+      ]
+    },
+    {
+      "id": "LEDGER_02",
+      "sequence": "discovery",
+      "in_seconds": 4,
+      "out_seconds": 8,
+      "camera_intent": "Close reaction; evidence stowed",
+      "checkpoint": "CP_Ledger",
+      "art_note": "Do not depend on companion availability.",
+      "dialogue_ids": [
+        "MSN_LEDGER_030"
+      ]
+    },
+    {
+      "id": "CHASE_01",
+      "sequence": "chase_intro",
+      "in_seconds": 0,
+      "out_seconds": 4,
+      "camera_intent": "Osebo occupies exit; foreground threat",
+      "checkpoint": "CP_Ledger",
+      "art_note": "Very short control transition; turn player toward escape.",
+      "dialogue_ids": [
+        "MSN_CHASE_010"
+      ]
+    },
+    {
+      "id": "CHASE_02",
+      "sequence": "chase_intro",
+      "in_seconds": 4,
+      "out_seconds": 7,
+      "camera_intent": "Reverse Kwaku, then playable canopy route",
+      "checkpoint": "CP_Ledger",
+      "art_note": "No on-rails replacement for chase.",
+      "dialogue_ids": [
+        "MSN_CHASE_020"
+      ]
+    },
+    {
+      "id": "EXPOSE_01",
+      "sequence": "expose",
+      "in_seconds": 0,
+      "out_seconds": 8,
+      "camera_intent": "Esi and readable ledger insert",
+      "checkpoint": "CP_Choice",
+      "art_note": "Public evidence; not universal brainwashing.",
+      "dialogue_ids": [
+        "MSN_EXPOSE_010"
+      ]
+    },
+    {
+      "id": "EXPOSE_02",
+      "sequence": "expose",
+      "in_seconds": 8,
+      "out_seconds": 14,
+      "camera_intent": "Witness recognizes the entry",
+      "checkpoint": "CP_Choice",
+      "art_note": "Respect performance and caption time.",
+      "dialogue_ids": [
+        "MSN_EXPOSE_020"
+      ]
+    },
+    {
+      "id": "EXPOSE_03",
+      "sequence": "expose",
+      "in_seconds": 14,
+      "out_seconds": 22,
+      "camera_intent": "Aso directs witnesses to a safe route",
+      "checkpoint": "CP_Choice",
+      "art_note": "Visible protection cost persists.",
+      "dialogue_ids": [
+        "MSN_EXPOSE_030"
+      ]
+    },
+    {
+      "id": "PROTECT_01",
+      "sequence": "protect",
+      "in_seconds": 0,
+      "out_seconds": 6,
+      "camera_intent": "Kwaku closes sensitive pages",
+      "checkpoint": "CP_Choice",
+      "art_note": "Evidence kept, not destroyed.",
+      "dialogue_ids": [
+        "MSN_PROTECT_010"
+      ]
+    },
+    {
+      "id": "PROTECT_02",
+      "sequence": "protect",
+      "in_seconds": 6,
+      "out_seconds": 15,
+      "camera_intent": "Esi addresses market without names at risk",
+      "checkpoint": "CP_Choice",
+      "art_note": "Public account differs from expose.",
+      "dialogue_ids": [
+        "MSN_PROTECT_020"
+      ]
+    },
+    {
+      "id": "PROTECT_03",
+      "sequence": "protect",
+      "in_seconds": 15,
+      "out_seconds": 22,
+      "camera_intent": "Kojo and witness depart",
+      "checkpoint": "CP_Choice",
+      "art_note": "Consequence persists after load.",
+      "dialogue_ids": [
+        "MSN_PROTECT_030"
+      ]
+    },
+    {
+      "id": "FOREST_01",
+      "sequence": "forest_epilogue",
+      "in_seconds": 0,
+      "out_seconds": 7,
+      "camera_intent": "Sanctuary with Ananse at story stone",
+      "checkpoint": "CP_Forest",
+      "art_note": "Four arms and four supporting legs readable.",
+      "dialogue_ids": [
+        "MSN_FOREST_010"
+      ]
+    },
+    {
+      "id": "FOREST_02",
+      "sequence": "forest_epilogue",
+      "in_seconds": 7,
+      "out_seconds": 11,
+      "camera_intent": "Kwaku asks; thread links their positions",
+      "checkpoint": "CP_Forest",
+      "art_note": "Avoid opaque glow over subtitles.",
+      "dialogue_ids": [
+        "MSN_FOREST_020"
+      ]
+    },
+    {
+      "id": "FOREST_03",
+      "sequence": "forest_epilogue",
+      "in_seconds": 11,
+      "out_seconds": 18,
+      "camera_intent": "Ananse gestures independently with four arms",
+      "checkpoint": "CP_Forest",
+      "art_note": "Final look to player, quiet musical resolution.",
+      "dialogue_ids": [
+        "MSN_FOREST_030"
+      ]
+    }
+  ]
+}

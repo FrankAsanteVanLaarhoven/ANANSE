@@ -1,33 +1,73 @@
 name: Native-Unreal-manual-gate
 on:
   workflow_dispatch:
+    inputs:
+      candidate_sha:
+        description: Reviewed exact 40-character commit SHA reachable from the development branch
+        required: true
+        type: string
 permissions:
   contents: read
+concurrency:
+  group: ananse-native-reviewed-build
+  cancel-in-progress: false
 jobs:
+  policy:
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/feature/local-milestone-verification'
+    runs-on: ubuntu-latest
+    outputs:
+      candidate_sha: ${{ steps.policy.outputs.candidate_sha }}
+    steps:
+      # Policy code is loaded from the selected trusted workflow ref, not the candidate.
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Validate reviewed candidate before self-hosted scheduling
+        id: policy
+        env:
+          CANDIDATE_SHA: ${{ inputs.candidate_sha }}
+          WORKFLOW_REF: ${{ github.ref }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          python scripts/native_ci_policy.py --event "$EVENT_NAME" --workflow-ref "$WORKFLOW_REF" --candidate-sha "$CANDIDATE_SHA"
+          printf 'candidate_sha=%s\n' "$CANDIDATE_SHA" >> "$GITHUB_OUTPUT"
   native:
-    if: github.ref == 'refs/heads/main'
+    needs: policy
+    if: vars.ANANSE_NATIVE_RUNNER_APPROVED == 'true'
     runs-on: [self-hosted, ananse-unreal]
     environment: native-build-approval
     timeout-minutes: 90
     steps:
-      # Provision an authorised engine runner and protect the environment before use.
-      # Never run this job automatically on untrusted PRs or with signing credentials.
-      - uses: actions/checkout@v4
+      # Require an isolated runner and independent environment approval of this exact SHA.
+      # No PR trigger, signing credentials, studio credentials or production account access.
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
+          ref: ${{ needs.policy.outputs.candidate_sha }}
           lfs: true
-      - run: python -m pip install -r requirements.lock
-      - run: python scripts/unreal.py doctor --evidence-dir .local/verification/native-ci/doctor
+          persist-credentials: false
+      - name: Record exact checked-out candidate
+        env:
+          CANDIDATE_SHA: ${{ needs.policy.outputs.candidate_sha }}
+        run: |
+          test "$(git rev-parse HEAD)" = "$CANDIDATE_SHA"
+          mkdir -p .local/verification/native-ci
+          git rev-parse HEAD > .local/verification/native-ci/source-sha.txt
+      - name: Isolated contract dependencies
+        run: |
+          python3 -m venv .local/native-ci-venv
+          .local/native-ci-venv/bin/python -m pip install -r requirements.lock
+      - run: .local/native-ci-venv/bin/python scripts/unreal.py doctor --evidence-dir .local/verification/native-ci/doctor
       - name: Require reviewed exact engine lock
-        run: python -c "from pathlib import Path; assert Path('toolchain.lock.json').is_file(), 'Commit the reviewed Build.version lock before native CI'"
-      - run: python scripts/unreal.py build --evidence-dir .local/verification/native-ci/build
-      - run: python scripts/unreal.py bootstrap --evidence-dir .local/verification/native-ci/bootstrap
-      - run: python scripts/unreal.py test --evidence-dir .local/verification/native-ci/test
-      # Device packaging additionally requires a reviewed exported catalogue and SDKs.
-      # Studio credentials and mutable local databases must not be copied onto this runner.
-      - uses: actions/upload-artifact@v4
+        run: .local/native-ci-venv/bin/python -c "from pathlib import Path; assert Path('toolchain.lock.json').is_file(), 'Commit the reviewed Build.version lock before native CI'"
+      - run: .local/native-ci-venv/bin/python scripts/unreal.py build --evidence-dir .local/verification/native-ci/build
+      - run: .local/native-ci-venv/bin/python scripts/unreal.py bootstrap --allocator ansi --evidence-dir .local/verification/native-ci/bootstrap
+      - run: .local/native-ci-venv/bin/python scripts/unreal.py test --allocator ansi --evidence-dir .local/verification/native-ci/test
+      # Compile/headless test evidence is separate from rendered, device and signing gates.
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         if: always()
         with:
-          name: unreal-native-evidence
+          name: unreal-native-evidence-${{ needs.policy.outputs.candidate_sha }}
           path: .local/verification/native-ci/
           include-hidden-files: true
           if-no-files-found: error

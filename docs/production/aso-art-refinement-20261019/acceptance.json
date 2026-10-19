@@ -1,0 +1,28 @@
+{
+  "character": "AsoYaa",
+  "revision": 8,
+  "source_revision": "Authored_v030",
+  "gates": {
+    "reference_likeness": "REVIEW_REQUIRED",
+    "silhouette": "REVIEW_REQUIRED",
+    "face": "REVIEW_REQUIRED",
+    "hands_digits": "REVIEW_REQUIRED",
+    "prop_contact": "REVIEW_REQUIRED",
+    "clothing_deformation": "REVIEW_REQUIRED",
+    "limb_deformation": "REVIEW_REQUIRED",
+    "material_quality": "REVIEW_REQUIRED",
+    "cinematic_readability": "REVIEW_REQUIRED",
+    "gameplay_readability": "REVIEW_REQUIRED",
+    "source_scene_verified": "PASS",
+    "package_verified": "PASS"
+  },
+  "robe_drape": "REVISE / awaiting visual review",
+  "natural_grip": "REVISE / awaiting visual review",
+  "prior_findings": "Original failure evidence retained. Prior v2 reviewer recommended bounded lab correction acceptance; no blanket owner approval or silent closure inferred.",
+  "campaign_aso_spring": "PENDING",
+  "baked_lighting": "BLOCKED",
+  "mobile": "UNQUALIFIED",
+  "long_session_memory": "UNQUALIFIED",
+  "broader_navigation": "UNQUALIFIED",
+  "visible_clothing_layer_defect": "FAIL: cream underlayer patches break through rear blue robe during recorded walking profile; garment/garment coverage outside the leg-clearance test."
+}

@@ -1,0 +1,347 @@
+{
+  "schema_version": 1,
+  "release_id": "ANANSE_Market_RC1",
+  "source_commit": null,
+  "content_sha256": null,
+  "dirty_tree": true,
+  "gates": {
+    "reproducibility": {
+      "status": "not_run",
+      "tests_executed": 0,
+      "checks": {
+        "clean_checkout_build": false,
+        "all_required_assets_retrievable": false,
+        "content_digest_matches": false,
+        "engine_and_dependency_pins_verified": false
+      },
+      "proofs": []
+    },
+    "art": {
+      "status": "not_run",
+      "tests_executed": 0,
+      "checks": {
+        "reference_comparison_approved": false,
+        "cultural_review_approved": false,
+        "mesh_material_lod_checks": false,
+        "all_runtime_assets_production": false
+      },
+      "proofs": []
+    },
+    "animation": {
+      "status": "not_run",
+      "tests_executed": 0,
+      "checks": {
+        "four_arms_four_legs": false,
+        "limb_isolation": false,
+        "locomotion_contact_tests": false,
+        "ability_interrupts": false,
+        "facial_performance_review": false
+      },
+      "proofs": []
+    },
+    "mission": {
+      "status": "not_run",
+      "tests_executed": 0,
+      "checks": {
+        "three_routes_two_outcomes": false,
+        "cutscene_skip_every_boundary": false,
+        "chase_capture_retry": false,
+        "save_load_process_restart": false,
+        "no_debug_completion_shortcut": false
+      },
+      "proofs": []
+    },
+    "audio": {
+      "status": "not_run",
+      "tests_executed": 0,
+      "checks": {
+        "approved_recordings_and_rights": false,
+        "mix_phone_and_headphones": false,
+        "captions_and_subtitles": false,
+        "mute_and_interruption_tests": false
+      },
+      "proofs": []
+    },
+    "linux": {
+      "status": "not_run",
+      "tests_executed": 0,
+      "checks": {
+        "fresh_shipping_package": false,
+        "packaged_playthrough": false,
+        "orderly_exit": false,
+        "shipping_debug_hooks_absent": false,
+        "allocator_limitation_review": false
+      },
+      "proofs": []
+    },
+    "android": {
+      "status": "not_run",
+      "tests_executed": 0,
+      "checks": {
+        "fresh_aab_and_derived_apk": false,
+        "arm64_and_target_api_36_or_higher": false,
+        "native_16k_compatibility": false,
+        "two_named_devices_twenty_minute_runs": false,
+        "touch_controller_lifecycle": false,
+        "frame_budget_passed": false
+      },
+      "proofs": []
+    },
+    "ios": {
+      "status": "not_run",
+      "tests_executed": 0,
+      "checks": {
+        "qualified_mac_xcode_sdk": false,
+        "signed_candidate": false,
+        "physical_iphone_twenty_minute_run": false,
+        "touch_controller_lifecycle": false,
+        "frame_budget_passed": false
+      },
+      "proofs": []
+    },
+    "cloud": {
+      "status": "not_run",
+      "tests_executed": 0,
+      "checks": {
+        "real_staging_auth": false,
+        "cross_account_denied": false,
+        "stale_save_conflict_preserved": false,
+        "offline_and_token_expiry": false,
+        "signed_config_rollback": false,
+        "deletion_and_restore_drill": false
+      },
+      "proofs": []
+    },
+    "security": {
+      "status": "not_run",
+      "tests_executed": 0,
+      "checks": {
+        "secret_scan": false,
+        "licence_and_voice_clearance": false,
+        "dependency_review": false,
+        "signing_access_separation": false,
+        "candidate_and_raw_evidence_bound": false
+      },
+      "proofs": []
+    }
+  },
+  "assets": {
+    "CHAR_ANANSE": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "CHAR_KWAKU": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "CHAR_ASO": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "CHAR_KOJO": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "CHAR_ESI": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "CHAR_OSEBO": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "ENV_MARKET_HERO": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "ENV_FOREST_CLEARING": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "UI_SHIPPING": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "VO_EN_MISSION": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "AMB_MARKET": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "AMB_RIVER": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "AMB_FOREST": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "MUS_MARKET_BASE": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "MUS_MARKET_PULSE": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "MUS_CHASE": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "MUS_REVEAL": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "MUS_EXPOSE": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "MUS_PROTECT": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "MUS_FOREST": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "FOL_EARTH": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "FOL_WOOD": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "FOL_STONE": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "FOL_CLOTH": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "FOL_LEDGER": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "FX_WEB_START": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "FX_WEB_LAND": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "FX_VOICE": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "FX_MIRROR": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "FX_BRIDGE": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "UI_FOCUS": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "UI_DENIED": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "UI_SAVE": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "UI_CHOICE": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "ANIMATION_PRODUCTION_SET": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    },
+    "VFX_PRODUCTION_SET": {
+      "quality": "missing",
+      "runtime": null,
+      "rights": null,
+      "review": null
+    }
+  },
+  "notice": "Template only. Do not mark fields pass without fresh candidate-bound raw evidence. Fails release checks intentionally."
+}

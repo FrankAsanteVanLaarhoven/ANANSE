@@ -161,6 +161,14 @@ class Store:
     def publish(self,channel,actor):
         with self.connect(True) as c:
             report=self._validation(c)
+            designs=set()
+            for row in c.execute("SELECT * FROM records WHERE kind='assets' AND deleted=0"):
+                record=row_to_record(row);design=record['data'].get('visual_design')
+                if not design: continue
+                if design['design_id'] in designs: raise DomainError(409,"Duplicate visual design bindings must be reconciled before publication.")
+                designs.add(design['design_id'])
+                review=c.execute("SELECT decision FROM reviews WHERE kind='assets' AND id=? AND version=? ORDER BY seq DESC LIMIT 1",(record['id'],record['version'])).fetchone()
+                if not review or review['decision']!='approved': raise DomainError(409,"Visual design publication requires approval of its exact current asset revision.")
             if channel != "prototype": raise DomainError(409,"Production publish is blocked. Inspect /api/validation; this starter has no verified production release adapter.")
             entities={k:[] for k in ("characters","factions","missions","assets")}
             for row in c.execute("SELECT * FROM records WHERE deleted=0 ORDER BY kind,id"):

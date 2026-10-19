@@ -1,6 +1,8 @@
 "use strict";
 const $=id=>document.getElementById(id);
 let token="",kind="characters",selected=null,records=[],session=null,actionLabels={};
+let designPreview=null,designPreviewGeneration=0;
+function clearDesignPreview(){designPreviewGeneration++;if(designPreview){designPreview.dispose();designPreview=null;}$("design-tools").hidden=true;}
 function notice(message,error=false){$("notice").textContent=message;$("notice").classList.toggle("error",error);}
 async function api(path,method="GET",body=undefined,version=undefined){
  const headers={Authorization:`Bearer ${token}`};if(body!==undefined)headers["Content-Type"]="application/json";if(version!==undefined)headers["If-Match"]=`"${version}"`;
@@ -14,7 +16,7 @@ function requireRecord(){if(!selected)throw new Error("Select a record first.");
 async function load(){
  records=[];let page;do{page=await api(`/api/${kind}?include_deleted=${$("archived").checked}&limit=100&offset=${records.length}`);records.push(...page.items);}while(records.length<page.total);
  $("count").textContent=String(records.length);renderList();
- if(selected){const fresh=records.find(r=>r.id===selected.id);if(fresh)select(fresh);else{selected=null;$("json").value="";$("character-tools").hidden=true;}}
+ if(selected){const fresh=records.find(r=>r.id===selected.id);if(fresh)select(fresh);else{clearDesignPreview();selected=null;$("json").value="";$("character-tools").hidden=true;}}
 }
 function renderList(){
  $("records").replaceChildren();const term=$("search").value.toLowerCase();
@@ -23,7 +25,11 @@ function renderList(){
   const sub=document.createElement("span");sub.className="subtitle";sub.textContent=`${r.id} · revision ${r.version}${r.deleted?" · archived":""}`;b.append(sub);b.addEventListener("click",()=>select(r));$("records").append(b);
  }
 }
-function select(r){selected=r;$("record-id").textContent=`${kind.toUpperCase()} / ${r.id}`;$("record-name").textContent=r.data.name;$("revision").textContent=`REVISION ${r.version}${r.deleted?" · ARCHIVED":""}`;$("json").value=JSON.stringify(r.data,null,2);$("character-tools").hidden=kind!=="characters";if(kind==="characters")variants();renderList();}
+function select(r){selected=r;$("record-id").textContent=`${kind.toUpperCase()} / ${r.id}`;$("record-name").textContent=r.data.name;$("revision").textContent=`REVISION ${r.version}${r.deleted?" · ARCHIVED":""}`;$("json").value=JSON.stringify(r.data,null,2);$("character-tools").hidden=kind!=="characters";if(kind==="characters")variants();
+ designPreviewGeneration++;if(designPreview){designPreview.dispose();designPreview=null;}$("design-tools").hidden=kind!=="assets"||!r.data.visual_design;$("design-status").textContent="Source not loaded; no native/art acceptance implied.";
+ if(r.data.visual_design){const cosmetics=r.data.visual_design.design_id==="osebo-leopard-v1";$("design-cape").disabled=!cosmetics;$("design-accent").disabled=!cosmetics;if(cosmetics){$("design-cape").value=r.data.visual_design.cape_colour;$("design-accent").value=r.data.visual_design.accent_colour;}}renderList();}
+$("design-preview").onclick=run(async()=>{requireRecord();const generation=++designPreviewGeneration;$("design-status").textContent="Validating local source bytes…";const response=await fetch(`/api/assets/${encodeURIComponent(selected.id)}/preview.glb`,{headers:{Authorization:`Bearer ${token}`}});if(!response.ok)throw Error((await response.json()).detail);const bytes=await response.arrayBuffer();const hash=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),b=>b.toString(16).padStart(2,'0')).join('');if(hash!==selected.data.visual_design.source_glb_sha256||hash!==response.headers.get('X-Source-SHA256'))throw Error('Preview bytes failed exact revision integrity.');const module=await import('/static/leopard-preview.js');if(generation!==designPreviewGeneration)return;if(designPreview)designPreview.dispose();const candidate=await module.preview($('design-canvas'),bytes,{clips:$('design-clip'),turn:$('design-turn'),wire:$('design-wire'),blink:$('design-blink'),cape:$('design-cape'),accent:$('design-accent')});if(generation!==designPreviewGeneration){candidate.dispose();return;}designPreview=candidate;$('design-status').textContent=`Actual saved model: ${candidate.boneCount} joints, ${candidate.clipCount} clips, ${candidate.morphCount} eyelid targets. SHA-256 ${hash}. Final art/contact approval remains separate.`;});
+for(const id of ['design-cape','design-accent'])$(id).oninput=run(async()=>{const d=editorData();if(!d.visual_design)throw Error('No selected visual design');d.visual_design[id==='design-cape'?'cape_colour':'accent_colour']=$(id).value;$("json").value=JSON.stringify(d,null,2);});
 function variants(){
  const d=editorData();$("variant").replaceChildren();for(const v of d.variants){const o=document.createElement("option");o.value=v.id;o.textContent=v.label;$("variant").append(o);}variantFields();
 }
@@ -39,7 +45,7 @@ function draw(d,v){
  ctx.restore();ctx.textAlign="center";ctx.font="10px system-ui";ctx.fillStyle="#b3c0b0";ctx.fillText("PROCEDURAL STAND-IN · NOT CHARACTER ART",w/2,21);ctx.fillText(`${d.representation.toUpperCase()} / ${d.silhouette.toUpperCase()}`,w/2,301);
 }
 $("connect").onclick=run(async()=>{token=$("token").value.trim();const me=await api("/api/whoami");$("token").value="";$("identity").textContent=`Connected as ${me.role}`;notice("Connected. Changes are local and versioned; production publishing remains blocked.");await load();});
-for(const b of document.querySelectorAll("[data-kind]"))b.onclick=run(async()=>{kind=b.dataset.kind;selected=null;document.querySelectorAll("[data-kind]").forEach(x=>x.classList.toggle("active",x===b));$("list-heading").textContent=b.textContent;$("record-name").textContent="Select a record";$("json").value="";$("character-tools").hidden=true;await load();});
+for(const b of document.querySelectorAll("[data-kind]"))b.onclick=run(async()=>{clearDesignPreview();kind=b.dataset.kind;selected=null;document.querySelectorAll("[data-kind]").forEach(x=>x.classList.toggle("active",x===b));$("list-heading").textContent=b.textContent;$("record-name").textContent="Select a record";$("json").value="";$("character-tools").hidden=true;await load();});
 $("search").oninput=renderList;$("archived").onchange=run(load);$("variant").onchange=variantFields;
 for(const id of ["cloth","accent","scale"])$(id).oninput=editVariant;
 $("json").addEventListener("change",run(async()=>{if(kind==="characters")variants();}));

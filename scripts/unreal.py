@@ -7,7 +7,25 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 from scripts.export_content import verify_manifest
 PROJECT=ROOT/'Unreal/Ananse.uproject'
+VISUAL_REVIEW_MAPS=('/Game/Ananse/Maps/Visual_v003/L_CharacterVisualReview','/Game/Ananse/Maps/Visual_v003/L_LeopardVisualContact')
+def required_visual_review_maps(content_root):
+    for path in VISUAL_REVIEW_MAPS:
+        if not(content_root/(path.removeprefix('/Game/')+'.umap')).is_file():raise RuntimeError('Visual review map missing: '+path)
+    return list(VISUAL_REVIEW_MAPS)
 
+
+
+ART_PASS2_MAPS=('/Game/Ananse/Maps/ArtPass2_v003/L_CharacterArtReview','/Game/Ananse/Maps/ArtPass2_v003/L_LeopardArtContact','/Game/Ananse/Maps/ArtPass2_v003/L_LeopardCinematicReview')
+def required_art_pass2_maps(content_root):
+    for path in ART_PASS2_MAPS:
+        if not(content_root/(path.removeprefix('/Game/')+'.umap')).is_file():raise RuntimeError('Art Pass2 map missing: '+path)
+    return list(ART_PASS2_MAPS)
+
+ACCEPTED_EPISODE_MAPS=('/Game/Ananse/Maps/EpisodeAccepted_v001/L_Market_AcceptedVisuals','/Game/Ananse/Maps/EpisodeAccepted_v001/L_Sanctuary_AcceptedVisuals')
+def required_accepted_episode_maps(content_root):
+    for path in ACCEPTED_EPISODE_MAPS:
+        if not(content_root/(path.removeprefix('/Game/')+'.umap')).is_file():raise RuntimeError('Accepted episode map missing: '+path)
+    return list(ACCEPTED_EPISODE_MAPS)
 
 def environment():
     system=platform.system();host={'Windows':'Win64','Linux':'Linux','Darwin':'Mac'}.get(system)
@@ -63,8 +81,11 @@ def verify_automation_report(index,not_before=None):
     return len(tests)
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('command',choices=['doctor','lock-engine','build','bootstrap','test','open','verify-android','package']);p.add_argument('--evidence-dir',type=Path,default=ROOT/'.local/verification'/datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S.%fZ')/'native');p.add_argument('--platform',choices=['Win64','Linux','Mac','Android','IOS']);p.add_argument('--replace-generated',action='store_true');p.add_argument('--variant',default='base');a=p.parse_args()
+    p=argparse.ArgumentParser();p.add_argument('--include-environment-route',action='store_true');p.add_argument('--include-aso-yaa',action='store_true');p.add_argument('--include-accepted-episode',action='store_true');p.add_argument('--include-art-pass2',action='store_true');p.add_argument('--include-visual-review',action='store_true');p.add_argument('--include-interaction-refinement',action='store_true');p.add_argument('--include-leopard-lab',action='store_true',help='Include the isolated authored feline lab; not final-art acceptance.');p.add_argument('--include-forms-scenery',action='store_true',help='Cook repaired WIP visual and scenery maps; not creative acceptance.');p.add_argument('--include-art-refinement',action='store_true',help='Cook versioned Kwaku visual/presentation refinement maps; creative acceptance remains separate.');p.add_argument('--include-story-cast',action='store_true',help='Include seven authored WIP cast labs and new market/sanctuary maps; not final art approval.');p.add_argument('command',choices=['doctor','lock-engine','build','bootstrap','test','open','verify-android','package']);p.add_argument('--evidence-dir',type=Path,default=ROOT/'.local/verification'/datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S.%fZ')/'native');p.add_argument('--platform',choices=['Win64','Linux','Mac','Android','IOS']);p.add_argument('--replace-generated',action='store_true');p.add_argument('--include-character-lab',action='store_true',help='Include the qualified local Character Lab map in a Development cook.');p.add_argument('--include-contact-lab',action='store_true',help='Include the versioned terrain-contact fixture map in a Development cook.');p.add_argument('--variant',default='base');p.add_argument('--allocator',choices=['default','ansi'],default='default');p.add_argument('--include-episode',action='store_true',help='Include the versioned technical sanctuary epilogue map.');a=p.parse_args()
     a.evidence_dir=a.evidence_dir.resolve()
+    if a.command not in ['doctor','lock-engine']:
+        from scripts.prepare_native_config import prepare
+        prepare(ROOT)
     info=environment();a.evidence_dir.mkdir(parents=True,exist_ok=True)
     doctor_report=a.evidence_dir/'unreal-doctor.json'
     if doctor_report.exists():raise RuntimeError('Doctor report exists. Select a fresh --evidence-dir to preserve evidence.')
@@ -85,21 +106,21 @@ def main():
         if previous.exists():raise RuntimeError('Bootstrap report exists. Select a fresh --evidence-dir.')
         env=os.environ.copy();env['ANANSE_EVIDENCE_DIR']=str(a.evidence_dir.resolve())
         if a.replace_generated:env['ANANSE_REGENERATE_GREYBOX']='1'
-        run([editor_cmd,PROJECT,f'-ExecutePythonScript={ROOT/"scripts/build_greybox.py"}','-unattended','-nop4','-nosplash'],'unreal-bootstrap',env,evidence_dir=a.evidence_dir)
+        run([editor_cmd,PROJECT,f'-ExecutePythonScript={ROOT/"scripts/build_greybox.py"}','-unattended','-nop4','-nosplash']+(['-ansimalloc'] if a.allocator=='ansi' else []),'unreal-bootstrap',env,evidence_dir=a.evidence_dir)
         if not previous.is_file() or json.loads(previous.read_text()).get('status')!='created':raise RuntimeError('No successful generated-map report. Engine exit code alone is insufficient.')
         return 0
     if a.command=='test':
         target=a.evidence_dir/'unreal-automation'
         if target.exists():raise RuntimeError('Archive or remove the old evidence/unreal-automation folder explicitly before a fresh test run.')
         started=time.time()
-        run([editor_cmd,PROJECT,'-unattended','-nop4','-NullRHI','-nosound','-ExecCmds=Automation RunTests Ananse;SoftQuit',f'-ReportExportPath={target}'],'unreal-automation',evidence_dir=a.evidence_dir)
+        run([editor_cmd,PROJECT,'-unattended','-nop4','-NullRHI','-nosound','-ExecCmds=Automation RunTests Ananse;SoftQuit',f'-ReportExportPath={target}']+(['-ansimalloc'] if a.allocator=='ansi' else []),'unreal-automation',evidence_dir=a.evidence_dir)
         index=target/'index.json'
         if not index.is_file():raise RuntimeError('No automation report. Tests are NOT verified.')
         count=verify_automation_report(index,not_before=started)
         print(f'Verified {count} Unreal automation results from a new report.');return 0
     if a.command=='open':
         if not (ROOT/'Unreal/Content/Maps/L_Market_Greybox.umap').is_file():raise RuntimeError('Run build and bootstrap before opening the intended greybox map.')
-        run([editor,PROJECT,f'-AnanseVariant={a.variant}'],'unreal-editor',evidence_dir=a.evidence_dir);return 0
+        run([editor,PROJECT,f'-AnanseVariant={a.variant}']+(['-ansimalloc'] if a.allocator=='ansi' else []),'unreal-editor',evidence_dir=a.evidence_dir);return 0
     if a.command=='verify-android':
         run([uat,'Turnkey','-command=VerifySdk','-platform=Android','-utf8output'],'android-sdk-verification',evidence_dir=a.evidence_dir);return 0
     if a.command=='package':
@@ -111,7 +132,66 @@ def main():
         verify_manifest(json.loads(catalogue.read_text()))
         archive=ROOT/'Builds'/target/datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S.%fZ')
         archive.mkdir(parents=True,exist_ok=False)
-        args=[uat,'BuildCookRun',f'-project={PROJECT}','-nop4',f'-platform={target}','-clientconfig=Development','-build','-cook','-stage','-pak','-iostore','-package','-archive',f'-archivedirectory={archive}','-map=/Game/Maps/L_Market_Greybox','-utf8output']
+        cook_maps='/Game/Maps/L_Market_Greybox'
+        if a.include_character_lab:
+            if not (ROOT/'Unreal/Content/Characters/AnanseSpider/Lab_v001/L_AnanseCharacterLab.umap').is_file():raise RuntimeError('Character Lab map is absent; import and qualify the proxy before this cook.')
+            cook_maps+='+/Game/Characters/AnanseSpider/Lab_v001/L_AnanseCharacterLab'
+        if a.include_leopard_lab:
+            leopard_map='Ananse/Maps/CharacterLabs/L_OseboLeopardCharacterLab'
+            if not (ROOT/'Unreal/Content'/f'{leopard_map}.umap').is_file():raise RuntimeError('Authored leopard lab is absent; no primitive substitution.')
+            for name in ['OseboLeopard.blend','OseboLeopard.glb','rig-map.json']:
+                if not (ROOT/'SourceArt/Characters/OseboLeopard/Authored_v002'/name).is_file():raise RuntimeError('Hydrate the actual authored leopard source before this character cook: '+name)
+            cook_maps+='+/Game/'+leopard_map
+            feline_contact='Ananse/Maps/CharacterLabs/LeopardContact_v001/L_LeopardContactLab'
+            if not (ROOT/'Unreal/Content'/f'{feline_contact}.umap').is_file():raise RuntimeError('Feline contact fixture map missing; explicit qualification cook required.')
+            cook_maps+='+/Game/'+feline_contact
+        if a.include_contact_lab:
+            contact_map='Characters/AnanseSpider/ContactLab_v006/L_AnanseContactLab'
+            if not (ROOT/'Unreal/Content'/f'{contact_map}.umap').is_file():raise RuntimeError('Contact Lab v006 map is absent; no fixture cook is inferred.')
+            cook_maps+='+/Game/'+contact_map
+        if a.include_episode:
+            episode_map='Production/Sanctuary/Technical_v001/L_StorySanctuary_Technical'
+            if not (ROOT/'Unreal/Content'/f'{episode_map}.umap').is_file():raise RuntimeError('Technical sanctuary map is absent; no episode cook is inferred.')
+            cook_maps+='+/Game/'+episode_map
+        if a.include_story_cast:
+            maps=['/Game/Ananse/Maps/StoryCast_v001/L_'+key+'CharacterLab' for key in ['Kwaku','AsoYaa','EsiHuman','OseboHuman','KojoTortoise','KofiHornbill','EsiMoth']]
+            maps+=['/Game/Ananse/Maps/Story_v001/L_Market_Authored','/Game/Ananse/Maps/Story_v001/L_Sanctuary_Authored','/Game/Ananse/Maps/Story_v001/L_Market_EpisodeStaging','/Game/Ananse/Maps/Story_v001/L_Sanctuary_EpisodeStaging']
+            for path in maps:
+                if not (ROOT/'Unreal/Content'/(path.removeprefix('/Game/')+'.umap')).is_file():raise RuntimeError('Authored story map missing: '+path)
+                cook_maps+='+'+path
+        if a.include_art_refinement:
+            for name in ['L_Market_PresentationRefined','L_Market_EpisodeRefined','L_Sanctuary_EpisodeRefined']:
+                path='/Game/Ananse/Maps/Refinement_v003/'+name
+                if not (ROOT/'Unreal/Content'/(path.removeprefix('/Game/')+'.umap')).is_file():raise RuntimeError('Refined presentation map missing: '+path)
+                cook_maps+='+'+path
+        if a.include_forms_scenery:
+            for name in ['L_Market_PresentationForms','L_Market_EpisodeForms','L_Sanctuary_EpisodeForms']:
+                path='/Game/Ananse/Maps/Refinement_v007/'+name
+                if not (ROOT/'Unreal/Content'/(path.removeprefix('/Game/')+'.umap')).is_file():raise RuntimeError('Form/scenery map missing: '+path)
+                cook_maps+='+'+path
+        if a.include_interaction_refinement:
+            for name in ['L_Market_InteractionsLab','L_Market_EpisodeInteractions','L_Sanctuary_EpisodeInteractions','L_LeopardContactInteractions']:
+                path='/Game/Ananse/Maps/Interactions_v003/'+name
+                if not (ROOT/'Unreal/Content'/(path.removeprefix('/Game/')+'.umap')).is_file():raise RuntimeError('Interaction presentation map missing: '+path)
+                cook_maps+='+'+path
+        if a.include_environment_route:
+            for name in ['L_RiverMarket_Route','L_StoryForest_Route']:
+                path='/Game/Ananse/Maps/EnvironmentRoute_v002/'+name
+                if not (ROOT/'Unreal/Content'/(path.removeprefix('/Game/')+'.umap')).is_file():raise RuntimeError('Environment route map missing: '+path)
+                cook_maps+='+'+path
+        if a.include_aso_yaa:
+            maps=['/Game/Ananse/Maps/ArtRefine_v002/L_AsoYaaCharacterLab','/Game/Ananse/Maps/Clearance_v001/L_AsoYaaCharacterLab','/Game/Ananse/Maps/Negotiation_v001/L_AsoYaaCharacterLab','/Game/Ananse/Maps/Negotiation_v001/L_Market_AsoNegotiation','/Game/Ananse/Maps/Contact_v002/L_AsoYaaCharacterLab','/Game/Ananse/Maps/Contact_v002/L_Market_AsoNegotiation','/Game/Ananse/Maps/Negotiation_v002/L_AsoYaaCharacterLab','/Game/Ananse/Maps/Negotiation_v002/L_Market_AsoNegotiation']
+            for path in maps:
+                if not (ROOT/'Unreal/Content'/(path.removeprefix('/Game/')+'.umap')).is_file():raise RuntimeError('Aso Yaa map missing: '+path)
+            cook_maps+='+'+'+'.join(maps)
+        if a.include_accepted_episode:
+            cook_maps+='+'+'+'.join(required_accepted_episode_maps(ROOT/'Unreal/Content'))
+        if a.include_art_pass2:
+            cook_maps+='+'+'+'.join(required_art_pass2_maps(ROOT/'Unreal/Content'))
+        if a.include_visual_review:
+            for path in required_visual_review_maps(ROOT/'Unreal/Content'):cook_maps+='+'+path
+        args=[uat,'BuildCookRun',f'-project={PROJECT}','-nop4',f'-platform={target}','-clientconfig=Development','-build','-cook','-stage','-pak','-iostore','-package','-archive',f'-archivedirectory={archive}',f'-map={cook_maps}','-utf8output']
+        if a.allocator=='ansi':args.append('-AdditionalCookerOptions=-ansimalloc')
         if target=='Android':args.append('-cookflavor=ASTC')
         run(args,f'package-{target.lower()}',evidence_dir=a.evidence_dir)
         files=list(archive.rglob('*'))
